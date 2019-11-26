@@ -8,7 +8,7 @@
                 <el-aside :width="isCollapse ? '64px' :'240px'"><left-aside :leftArr="leftArr" :isCollapse="isCollapse" @select-menu="handleSelectMenu" /></el-aside>
                 <el-container>
                     <el-main>
-                        <el-tabs class="header-nav" v-show="editableTabs.length > 0" v-model="editableTabsValue" type="card" closable @edit="handleTabsEdit" @tab-click="handleMenuChange">
+                        <el-tabs class="header-nav" :closable="editableTabs.length > 1" v-show="editableTabs.length > 0" v-model="editableTabsValue" type="card" @edit="handleTabsEdit" @tab-click="handleMenuChange">
                             <el-tab-pane :key="item.id" v-for="(item, index) in editableTabs" :label="item.title" :name="item.name">
                             </el-tab-pane>
                         </el-tabs>
@@ -39,14 +39,13 @@
             return {
                 navArr: navData,
                 leftArr: navData[0].childAuthorities ? navData[0].childAuthorities : [],
-                editableTabsValue: '',
-                editableTabs: [],
+                editableTabsValue: '/myApplication',
+                editableTabs: [{title: '我的申请',name: '/myApplication',id: 'EE48A38918264BE58324767F5B84F149'}],
                 isCollapse: false
             }
         },
         mounted() {
 			this.$nextTick(function() {
-                
             });
         },
         methods: {
@@ -121,7 +120,7 @@
     }
 </script>
 
-<style lang="less" scoped>
+<style lang="scss" scoped>
     .index-app {
         width: 100%;
         height: 100%;
@@ -129,7 +128,7 @@
             height: 100%;
             .el-main {
                 position: relative;
-                background-color: #fff;
+                background-color: #f0f2f5;
                 color: #333;
                 padding: 46px 0px 10px;
                 height: 100%;
@@ -138,19 +137,24 @@
                     position: absolute;
                     top: 0px;
                     left: 0px;
-                    height: 46px;
+                    height: 36px;
                     width: 100%;
                     background-color: #fff;
+                    /deep/ .el-tabs__item {
+                        height: 36px;
+                        line-height: 36px;
+                    }
                 }
                 .main-box{
                     height: 100%;
-                    padding: 0 10px;
-                    overflow-x: hidden;
+                    margin: 0 10px;
+                    overflow-x: auto;
                     overflow-y: auto;
+                    background-color: #fff;
                 }
             }
             .el-footer {
-                background-color: #B3C0D1;
+                background-color: #fff;
                 color: #fff;
                 text-align: center;
                 line-height: 60px;

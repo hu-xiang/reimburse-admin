@@ -6,14 +6,16 @@ import router from './router'
 import axios from 'axios'
 // 引入ui组件
 import ElementUI from 'element-ui';
-import 'element-ui/lib/theme-chalk/index.css';
+//import 'element-ui/lib/theme-chalk/index.css';
+
 
 import api from './assets/js/common.js' // 公共js
-import './assets/css/common.less' // 公共css
+import './assets/css/common.scss' // 公共css
+import { log } from 'util';
 
 Vue.use(ElementUI);
 
-const axiosBaseUrl = "http://www.baidu.com"; // 请求地址
+const axiosBaseUrl = "http://192.168.49.82:8080/jeecg-boot"; // 请求地址
 /** axios 全局配置 */
 axios.defaults.baseURL = axiosBaseUrl; // 默认地址
 axios.defaults.headers.post['Content-Type'] = 'application/json'; // 设置请求头
@@ -30,13 +32,20 @@ axios.interceptors.request.use((config) => {
 axios.interceptors.response.use(response => {
 	setTimeout(() => {
 		loadingInstance.close();
-		if(response.data.status && response.data.status != 'success') {
+		if(response.data && !response.data.success) {
 			ElementUI.Message.error({
-				message: response.data.resultMsg || '请求数据异常，请稍后再试！！',
+				message: response.data.message || '请求数据异常，请稍后再试！！',
 				duration: 3000,
 				showClose: true
 			});
 		}
+		// } else if (response.data && response.data.success) {
+		// 	ElementUI.Message.success({
+		// 		message: response.data.message || '请求成功！！',
+		// 		duration: 3000,
+		// 		showClose: true
+		// 	});
+		// }
 	}, 500)
 	return response.data;
 }, error => {

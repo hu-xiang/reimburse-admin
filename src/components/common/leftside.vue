@@ -48,7 +48,7 @@
     }
 </script>
 
-<style lang="less" scoped>
+<style lang="scss" scoped>
     .leftside-app {
         height: 100%;
         .nav-icon{

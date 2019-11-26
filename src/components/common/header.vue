@@ -1,6 +1,12 @@
 <template>
     <div class="header-app">
-        <el-menu :default-active="activeIndex" class="el-menu-header" mode="horizontal" background-color="#409EFF" text-color="#fff" active-text-color="#ffd04b" @select="handleSelect">
+        <div class="header-left">
+            <!-- <img src="../../assets/img/logo.gif"/> -->
+            <!-- <span>闻泰科技</span>
+            <span class="shu">|</span>
+            <span>报账系统</span> -->
+        </div>
+        <el-menu :default-active="activeIndex" class="el-menu-header" mode="horizontal" background-color="#303133" text-color="#fff" active-text-color="#ffd04b" @select="handleSelect">
             <el-menu-item :index="String(index)" v-for="(item, index) in navArr" :key="item.id">{{item.authorityName}}</el-menu-item>
         </el-menu>
         <el-dropdown class="header-center" trigger="click" @command="handleCommand">
@@ -56,25 +62,48 @@
     }
 </script>
 
-<style lang="less" scoped>
+<style lang="scss" scoped>
     .header-app {
         width: 100%;
         height:60px;
-        background-color: #409EFF;
-        padding: 0 40px;
+        background-color: #303133;
+        // padding: 0 40px;
         overflow: hidden;
         display: flex;
         display: -webkit-flex;
-        justify-content: flex-end;
         align-items: center;
+        justify-content: flex-end;
+        .header-left {
+            width: 240px;
+            height: 60px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            .shu {
+                display: inline-block;
+                margin: 0 5px;
+            }
+            > span {
+                font-family: MicrosoftYaHei-Bold;
+                font-size: 20px;
+                font-weight: bold;
+                font-stretch: normal;
+                letter-spacing: 0px;
+                color: rgb(255, 208, 75);
+            }
+        }
         .el-menu-header{
-            background-color: #409EFF;
+            justify-content: flex-end;
+            background-color: #303133;
             border-bottom: none;
+            //flex-grow: 1;
         }
         .header-center{
-            margin-left: 80px;
+            margin-right: 40px;
+            margin-left: 50px;
             color: #fff;
             font-size: 14px;
+            justify-content: flex-end;
         }
     }
 </style>
