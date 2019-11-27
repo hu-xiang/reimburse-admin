@@ -1,7 +1,7 @@
 <template>
     <div class="header-app">
         <div class="header-left">
-            <!-- <img src="../../assets/img/logo.gif"/> -->
+            <img src="../../assets/img/logo.gif"/>
             <!-- <span>闻泰科技</span>
             <span class="shu">|</span>
             <span>报账系统</span> -->
@@ -72,7 +72,6 @@
         display: flex;
         display: -webkit-flex;
         align-items: center;
-        justify-content: flex-end;
         .header-left {
             width: 240px;
             height: 60px;
@@ -96,7 +95,7 @@
             justify-content: flex-end;
             background-color: #303133;
             border-bottom: none;
-            //flex-grow: 1;
+            flex-grow: 1;
         }
         .header-center{
             margin-right: 40px;
