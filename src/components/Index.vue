@@ -154,7 +154,7 @@
                 .main-box{
                     height: 100%;
                     margin: 0 10px;
-                    overflow-x: auto;
+                    overflow-x: hidden;
                     overflow-y: auto;
                     //background-color: #fff;
                 }

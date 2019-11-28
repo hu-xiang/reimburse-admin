@@ -8,7 +8,7 @@ import axios from 'axios'
 import ElementUI from 'element-ui';
 //import 'element-ui/lib/theme-chalk/index.css';
 
-
+import qs from 'qs';
 import api from './assets/js/common.js' // 公共js
 import './assets/css/common.scss' // 公共css
 // import { log } from 'util';
@@ -59,7 +59,7 @@ axios.interceptors.response.use(response => {
 	}, 500)
 	return response.data;
 }, error => {
-	loadingInstance.close();;
+	loadingInstance.close();
 	ElementUI.Message.error({
 		message: '服务器异常，请稍后再试！！',
 		duration: 3000,
@@ -129,6 +129,7 @@ router.beforeEach((to, from, next) => {
 // 全局使用
 Vue.prototype.api = api;
 Vue.prototype.$axios = axios;
+Vue.prototype.$qs = qs;
 
 // Date对象的toJSON方法
 Date.prototype.toJSON = function () {

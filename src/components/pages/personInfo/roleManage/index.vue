@@ -47,19 +47,19 @@
           </template>
         </el-table-column>
         <el-table-column prop="roleName"
-          label="角色名称">
+          label="角色名称" show-overflow-tooltip>
         </el-table-column>
         <el-table-column prop="roleCode"
-          label="角色编码">
+          label="角色编码" show-overflow-tooltip>
         </el-table-column>
         <el-table-column prop="description"
-          label="备注">
+          label="备注" show-overflow-tooltip>
         </el-table-column>
         <el-table-column prop="createTime"
-          label="创建时间">
+          label="创建时间" show-overflow-tooltip>
         </el-table-column>
         <el-table-column prop="updateTime"
-          label="更新时间">
+          label="更新时间" show-overflow-tooltip>
         </el-table-column>
       </el-table>
       <el-pagination slot="page"
@@ -104,7 +104,7 @@ export default {
     getList(bool) {
       if (bool) Object.assign(this.curSearchContent, this.searchContent);
       this.loading = true;
-      this.$axios.get("/sys/role/list", this.curSearchContent).then(res => {
+      this.$axios.get(`/sys/role/list?${this.$qs.stringify(this.curSearchContent)}`).then(res => {
         this.loading = false;
         if (res && res.success) {
           this.tableList = res.result.records;

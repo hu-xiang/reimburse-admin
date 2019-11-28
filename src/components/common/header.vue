@@ -137,7 +137,7 @@
         }
         .header-center{
             margin-right: 40px;
-            margin-left: 50px;
+            //margin-left: 50px;
             color: #fff;
             font-size: 14px;
             justify-content: flex-end;
