@@ -9,6 +9,16 @@
 		"authorityCode": "in_first_menu",
 		"childAuthorities": [
 			{
+				"id": "9598D9AEB2CC8376BC6AF3",
+				"description": "二级菜单",
+				"sort": 5,
+				"routerName": "/role",
+				"authorityName": "角色管理",
+				"imageUrl": null,
+				"authorityCode": "in_second_menu",
+				"childAuthorities": null
+			},
+			{
 				"id": "EE48A38918264BE58324767F5B84F149",
 				"description": "二级菜单",
 				"sort": 1,
@@ -267,15 +277,6 @@
 				"sort": 4,
 				"routerName": "/position",
 				"authorityName": "岗位维护",
-				"imageUrl": null,
-				"authorityCode": "in_second_menu",
-				"childAuthorities": null
-			}, {
-				"id": "9598D9AEB2CC8376BC6AF3",
-				"description": "二级菜单",
-				"sort": 5,
-				"routerName": "/role",
-				"authorityName": "角色管理",
 				"imageUrl": null,
 				"authorityCode": "in_second_menu",
 				"childAuthorities": null

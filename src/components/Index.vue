@@ -38,7 +38,6 @@
         data (){
             return {
                 navArr: navData, // tab标签页列表在nav.json中维护
-                // leftArr: navData[0].childAuthorities ? navData[0].childAuthorities : [],
                 leftArr: [],
                 editableTabsValue: '',
                 editableTabs: [],

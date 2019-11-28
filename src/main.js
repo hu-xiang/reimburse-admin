@@ -88,7 +88,16 @@ router.beforeEach((to, from, next) => {
 		}
 		
 	} else { // 没有token，直接跳到登录页
-		this.$router.push("/login");
+		if (to.path==='/') {
+			next();
+		} else {
+			ElementUI.Message.error({
+				message: '您还没登陆',
+				duration: 3000,
+				showClose: true
+			});
+			next({path: '/'});
+		}
 	}
 	const pathName = window.location.origin + window.location.pathname; // 项目路径地址
 	//判断版本是否更新(打包时执行)
