@@ -37,11 +37,11 @@
         },
         data (){
             return {
-                navArr: navData,
-                leftArr: navData[0].childAuthorities ? navData[0].childAuthorities : [],
-                // leftArr: [],
-                editableTabsValue: '/myApplication',
-                editableTabs: [{title: '我的申请',name: '/myApplication',id: 'EE48A38918264BE58324767F5B84F149'}],
+                navArr: navData, // tab标签页列表在nav.json中维护
+                // leftArr: navData[0].childAuthorities ? navData[0].childAuthorities : [],
+                leftArr: [],
+                editableTabsValue: '',
+                editableTabs: [],
                 isCollapse: false,
             }
         },
@@ -49,20 +49,10 @@
             
         },
         mounted() {
-            // console.log(navData);
-            // for (let i=0; i < navData.length; i++) {
-            //     console.log(navData[i]);
-            //     if (navData[i].authorityName === '工作台' && this.is==='工作台' && navData[i].childAuthorities) {
-            //         this.leftArr = navData[0].childAuthorities
-            //         break
-            //     }
-            //     if (navData[i].authorityName === '出差申请' && this.is==='sdaas' && navData[i].childAuthorities) {
-            //         this.leftArr = navData[1].childAuthorities
-            //         break
-            //     }
-            // }
-            // console.log(navData);
 			this.$nextTick(function() {
+                this.editableTabs = [{title: this.leftArr[0].authorityName, name: this.leftArr[0].routerName, id: this.leftArr[0].id}];
+                this.editableTabsValue = this.leftArr[0].routerName;
+                this.$router.push(this.leftArr[0].routerName);
             });
         },
         methods: {

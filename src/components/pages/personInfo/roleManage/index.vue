@@ -23,7 +23,7 @@
     </top-bar>
     <table-bar>
       <div slot="top">
-        <el-button type="primary" @click="$router.push('/roleAdd')" size="mini">新增</el-button>
+        <el-button type="primary" @click="$router.push('/roleAdd')" size="mini" v-if="$auths('/roleAdd')">新增</el-button>
       </div>
       <el-table slot="table"
         v-loading="loading"
@@ -34,14 +34,14 @@
         <el-table-column align="center"
           fixed="left"
           label="操作"
-          width="120">
+          width="120" v-if="$auths('/roleEdit') || $auths('/roleDelete')">
           <template slot-scope="{row}">
             <el-button type="text"
               @click="$router.push({path:'/roleEdit',query:{row:row}})"
-              size="mini">
+              size="mini" v-if="$auths('/roleEdit')">
               编辑
             </el-button>
-            <el-button type="text" size="mini" @click="eventDel(row)">
+            <el-button type="text" size="mini" @click="eventDel(row)" v-if="$auths('/roleDelete')">
               删除
             </el-button>
           </template>

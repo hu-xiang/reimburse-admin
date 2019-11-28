@@ -7,7 +7,7 @@
             <span>报账系统</span> -->
         </div>
         <el-menu :default-active="activeIndex" class="el-menu-header" mode="horizontal" background-color="#303133" text-color="#fff" active-text-color="#ffd04b" @select="handleSelect">
-            <el-menu-item :index="String(index)" v-for="(item, index) in navArr" :key="item.id">{{item.authorityName}}</el-menu-item>
+            <el-menu-item :index="String(index)" v-for="(item, index) in navArr" :key="item.id" v-if="$auths(item.routerName)">{{item.authorityName}}</el-menu-item>
         </el-menu>
         <el-dropdown class="header-center" trigger="click" @command="handleCommand">
             <span class="el-dropdown-link">
@@ -31,21 +31,44 @@
             }
         },
         mounted() {
-            // console.log(this.navArr);
-            // for (let i=0; i < this.navArr.length; i++) {
-            //     console.log(this.navArr[i]);
-            //     console.log(this.navArr[i].authorityName);
-            //     if (this.navArr[i].authorityName === '工作台' && this.is==='工作台' && this.navArr[i].childAuthorities) {
-            //         this.activeIndex = '0'
-            //         break
-            //     }
-            //     if (this.navArr[i].authorityName === '出差申请' && this.is==='出差申请' && this.navArr[i].childAuthorities) {
-            //         this.activeIndex = '1'
-            //         break
-            //     }
-            // }
-            // console.log(this.navArr);
-
+            // 默认选中的头部tab, 因为权限会过滤掉一些tab, 所以需要如下重置默认权限内的第一个
+            for (let i=0; i < this.navArr.length; i++) {
+                if (this.navArr[i].authorityName === '工作台' && this.$auths(this.navArr[i].routerName)) {
+                    this.activeIndex = '0'
+                    this.$emit("left-aside", this.navArr[0]);
+                    break
+                }
+                if (this.navArr[i].authorityName === '出差申请' && this.$auths(this.navArr[i].routerName)) {
+                    this.activeIndex = '1'
+                    this.$emit("left-aside", this.navArr[1]);
+                    break
+                }
+                if (this.navArr[i].authorityName === '费用报销' && this.$auths(this.navArr[i].routerName)) {
+                    this.activeIndex = '2'
+                    this.$emit("left-aside", this.navArr[2]);
+                    break
+                }
+                if (this.navArr[i].authorityName === '预算管理' && this.$auths(this.navArr[i].routerName)) {
+                    this.activeIndex = '3'
+                    this.$emit("left-aside", this.navArr[3]);
+                    break
+                }
+                if (this.navArr[i].authorityName === '报表分析' && this.$auths(this.navArr[i].routerName)) {
+                    this.activeIndex = '4'
+                    this.$emit("left-aside", this.navArr[4]);
+                    break
+                }
+                if (this.navArr[i].authorityName === '人事资料' && this.$auths(this.navArr[i].routerName)) {
+                    this.activeIndex = '5'
+                    this.$emit("left-aside", this.navArr[5]);
+                    break
+                }
+                if (this.navArr[i].authorityName === '系统管理' && this.$auths(this.navArr[i].routerName)) {
+                    this.activeIndex = '6'
+                    this.$emit("left-aside", this.navArr[6]);
+                    break
+                }
+            }
         },
         methods: {
             handleSelect(key, keyPath) {

@@ -85,6 +85,8 @@ export default {
   name: "login",
   data() {
     return {
+      // 目前写死的路由权限配置数据
+      resourceCodes: ["/workBench", "/myApplication", "/myApproval", "/approvalQuery", "/news", "/travelApply", "/travelEntry", "/travelQuery", "/reimbursement", "/feeEntry", "/feeQuery", "/budgetManage", "/budgetEntry", "/budgetChange", "/budgetApproval", "/rightSetting", "/transSetting", "/subsidySetting", "/liveSetting", "/classMaintenance", "/reportAnalysis", "/budget", "/fee", "/travel", "/personInfo", "/userInfo", "/depart", "/rank", "/position", "/role", "/role", "/roleAdd", "/roleEdit", "/roleDelete", "/sysManage", "/globalData", "/comCode", "/accountSubject", "/costCenter", "/zone"],
       ruleForm: {
         username: "",
         password: ""
@@ -125,10 +127,10 @@ export default {
     login() {
       // 登录
       this.$axios.post("/sys/login", this.ruleForm).then(res => {
-        console.log(res);
         if (res && res.success) {
           sessionStorage.setItem('token', res.result.token);
-          this.$router.push("/myApplication");
+          sessionStorage.setItem('resourceCodes', this.resourceCodes); // 后台还没提供目前写死的数据
+          this.$router.push("/index");
         }
       });
 	},

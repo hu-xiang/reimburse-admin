@@ -1,13 +1,15 @@
 <template>
     <el-menu class="leftside-app" :collapse="isCollapse" :router="true" :unique-opened="true" @select="handleSelectMenu">
-        <el-submenu :index="item.routerName ? item.routerName : item.id" v-for="(item, index) in leftArr" v-if="item.childAuthorities && item.childAuthorities.length > 0" :key="item.id">
+        <!-- 有三级菜单 -->
+        <el-submenu :index="item.routerName ? item.routerName : item.id" v-for="(item, index) in leftArr" v-if="item.childAuthorities && item.childAuthorities.length > 0 && $auths(item.routerName)" :key="item.id">
             <template slot="title">
                 <img class="nav-icon" :src='item.imageUrl ? require("../../assets/img/leftside/"+ item.imageUrl + ".png") :""' />
                 <span>{{item.authorityName}}</span>
             </template>
             <el-menu-item v-for="i in item.childAuthorities" :key="i.id" :index="i.routerName ? i.routerName : i.id">{{i.authorityName}}</el-menu-item>
         </el-submenu>
-        <el-menu-item v-else :index="item.routerName ? item.routerName : item.id">
+        <!-- 没有三级菜单 -->
+        <el-menu-item v-else-if="$auths(item.routerName)" :index="item.routerName ? item.routerName : item.id">
             <img class="nav-icon" :src='item.imageUrl ? require("../../assets/img/leftside/"+ item.imageUrl + ".png") :""' />
             <span slot="title">{{item.authorityName}}</span>
         </el-menu-item>
@@ -25,7 +27,7 @@
         },
         mounted() {
 			this.$nextTick(function() {
-                
+                // this.$router.push(this.leftArr[0].routerName);
             });
         },
         methods: {

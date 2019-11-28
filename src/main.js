@@ -13,6 +13,7 @@ import api from './assets/js/common.js' // 公共js
 import './assets/css/common.scss' // 公共css
 // import { log } from 'util';
 import './core';
+import { log } from 'util';
 
 Vue.use(ElementUI);
 
@@ -65,9 +66,30 @@ axios.interceptors.response.use(response => {
 		showClose: true
 	});
 });
-
+// 权限过滤
+Vue.prototype.$auths = (key) => {
+	const resourceCodes = sessionStorage.getItem('resourceCodes');
+	return (key && resourceCodes && resourceCodes.includes(key));
+};
 // 路由渲染前动作
 router.beforeEach((to, from, next) => {
+	// 判断是否有token，验证是否已登录
+	if (sessionStorage.getItem('token')) {
+		if (to.path === '/index') { // 由于白名单没有包含/index,但是进入系统必须通过/index,所以遇到index在已登录后放行
+			return next();
+		} else if (sessionStorage.getItem('resourceCodes').includes(to.path)) { // // 白名单放行
+			return next();
+		} else { // 黑名单禁止并给出提示
+			ElementUI.Message.error({
+				message: '您没有权限访问',
+				duration: 3000,
+				showClose: true
+			});
+		}
+		
+	} else { // 没有token，直接跳到登录页
+		this.$router.push("/login");
+	}
 	const pathName = window.location.origin + window.location.pathname; // 项目路径地址
 	//判断版本是否更新(打包时执行)
 	if (process.env.NODE_ENV !== 'development') { // 发布环境
@@ -93,7 +115,6 @@ router.beforeEach((to, from, next) => {
 			}
 		});
 	}
-	next();
 });
 
 // 全局使用
