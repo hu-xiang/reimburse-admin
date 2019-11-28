@@ -27,10 +27,25 @@
         props: ["navArr"],
         data (){
             return {
-                activeIndex: '0'
+                activeIndex: '0',
             }
         },
         mounted() {
+            // console.log(this.navArr);
+            // for (let i=0; i < this.navArr.length; i++) {
+            //     console.log(this.navArr[i]);
+            //     console.log(this.navArr[i].authorityName);
+            //     if (this.navArr[i].authorityName === '工作台' && this.is==='工作台' && this.navArr[i].childAuthorities) {
+            //         this.activeIndex = '0'
+            //         break
+            //     }
+            //     if (this.navArr[i].authorityName === '出差申请' && this.is==='出差申请' && this.navArr[i].childAuthorities) {
+            //         this.activeIndex = '1'
+            //         break
+            //     }
+            // }
+            // console.log(this.navArr);
+
         },
         methods: {
             handleSelect(key, keyPath) {

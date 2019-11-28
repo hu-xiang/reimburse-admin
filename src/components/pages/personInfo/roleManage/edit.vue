@@ -1,12 +1,12 @@
 <template>
-    <div class="role">
-        角色管理
+    <div class="roleEdit">
+        编辑角色
     </div>
 </template>
 
 <script>
     export default {
-        name: 'role',
+        name: 'roleEdit',
         data (){
             return {
 
@@ -18,12 +18,11 @@
             });
         },
         methods: {
-
         }
     }
 </script>
 
 <style lang="scss" scoped>
-    .role {
+    .roleEdit {
     }
 </style>

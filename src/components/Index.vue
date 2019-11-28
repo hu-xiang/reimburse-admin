@@ -39,12 +39,29 @@
             return {
                 navArr: navData,
                 leftArr: navData[0].childAuthorities ? navData[0].childAuthorities : [],
+                // leftArr: [],
                 editableTabsValue: '/myApplication',
                 editableTabs: [{title: '我的申请',name: '/myApplication',id: 'EE48A38918264BE58324767F5B84F149'}],
-                isCollapse: false
+                isCollapse: false,
             }
         },
+        created() {
+            
+        },
         mounted() {
+            // console.log(navData);
+            // for (let i=0; i < navData.length; i++) {
+            //     console.log(navData[i]);
+            //     if (navData[i].authorityName === '工作台' && this.is==='工作台' && navData[i].childAuthorities) {
+            //         this.leftArr = navData[0].childAuthorities
+            //         break
+            //     }
+            //     if (navData[i].authorityName === '出差申请' && this.is==='sdaas' && navData[i].childAuthorities) {
+            //         this.leftArr = navData[1].childAuthorities
+            //         break
+            //     }
+            // }
+            // console.log(navData);
 			this.$nextTick(function() {
             });
         },
@@ -150,7 +167,7 @@
                     margin: 0 10px;
                     overflow-x: auto;
                     overflow-y: auto;
-                    background-color: #fff;
+                    //background-color: #fff;
                 }
             }
             .el-footer {

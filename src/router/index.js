@@ -11,8 +11,8 @@ import myApproval from '@/components/pages/workBench/myApproval/index.vue';
 import approvalQuery from '@/components/pages/workBench/approvalQuery/index.vue';
 import news from '@/components/pages/workBench/news/index.vue';
 // 出差申请页面
-import travelEntry from '@/components/pages/travel/travelEntry/index.vue';
-import travelQuery from '@/components/pages/travel/travelQuery/index.vue';
+import travelEntry from '@/components/pages/travelApply/travelEntry/index.vue';
+import travelQuery from '@/components/pages/travelApply/travelQuery/index.vue';
 // 费用报销页面
 import feeEntry from '@/components/pages/reimbursement/feeEntry/index.vue';
 import feeQuery from '@/components/pages/reimbursement/feeQuery/index.vue';
@@ -34,7 +34,9 @@ import userInfo from '@/components/pages/personInfo/userInfo/index.vue';
 import depart from '@/components/pages/personInfo/depart/index.vue';
 import rank from '@/components/pages/personInfo/rank/index.vue';
 import position from '@/components/pages/personInfo/position/index.vue';
-import role from '@/components/pages/personInfo/role/index.vue';
+import role from '@/components/pages/personInfo/roleManage/index.vue';
+import roleAdd from '@/components/pages/personInfo/roleManage/add.vue';
+import roleEdit from '@/components/pages/personInfo/roleManage/edit.vue';
 // 系统管理页面
 import globalData from '@/components/pages/sysManage/globalData/index.vue';
 import comCode from '@/components/pages/sysManage/comCode/index.vue';
@@ -183,6 +185,16 @@ export default new Router({
           path: '/role',
           name: '角色管理',
           component: role,
+        },
+        { // 在nav.json不需要配置，不用新开tab
+          path: '/roleAdd',
+          name: '新增角色',
+          component: roleAdd,
+        },
+        { // 在nav.json不需要配置，不用新开tab
+          path: '/roleEdit',
+          name: '编辑角色',
+          component: roleEdit,
         },
         // 系统管理页面路由
         {

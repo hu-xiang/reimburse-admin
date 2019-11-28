@@ -11,7 +11,8 @@ import ElementUI from 'element-ui';
 
 import api from './assets/js/common.js' // 公共js
 import './assets/css/common.scss' // 公共css
-import { log } from 'util';
+// import { log } from 'util';
+import './core';
 
 Vue.use(ElementUI);
 
@@ -22,17 +23,25 @@ axios.defaults.headers.post['Content-Type'] = 'application/json'; // 设置请�
 axios.defaults.timeout = 30 * 1000; // 设置请求超时时间
 
 let loadingInstance = null; // 请求动画
-// 统一设置请求前修改参数
+
+// 添加请求拦截器   (统一设置请求前修改参数)
 axios.interceptors.request.use((config) => {
 	loadingInstance = ElementUI.Loading.service({}); // 加载动画
+	// 若是有做鉴权token , 就给头部带上token
+	if (sessionStorage.getItem('token')) {
+		// 判断是否存在token，如果存在的话，则每个http header都加上token
+		config.headers.common['X-Access-Token'] = sessionStorage.getItem('token');
+	}
 	return config;
+}, (error) => {
+	Promise.reject(error);
 });
 
 // 统一设置请求不成功的方法
 axios.interceptors.response.use(response => {
 	setTimeout(() => {
 		loadingInstance.close();
-		if(response.data && !response.data.success) {
+		if (response.data && !response.data.success) {
 			ElementUI.Message.error({
 				message: response.data.message || '请求数据异常，请稍后再试！！',
 				duration: 3000,
@@ -61,13 +70,13 @@ axios.interceptors.response.use(response => {
 router.beforeEach((to, from, next) => {
 	const pathName = window.location.origin + window.location.pathname; // 项目路径地址
 	//判断版本是否更新(打包时执行)
-	if(process.env.NODE_ENV !== 'development') { // 发布环境
+	if (process.env.NODE_ENV !== 'development') { // 发布环境
 		$.ajax({
 			url: pathName + 'static/version.json?_=' + Math.random(), //json文件位置
 			type: "GET",
 			dataType: "json",
-			success: function(data) {
-				if(process.env.VERSION !== data.version) {
+			success: function (data) {
+				if (process.env.VERSION !== data.version) {
 					Vue.prototype.$alert('系统版本有更新，点击确定加载最新，或按【CTRL + F5】！', '系统提示', {
 						type: 'warning',
 						showClose: false,
@@ -79,7 +88,7 @@ router.beforeEach((to, from, next) => {
 				}
 				next();
 			},
-			error: function(err) {
+			error: function (err) {
 				next();
 			}
 		});
@@ -92,7 +101,7 @@ Vue.prototype.api = api;
 Vue.prototype.$axios = axios;
 
 // Date对象的toJSON方法
-Date.prototype.toJSON = function() {    
+Date.prototype.toJSON = function () {
 	return this.toString();
 }
 

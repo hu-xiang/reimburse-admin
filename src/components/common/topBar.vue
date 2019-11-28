@@ -75,6 +75,14 @@ export default {
       border-bottom-left-radius: 0;
       padding: 0 8px;
     }
+    /deep/ .el-range-editor .el-range-input {
+        font-size: 12px;
+        width: 45%;
+    }
+    /deep/ .el-date-editor .el-range-separator {
+        font-size: 12px;
+        width: 12%;
+    }
     /deep/ .el-select {
       width: 100%;
     }

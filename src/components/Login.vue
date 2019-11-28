@@ -127,6 +127,7 @@ export default {
       this.$axios.post("/sys/login", this.ruleForm).then(res => {
         console.log(res);
         if (res && res.success) {
+          sessionStorage.setItem('token', res.result.token);
           this.$router.push("/myApplication");
         }
       });
