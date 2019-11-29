@@ -6,7 +6,7 @@ import locale from 'element-ui/lib/locale'
 Vue.use(VueI18n)
 
 const i18n = new VueI18n({
-    locale: 'en',
+    locale: 'cn',
     messages,
 })
 locale.i18n((key, value) => i18n.t(key, value))

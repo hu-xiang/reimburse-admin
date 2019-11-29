@@ -141,7 +141,7 @@ export default {
         password: ""
       },
       passwordType: "password",
-      lang: "en"
+      lang: ""
     };
   },
   computed: {
@@ -165,9 +165,8 @@ export default {
     }
   },
   mounted() {
-    console.log(this.full);
+    this.lang = this.$i18n.locale;
     this.$nextTick(function() {
-      console.log(this.full);
     });
   },
   methods: {
