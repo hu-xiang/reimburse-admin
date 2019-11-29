@@ -59,12 +59,22 @@ axios.interceptors.response.use(response => {
 	}, 500)
 	return response.data;
 }, error => {
+	const errorRes = error.response.data;
+	if (errorRes.message === 'Token失效，请重新登录') { // 系统长时间没操作，token失效跳转到登录页
+		router.push('/');
+		ElementUI.Message.error({
+			message: 'Token失效，请重新登录！！',
+			duration: 3000,
+			showClose: true
+		});
+	} else {
+		ElementUI.Message.error({ // 其他报错直接抛出错误，不用跳到登录页
+			message: '服务器异常，请稍后再试！！',
+			duration: 3000,
+			showClose: true
+		});
+	}
 	loadingInstance.close();
-	ElementUI.Message.error({
-		message: '服务器异常，请稍后再试！！',
-		duration: 3000,
-		showClose: true
-	});
 });
 // 权限过滤
 Vue.prototype.$auths = (key) => {
