@@ -5,6 +5,7 @@ import App from './App'
 import router from './router'
 import axios from 'axios'
 import i18n from './i18n/i18n'
+import './mixin'
 // 引入ui组件
 import ElementUI from 'element-ui';
 //import 'element-ui/lib/theme-chalk/index.css';

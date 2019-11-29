@@ -7,8 +7,6 @@ const en = {
         systemName: 'billing system',
         systemInfo1: 'intelligent financial collaboration',
         systemInfo2: 'internal and external system interconnection',
-        ok: 'ok',
-        cancel: 'cancel',
         login: 'login',
         languageArr: [
             {
@@ -22,6 +20,19 @@ const en = {
         ],
         userNameTips: 'please enter user name',
         passwordTips: 'please enter the password',
+        addBtn: 'add',
+        editBtn: 'edit',
+        deleteBtn: 'delete',
+        submitBtn: 'submit',
+        searchBtn: 'search',
+        resetBtn: 'reset',
+        okBtn: 'ok',
+        cancelBtn: 'cancel',
+        personalCenter: 'personal center',
+        changePassword: 'change password',
+        signOut: 'sign out',
+        tips: 'tips',
+        tipsTitle: 'Are you sure you want to log out ?',
     },
     ...enLocale
 }

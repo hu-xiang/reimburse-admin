@@ -11,11 +11,11 @@
         </el-menu>
         <el-dropdown class="header-center" trigger="click" @command="handleCommand">
             <span class="el-dropdown-link">
-                个人中心<i class="el-icon-arrow-down el-icon--right"></i>
+                {{$t('message.personalCenter')}}<i class="el-icon-arrow-down el-icon--right"></i>
             </span>
             <el-dropdown-menu slot="dropdown">
-                <el-dropdown-item command="changePsd">修改密码</el-dropdown-item>
-                <el-dropdown-item command="longinOut">退出登录</el-dropdown-item>
+                <el-dropdown-item command="changePsd">{{$t('message.changePassword')}}</el-dropdown-item>
+                <el-dropdown-item command="longinOut">{{$t('message.signOut')}}</el-dropdown-item>
             </el-dropdown-menu>
         </el-dropdown>
     </div>
