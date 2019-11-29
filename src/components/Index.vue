@@ -160,8 +160,8 @@
                 }
             }
             .el-footer {
-                background-color: #fff;
-                color: #fff;
+                //background-color: #fff;
+                background-color: rgba(256,256,256,0.5);
                 text-align: center;
                 line-height: 60px;
             }

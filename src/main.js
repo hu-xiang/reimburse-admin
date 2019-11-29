@@ -4,6 +4,7 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import axios from 'axios'
+import i18n from './i18n/i18n'
 // 引入ui组件
 import ElementUI from 'element-ui';
 //import 'element-ui/lib/theme-chalk/index.css';
@@ -11,7 +12,6 @@ import ElementUI from 'element-ui';
 import qs from 'qs';
 import api from './assets/js/common.js' // 公共js
 import './assets/css/common.scss' // 公共css
-// import { log } from 'util';
 import './core';
 import { log } from 'util';
 
@@ -152,6 +152,7 @@ Vue.config.productionTip = false
 new Vue({
 	el: '#app',
 	router,
+	i18n,
 	components: {
 		App
 	},

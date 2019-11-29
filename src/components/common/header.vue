@@ -132,6 +132,7 @@
         .el-menu-header{
             justify-content: flex-end;
             background-color: #303133;
+            background-color: rgba(0,0,0,0.7);
             border-bottom: none;
             flex-grow: 1;
         }

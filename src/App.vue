@@ -14,7 +14,7 @@ export default {
 #app {
   width: 100%;
   height: 100%;
-  background: #f0f2f5;
+  /* background: #f0f2f5; */
   min-width: 1024px;
   font-family: 'PingFang SC, Microsoft Yahei';
   font-size: 12px;

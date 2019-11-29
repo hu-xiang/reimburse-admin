@@ -6,19 +6,19 @@
       </video>
     </div>
     <div class="login-info text-whit fadeInLeft">
-      <h2 class="login-info-title">闻泰科技 - 报账系统</h2>
+      <h2 class="login-info-title">{{$t('message.comName')}} - {{$t('message.systemName')}}</h2>
       <ul class="login-info-list">
         <li class="login-info-item">
-          <i class="el-icon-check"></i>&nbsp;智能财务协同
+          <i class="el-icon-check"></i>&nbsp;{{$t('message.systemInfo1')}}
         </li>
         <li class="login-info-item">
-          <i class="el-icon-check"></i>&nbsp;内外系统互连互通
+          <i class="el-icon-check"></i>&nbsp;{{$t('message.systemInfo2')}}
         </li>
       </ul>
     </div>
     <div class="login-border fadeInRight">
       <div class="login-main">
-        <h2 class="login-title">闻泰科技报账系统</h2>
+        <h2 class="login-title">{{$t('message.comName')}}-{{$t('message.systemName')}}</h2>
         <el-form
           class="login-form"
           status-icon
@@ -33,7 +33,7 @@
               @keyup.enter.native="submitForm('ruleForm')"
               v-model="ruleForm.username"
               auto-complete="off"
-              placeholder="请输入用户名"
+              :placeholder="$t('message.userNameTips')"
             >
               <i slot="prefix" class="el-icon-user"></i>
             </el-input>
@@ -45,7 +45,7 @@
               :type="passwordType"
               v-model="ruleForm.password"
               auto-complete="off"
-              placeholder="请输入密码"
+              :placeholder="$t('message.passwordTips')"
             >
               <i class="el-icon-view el-input__icon" slot="suffix" @click="showPassword"></i>
               <i slot="prefix" class="el-icon-unlock"></i>
@@ -54,12 +54,20 @@
           <el-form-item>
             <el-button
               type="primary"
-              size="small"
+              size="medium"
               @click.native.prevent="submitForm('ruleForm')"
               class="login-submit"
-            >登录</el-button>
+            >{{$t('message.login')}}</el-button>
           </el-form-item>
         </el-form>
+        <el-select v-model="lang" placeholder="请选择" class="login-language" @change="changeLang">
+          <el-option
+            v-for="item in $t('message.languageArr')"
+            :key="item.value"
+            :label="item.label"
+            :value="item.value"
+          ></el-option>
+        </el-select>
       </div>
     </div>
   </div>
@@ -86,33 +94,81 @@ export default {
   data() {
     return {
       // 目前写死的路由权限配置数据
-      resourceCodes: ["/workBench", "/myApplication", "/myApproval", "/approvalQuery", "/news", "/travelApply", "/travelEntry", "/travelQuery", "/reimbursement", "/feeEntry", "/feeQuery", "/budgetManage", "/budgetEntry", "/budgetChange", "/budgetApproval", "/rightSetting", "/transSetting", "/subsidySetting", "/liveSetting", "/classMaintenance", "/reportAnalysis", "/budget", "/fee", "/travel", "/personInfo", "/userInfo", "/depart", "/rank", "/position", "/role", "/role", "/roleAdd", "/roleEdit", "/roleDelete", "/sysManage", "/globalData", "/comCode", "/accountSubject", "/costCenter", "/zone"],
+      resourceCodes: [
+        "/workBench",
+        "/myApplication",
+        "/myApproval",
+        "/approvalQuery",
+        "/news",
+        "/travelApply",
+        "/travelEntry",
+        "/travelQuery",
+        "/reimbursement",
+        "/feeEntry",
+        "/feeQuery",
+        "/budgetManage",
+        "/budgetEntry",
+        "/budgetChange",
+        "/budgetApproval",
+        "/rightSetting",
+        "/transSetting",
+        "/subsidySetting",
+        "/liveSetting",
+        "/classMaintenance",
+        "/reportAnalysis",
+        "/budget",
+        "/fee",
+        "/travel",
+        "/personInfo",
+        "/userInfo",
+        "/depart",
+        "/rank",
+        "/position",
+        "/role",
+        "/role",
+        "/roleAdd",
+        "/roleEdit",
+        "/roleDelete",
+        "/sysManage",
+        "/globalData",
+        "/comCode",
+        "/accountSubject",
+        "/costCenter",
+        "/zone"
+      ],
       ruleForm: {
         username: "",
         password: ""
       },
-      rules: {
+      passwordType: "password",
+      lang: "en"
+    };
+  },
+  computed: {
+    rules() {
+      return {
         username: [
           {
             required: true,
-            message: "请输入用户名",
+            message: this.$t("message.userNameTips"),
             trigger: "blur"
           }
         ],
         password: [
           {
             required: true,
-            message: "请输入密码",
+            message: this.$t("message.passwordTips"),
             trigger: "blur"
           }
         ]
-	  },
-	  passwordType: 'password',
-    };
+      };
+    }
   },
-  created() {},
   mounted() {
-    this.$nextTick(function() {});
+    console.log(this.full);
+    this.$nextTick(function() {
+      console.log(this.full);
+    });
   },
   methods: {
     submitForm(formName) {
@@ -128,22 +184,24 @@ export default {
       // 登录
       this.$axios.post("/sys/login", this.ruleForm).then(res => {
         if (res && res.success) {
-          sessionStorage.setItem('token', res.result.token);
-          sessionStorage.setItem('resourceCodes', this.resourceCodes); // 后台还没提供目前写死的数据
+          sessionStorage.setItem("token", res.result.token);
+          sessionStorage.setItem("resourceCodes", this.resourceCodes); // 后台还没提供目前写死的数据
           this.$router.push("/index");
         }
       });
-	},
-	showPassword() {
-      if (this.passwordType === 'password') {
-        this.passwordType = '';
+    },
+    showPassword() {
+      if (this.passwordType === "password") {
+        this.passwordType = "";
       } else {
-        this.passwordType = 'password';
+        this.passwordType = "password";
       }
     },
+    changeLang() {
+      this.$i18n.locale = this.lang;
+    }
   },
-  watch: {},
-  computed: {}
+  watch: {}
 };
 </script>
 
@@ -221,19 +279,20 @@ export default {
 }
 .login-container::before {
   z-index: -999;
-  content: '';
+  content: "";
   position: absolute;
   left: 0;
   top: 0;
   width: 100%;
   height: 100%;
-  background-image: url('../assets/img/login/login.jpg');
+  background-image: url("../assets/img/login/login.jpg");
   background-size: cover;
 }
 
 .login-info {
   z-index: 1;
   padding-left: 60px;
+  width: 380px;
 }
 
 .login-info-title {
@@ -257,15 +316,15 @@ export default {
   justify-content: center;
   flex-direction: column;
   padding: 30px 40px 25px 40px;
-  background-color: #fff;
-  border-radius: 6px;
+  background-color: rgba(0,0,0,0.5);
   box-shadow: 1px 1px 2px #eee;
+  border-radius: 6px;
 }
 
 .login-main {
   border-radius: 3px;
   box-sizing: border-box;
-  background-color: #fff;
+  //background-color: #fff;
 }
 
 .login-main > h3 {
@@ -275,7 +334,10 @@ export default {
 .login-main > p {
   color: #76838f;
 }
-
+.login-language {
+  width: 100px;
+  margin-left: 95px;
+}
 .login-title {
   margin: 0 0 20px;
   text-align: center;
@@ -292,9 +354,9 @@ export default {
 .login-form {
   margin: 10px 0;
   .el-form-item {
-    margin-bottom: 22px;
+    margin-bottom: 16px;
     & /deep/ .el-form-item__content {
-      width: 270px;
+      width: 290px;
     }
   }
   .el-input {
