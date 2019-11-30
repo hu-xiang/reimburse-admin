@@ -196,8 +196,10 @@ export default {
         this.passwordType = "password";
       }
     },
-    changeLang() {
-      this.$i18n.locale = this.lang;
+    changeLang(val) {
+      this.$i18n.locale = val;
+      sessionStorage.setItem('lang', val)
+
     }
   },
   watch: {}

@@ -12,7 +12,7 @@ export default {
   props: {
     width: {
       type: String,
-      default: '260px',
+      default: '',
     },
   },
   mounted() {
@@ -49,7 +49,7 @@ export default {
   flex-wrap: wrap;
   align-items: center;
   > section {
-    width: 260px;
+    /* width: 260px; */
     margin-right: 7px;
     margin-bottom: 7px;
     display: flex;

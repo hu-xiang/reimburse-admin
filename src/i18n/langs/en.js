@@ -33,6 +33,16 @@ const en = {
         signOut: 'sign out',
         tips: 'tips',
         tipsTitle: 'Are you sure you want to log out ?',
+        cancelledTips: 'cancelled',
+        roleName: 'role name',
+        creationTime: 'creation time',
+        startDate: 'start date',
+        endDate: 'end date',
+        to: 'to',
+        operate: 'operate',
+        roleCoding: 'role coding',
+        remark: 'remark',
+        updateTime: 'update time',
     },
     ...enLocale
 }

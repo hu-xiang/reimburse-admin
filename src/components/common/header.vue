@@ -76,20 +76,16 @@
             },
             handleCommand(val){
                 if(val == 'longinOut'){  // 退出登录
-                    this.$confirm('是否确定退出登录?', '提示', {
-                        confirmButtonText: '确定',
-                        cancelButtonText: '取消',
+                    this.$confirm(this.$t('message.tipsTitle'), this.$t('message.tips'), {
+                        confirmButtonText: this.$t('message.okBtn'),
+                        cancelButtonText: this.$t('message.cancelBtn'),
                         type: 'warning'
                     }).then(() => {
                         this.$router.push("/");
-                        this.$message({
-                            type: 'success',
-                            message: '退出登录成功!'
-                        });
                     }).catch(() => {
                         this.$message({
                             type: 'info',
-                            message: '已取消'
+                            message: this.$t('message.cancelledTips'),
                         });          
                     });
                 }else if(val == 'changePsd'){  // 修改密码

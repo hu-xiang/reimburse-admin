@@ -33,6 +33,16 @@ const cn = {
         signOut: '退出登录',
         tips: '提示',
         tipsTitle: '是否确定退出登录？',
+        cancelledTips: '已取消',
+        roleName: '角色名称',
+        creationTime: '创建时间',
+        startDate: '开始日期',
+        endDate: '结束日期',
+        to: '至',
+        operate: '操作',
+        roleCoding: '角色编码',
+        remark: '备注',
+        updateTime: '更新时间',
     },
     ...zhLocale
 }
