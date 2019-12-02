@@ -137,7 +137,6 @@
                     top: 0px;
                     left: 0px;
                     background: #fff;
-                    border-radius: 8px;
                     .fold-icon {
                         margin-top: 1px;
                         margin-left: 1px;
