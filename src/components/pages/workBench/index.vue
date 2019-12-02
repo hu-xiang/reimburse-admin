@@ -1,12 +1,12 @@
 <template>
-    <div class="myApproval">
-        我的审批
+    <div class="workBench">
+        我的工作台
     </div>
 </template>
 
 <script>
     export default {
-        name: 'myApproval',
+        name: 'workBench',
         data (){
             return {
 
@@ -24,6 +24,6 @@
 </script>
 
 <style lang="scss" scoped>
-    .myApproval {
+    .workBench {
     }
 </style>

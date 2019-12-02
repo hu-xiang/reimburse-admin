@@ -2,21 +2,24 @@
     <div class="index-app">
         <el-container>
             <el-header>
-                <header-app :navArr="navArr" @left-aside="changeLeftAside" />
+                <header-app/>
             </el-header>
             <el-container>
-                <el-aside :width="isCollapse ? '64px' :'240px'"><left-aside :leftArr="leftArr" :isCollapse="isCollapse" @select-menu="handleSelectMenu" /></el-aside>
+                    <el-aside :width="isCollapse ? '50px' :'240px'"><left-aside @select-menu="handleSelectMenu" :isCollapse="isCollapse" :defaultActive="editableTabsValue"/></el-aside>
                 <el-container>
                     <el-main>
-                        <el-tabs class="header-nav" :closable="editableTabs.length > 1" v-show="editableTabs.length > 0" v-model="editableTabsValue" type="card" @edit="handleTabsEdit" @tab-click="handleMenuChange">
-                            <el-tab-pane :key="item.id" v-for="(item, index) in editableTabs" :label="item.title" :name="item.name">
+                        <div class="fold-button">
+                            <el-button :icon="isCollapse ? 'el-icon-s-unfold' : 'el-icon-s-fold'" circle class="fold-icon" size="small" @click="changeIsCollapse"></el-button>
+                        </div>
+                        <el-tabs class="header-nav" closable v-show="editableTabs.length > 0" v-model="editableTabsValue" type="card" @edit="handleTabsEdit" @tab-click="handleMenuChange">
+                            <el-tab-pane :key="item.path" v-for="(item, index) in editableTabs" :label="item.name" :name="item.path">
                             </el-tab-pane>
                         </el-tabs>
                         <div class="main-box">
                             <router-view></router-view>
                         </div>
                     </el-main>
-                    <el-footer><footer-app /></el-footer>
+                    <!-- <el-footer><footer-app /></el-footer> -->
                 </el-container>
             </el-container>
         </el-container>
@@ -26,21 +29,18 @@
 <script>
     import header from './common/header.vue';
     import leftAside from './common/leftside.vue';
-    import footer from './common/footer.vue';
-    import navData from  '../assets/json/nav.json';
+    //import footer from './common/footer.vue';
     export default {
         name: 'index',
         components: {
             'left-aside' : leftAside,
-            "footer-app": footer,
+            //"footer-app": footer,
             "header-app": header,
         },
         data (){
             return {
-                navArr: navData, // tab标签页列表在nav.json中维护
-                leftArr: [],
-                editableTabsValue: '',
-                editableTabs: [],
+                editableTabsValue: '/workBench',
+                editableTabs: [{name: this.$t('message.workbench'), path: '/workBench'}],
                 isCollapse: false,
             }
         },
@@ -49,63 +49,53 @@
         },
         mounted() {
 			this.$nextTick(function() {
-                this.editableTabs = [{title: this.leftArr[0].authorityName, name: this.leftArr[0].routerName, id: this.leftArr[0].id}];
-                this.editableTabsValue = this.leftArr[0].routerName;
-                this.$router.push(this.leftArr[0].routerName);
+                this.$router.push('/workBench')
             });
         },
         methods: {
-            changeLeftAside(data){
-                this.leftArr = data.childAuthorities ? data.childAuthorities : [];
-            },
             handleSelectMenu(data){
-                this.handleTabsEdit(data.routerName, 'add', data);
+                this.handleTabsEdit(data.path, 'add', data);
             },
-            handleTabsEdit(targetName, action, data) {
+            handleTabsEdit(path, action, data) {
                 if (action === 'add') {
-                    let newTabName = targetName;
                     let flag = true;
                     for(let i = 0; i < this.editableTabs.length; i++){
                         let item = this.editableTabs[i];
-                        if(item.name === targetName){
+                        if(item.path === path){
                             flag = false;
                             break;
                         }
                     }
                     if(flag){
                         this.editableTabs.push({
-                            title: data.authorityName,
-                            name: newTabName,
-                            id: data.id
+                            name: data.name,
+                            path: path
                         });
                     }
-                    this.editableTabsValue = newTabName;
+                    this.editableTabsValue = path;
                 }
                 if (action === 'remove') {
-                    let tabs = this.editableTabs;
-                    let activeName = this.editableTabsValue;
-                    if (activeName === targetName) {
-                        tabs.forEach((tab, index) => {
-                            if (tab.name === targetName) {
-                                let nextTab = tabs[index + 1] || tabs[index - 1];
+                    if(path == '/workBench') {
+                        this.$message.error(this.$t('message.noClose'));
+                        return;
+                    }
+                    if (this.editableTabsValue === path) {
+                        this.editableTabs.forEach((tab, index) => {
+                            if (tab.path === path) {
+                                let nextTab = this.editableTabs[index + 1] || this.editableTabs[index - 1];
                                 if (nextTab) {
-                                    activeName = nextTab.name;
+                                    this.editableTabsValue = nextTab.path;
                                 }
                             }
                         });
                     }
-                    this.editableTabsValue = activeName;
-                    this.editableTabs = tabs.filter(tab => tab.name !== targetName);
-                    if(this.editableTabs.length === 0){
-                        this.$router.push('/index');
-                    }else{
-                        this.$router.push(activeName);
-                    }
+                    this.editableTabs = this.editableTabs.filter(tab => tab.path !== path);
+                    this.$router.push(this.editableTabsValue);
                 }
             },
             handleMenuChange(tab, event){
-                let targetName = tab.name;
-                this.$router.push(targetName);
+                let path = tab.name;
+                this.$router.push(path);
             },
             changeIsCollapse(){
                 this.isCollapse = !this.isCollapse;
@@ -113,11 +103,11 @@
         },
         watch: {
             $route(to, from) {
-                let targetName = to.path;
+                let path = to.path;
                 for(let i = 0; i < this.editableTabs.length; i++){
                     let item = this.editableTabs[i];
-                    if(item.name === targetName){
-                        this.editableTabsValue = targetName;
+                    if(item.path === path){
+                        this.editableTabsValue = path;
                         break;
                     }
                 }
@@ -139,10 +129,26 @@
                 padding: 46px 0px 10px;
                 height: 100%;
                 overflow: hidden;
-                .header-nav{
+                .fold-button{
+                    display: inline-block;
                     position: absolute;
+                    width: 37px;
+                    height: 37px;
                     top: 0px;
                     left: 0px;
+                    background: #fff;
+                    border-radius: 8px;
+                    .fold-icon {
+                        margin-top: 1px;
+                        margin-left: 1px;
+                        font-size: 14px;
+                    }
+                }
+                .header-nav{
+                    display: inline-block;
+                    position: absolute;
+                    top: 0px;
+                    left: 37px;
                     height: 36px;
                     width: 100%;
                     background-color: #fff;
@@ -159,12 +165,12 @@
                     //background-color: #fff;
                 }
             }
-            .el-footer {
+            /* .el-footer {
                 //background-color: #fff;
                 background-color: rgba(256,256,256,0.5);
                 text-align: center;
                 line-height: 60px;
-            }
+            } */
             .el-header {
                 padding: 0;
             }

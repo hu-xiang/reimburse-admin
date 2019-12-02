@@ -6,10 +6,7 @@ import ErrorApp from '@/components/common/error';  // 错误页面
 
 /** 业务代码 */
 // 工作台页面
-import myApplication from '@/components/pages/workBench/myApplication/index.vue';
-import myApproval from '@/components/pages/workBench/myApproval/index.vue';
-import approvalQuery from '@/components/pages/workBench/approvalQuery/index.vue';
-import news from '@/components/pages/workBench/news/index.vue';
+import workBench from '@/components/pages/workBench/index.vue';
 // 出差申请页面
 import travelEntry from '@/components/pages/travelApply/travelEntry/index.vue';
 import travelQuery from '@/components/pages/travelApply/travelQuery/index.vue';
@@ -62,24 +59,9 @@ export default new Router({
       children: [
         // 工作台页面路由
         {
-          path: '/myApplication',
-          name: '我的申请',
-          component: myApplication,
-        },
-        {
-          path: '/myApproval',
-          name: '我的审批',
-          component: myApproval,
-        },
-        {
-          path: '/approvalQuery',
-          name: '审批查询',
-          component: approvalQuery,
-        },
-        {
-          path: '/news',
-          name: '消息公告',
-          component: news,
+          path: '/workBench',
+          name: '工作台',
+          component: workBench,
         },
         // 出差申请页面路由
         {
@@ -121,22 +103,22 @@ export default new Router({
         },
         {
           path: '/rightSetting',
-          name: '审批签权设定',
+          name: '审批签权',
           component: rightSetting,
         },
         {
           path: '/transSetting',
-          name: '出差交通费设定',
+          name: '出差交通费',
           component: transSetting,
         },
         {
           path: '/subsidySetting',
-          name: '出差补助设定',
+          name: '出差补助',
           component: subsidySetting,
         },
         {
           path: '/liveSetting',
-          name: '出差住宿费设定',
+          name: '出差住宿费',
           component: liveSetting,
         },
         {
@@ -199,7 +181,7 @@ export default new Router({
         // 系统管理页面路由
         {
           path: '/globalData',
-          name: '系统全局参数设定',
+          name: '系统全局参数',
           component: globalData,
         },
         {

@@ -96,10 +96,6 @@ export default {
       // 目前写死的路由权限配置数据
       resourceCodes: [
         "/workBench",
-        "/myApplication",
-        "/myApproval",
-        "/approvalQuery",
-        "/news",
         "/travelApply",
         "/travelEntry",
         "/travelQuery",

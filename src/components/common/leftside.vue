@@ -1,44 +1,56 @@
 <template>
-    <el-menu class="leftside-app" :collapse="isCollapse" :router="true" :unique-opened="true" @select="handleSelectMenu">
-        <!-- 有三级菜单 -->
-        <el-submenu :index="item.routerName ? item.routerName : item.id" v-for="(item, index) in leftArr" v-if="item.childAuthorities && item.childAuthorities.length > 0 && $auths(item.routerName)" :key="item.id">
-            <template slot="title">
-                <img class="nav-icon" :src='item.imageUrl ? require("../../assets/img/leftside/"+ item.imageUrl + ".png") :""' />
-                <span>{{item.authorityName}}</span>
-            </template>
-            <el-menu-item v-for="i in item.childAuthorities" :key="i.id" :index="i.routerName ? i.routerName : i.id">{{i.authorityName}}</el-menu-item>
-        </el-submenu>
-        <!-- 没有三级菜单 -->
-        <el-menu-item v-else-if="$auths(item.routerName)" :index="item.routerName ? item.routerName : item.id">
-            <img class="nav-icon" :src='item.imageUrl ? require("../../assets/img/leftside/"+ item.imageUrl + ".png") :""' />
-            <span slot="title">{{item.authorityName}}</span>
-        </el-menu-item>
+    <el-menu
+      :collapse="isCollapse"
+      @select="handleSelectMenu"
+      router
+      unique-opened
+      :default-active="defaultActive"
+      class="el-menu-vertical-demo leftside-app">
+      <el-submenu :index="item.path" v-for="item in routerList" v-if="item.children&&$auths(item.path)" :key="item.path">
+        <template slot="title">
+          <i :class="item.icon" style="color: #f45d2f"></i>
+          <span>{{item.name}}</span>
+        </template>
+        <el-menu-item :index="i.path" v-for="i in item.children" v-if="$auths(i.path)" :key="i.path">{{i.name}}</el-menu-item>
+      </el-submenu>
+      <el-menu-item :index="item.path" v-else-if="$auths(item.path)">
+        <i :class="item.icon" style="color: #f45d2f"></i>
+        <span slot="title">{{item.name}}</span>
+      </el-menu-item>
     </el-menu>
 </template>
 
 <script>
+
     export default {
         name: 'leftside',
-        props: ["leftArr", "isCollapse"],
+        props: {
+            defaultActive: {
+                type: String,
+                default: '/workBench',
+            },
+            isCollapse: {
+                type: Boolean,
+                default: false,
+            }
+        },
         data (){
             return {
-
             }
         },
         mounted() {
 			this.$nextTick(function() {
-                // this.$router.push(this.leftArr[0].routerName);
             });
         },
         methods: {
             handleSelectMenu(index, indexPath){
                 let indexMenu = {};
-                this.leftArr.forEach(element => {
-					if(element.routerName == index && !element.childAuthorities) {
+                this.routerList.forEach(element => {
+					if(element.path == index && !element.children) {
                         indexMenu = element;
-					} else if(element.childAuthorities && element.childAuthorities.length > 0) {
-						element.childAuthorities.forEach(e => {
-							if(e.routerName == index) {
+					} else if(element.children && element.children.length > 0) {
+						element.children.forEach(e => {
+							if(e.path == index) {
                                 indexMenu = e;
 							}
 						});
@@ -53,11 +65,8 @@
 <style lang="scss" scoped>
     .leftside-app {
         height: 100%;
-        .nav-icon{
-            width: 16px;
-            height: 16px;
-            margin-right:10px;
-            vertical-align: middle;
-        }   
+        .tooltip {
+            overflow: hidden;
+        }
     }
 </style>
