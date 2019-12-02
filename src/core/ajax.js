@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import axios from 'axios'
+import router from '../router'
 import ElementUI from 'element-ui';
 Vue.use(ElementUI);
 import qs from 'qs';
