@@ -70,6 +70,9 @@
         </el-select>
       </div>
     </div>
+    <footer>
+        <p>COPYRIGHT  ©  2019 {{$t('message.comFullName')}}  {{$t('message.allRightsReserved')}}</p>
+    </footer>
   </div>
   <!-- <div class="login-app">
 		<div class="login-outbox">
@@ -250,7 +253,7 @@ export default {
   position: relative;
   > footer {
     position: absolute;
-    bottom: 40px;
+    bottom: 0px;
     left: 0;
     height: 60px;
     width: 100%;

@@ -4,6 +4,7 @@ import enLocale from 'element-ui/lib/locale/lang/en'
 const en = {
     message: {
         comName: 'wingtech',
+        comFullName: 'wingtech',
         systemName: 'billing system',
         systemInfo1: 'intelligent financial collaboration',
         systemInfo2: 'internal and external system interconnection',
@@ -81,6 +82,7 @@ const en = {
         editRole: 'edit role',
         deleteRole: 'delete role',
         welcome: 'welcome',
+        allRightsReserved: 'all rights reserved',
     },
     ...enLocale
 }
