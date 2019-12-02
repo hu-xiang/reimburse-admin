@@ -80,6 +80,7 @@ const cn = {
         addRole: '新增角色',
         editRole: '编辑角色',
         deleteRole: '删除角色',
+        welcome: '欢迎您',
     },
     ...zhLocale
 }

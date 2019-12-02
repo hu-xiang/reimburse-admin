@@ -180,6 +180,7 @@ export default {
       this.$axios.post("/sys/login", this.ruleForm).then(res => {
         if (res && res.success) {
           sessionStorage.setItem("token", res.result.token);
+          sessionStorage.setItem("userInfo", JSON.stringify(res.result.userInfo));
           sessionStorage.setItem("resourceCodes", this.resourceCodes); // 后台还没提供目前写死的数据
           this.$router.push("/index");
         }

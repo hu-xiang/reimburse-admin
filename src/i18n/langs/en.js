@@ -80,6 +80,7 @@ const en = {
         addRole: 'add role',
         editRole: 'edit role',
         deleteRole: 'delete role',
+        welcome: 'welcome',
     },
     ...enLocale
 }
