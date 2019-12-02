@@ -10,7 +10,7 @@ import './assets/css/common.scss' // 公共css
 import './core';
 import { log } from 'util';
 
-Vue.prototype.api = api;
+Vue.prototype.$api = api;
 
 // Date对象的toJSON方法
 Date.prototype.toJSON = function () {

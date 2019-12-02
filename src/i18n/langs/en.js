@@ -83,6 +83,10 @@ const en = {
         deleteRole: 'delete role',
         welcome: 'welcome',
         allRightsReserved: 'all rights reserved',
+        myApplication: 'my application',
+        myApproval: 'my approval',
+        approvalQuery: 'approval query',
+        newsAnnouncement: 'news announcement',
     },
     ...enLocale
 }

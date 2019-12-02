@@ -83,6 +83,10 @@ const cn = {
         deleteRole: '删除角色',
         welcome: '欢迎您',
         allRightsReserved: '版权所有',
+        myApplication: '我的申请',
+        myApproval: '我的审批',
+        approvalQuery: '审批查询',
+        newsAnnouncement: '消息公告',
     },
     ...zhLocale
 }

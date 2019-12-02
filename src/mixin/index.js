@@ -191,7 +191,7 @@ Vue.mixin({
 
       if (to.path === '/index') { // 由于白名单没有包含/index,但是进入系统必须通过/index,所以遇到index在已登录后放行
         return next();
-      } else if (sessionStorage.getItem('resourceCodes').includes(to.path)) { // // 白名单放行
+      } else if (sessionStorage.getItem('resourceCodes').includes(to.path)) { // 白名单放行
         return next();
       } else { // 黑名单禁止并给出提示
         ElementUI.Message.error({
