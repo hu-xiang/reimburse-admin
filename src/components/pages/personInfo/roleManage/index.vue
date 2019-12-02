@@ -2,28 +2,28 @@
   <div class="role">
     <top-bar>
       <section>
-        <label>角色名称</label>
+        <label>{{$t('message.roleName')}}</label>
         <el-input v-model="searchContent.roleName"></el-input>
       </section>
       <section>
-        <label>创建时间</label>
+        <label>{{$t('message.creationTime')}}</label>
         <el-date-picker
           v-model="searchContent.time"
           type="daterange"
           value-format="yyyy-MM-dd"
-          range-separator="至"
-          start-placeholder="开始日期"
-          end-placeholder="结束日期"
+          :range-separator="$t('message.to')"
+          :start-placeholder="$t('message.startDate')"
+          :end-placeholder="$t('message.endDate')"
         ></el-date-picker>
       </section>
       <section>
-        <el-button type="primary" @click="eventSearch" size="mini">查询</el-button>
-        <el-button @click="eventReset" size="mini">重置</el-button>
+        <el-button type="primary" @click="eventSearch" size="mini">{{$t('message.searchBtn')}}</el-button>
+        <el-button @click="eventReset" size="mini">{{$t('message.resetBtn')}}</el-button>
       </section>
     </top-bar>
     <table-bar>
       <div slot="top">
-        <el-button type="primary" @click="$router.push('/roleAdd')" size="mini" v-if="$auths('/roleAdd')">新增</el-button>
+        <el-button type="primary" @click="$router.push('/roleAdd')" size="mini" v-if="$auths('/roleAdd')">{{$t('message.addBtn')}}</el-button>
       </div>
       <el-table slot="table"
         v-loading="loading"
@@ -33,33 +33,33 @@
         style="width: 100%">
         <el-table-column align="center"
           fixed="left"
-          label="操作"
+          :label="$t('message.operate')"
           width="120" v-if="$auths('/roleEdit') || $auths('/roleDelete')">
           <template slot-scope="{row}">
             <el-button type="text"
               @click="$router.push({path:'/roleEdit',query:{row:row}})"
               size="mini" v-if="$auths('/roleEdit')">
-              编辑
+              {{$t('message.editBtn')}}
             </el-button>
             <el-button type="text" size="mini" @click="eventDel(row)" v-if="$auths('/roleDelete')">
-              删除
+              {{$t('message.deleteBtn')}}
             </el-button>
           </template>
         </el-table-column>
         <el-table-column prop="roleName"
-          label="角色名称" show-overflow-tooltip>
+          :label="$t('message.roleName')" show-overflow-tooltip>
         </el-table-column>
         <el-table-column prop="roleCode"
-          label="角色编码" show-overflow-tooltip>
+          :label="$t('message.roleCoding')" show-overflow-tooltip>
         </el-table-column>
         <el-table-column prop="description"
-          label="备注" show-overflow-tooltip>
+          :label="$t('message.remark')" show-overflow-tooltip>
         </el-table-column>
         <el-table-column prop="createTime"
-          label="创建时间" show-overflow-tooltip>
+          :label="$t('message.creationTime')" show-overflow-tooltip>
         </el-table-column>
         <el-table-column prop="updateTime"
-          label="更新时间" show-overflow-tooltip>
+          :label="$t('message.updateTime')" show-overflow-tooltip>
         </el-table-column>
       </el-table>
       <el-pagination slot="page"

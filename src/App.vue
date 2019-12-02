@@ -14,8 +14,7 @@ export default {
 #app {
   width: 100%;
   height: 100%;
-  /* background: #f0f2f5; */
-  min-width: 1024px;
+  min-width: 1080px;
   font-family: 'PingFang SC, Microsoft Yahei';
   font-size: 12px;
   -webkit-tap-highlight-color: transparent;

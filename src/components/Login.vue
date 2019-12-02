@@ -70,6 +70,9 @@
         </el-select>
       </div>
     </div>
+    <footer>
+        <p>COPYRIGHT  ©  2019 {{$t('message.comFullName')}}  {{$t('message.allRightsReserved')}}</p>
+    </footer>
   </div>
   <!-- <div class="login-app">
 		<div class="login-outbox">
@@ -96,10 +99,6 @@ export default {
       // 目前写死的路由权限配置数据
       resourceCodes: [
         "/workBench",
-        "/myApplication",
-        "/myApproval",
-        "/approvalQuery",
-        "/news",
         "/travelApply",
         "/travelEntry",
         "/travelQuery",
@@ -184,6 +183,7 @@ export default {
       this.$axios.post("/sys/login", this.ruleForm).then(res => {
         if (res && res.success) {
           sessionStorage.setItem("token", res.result.token);
+          sessionStorage.setItem("userInfo", JSON.stringify(res.result.userInfo));
           sessionStorage.setItem("resourceCodes", this.resourceCodes); // 后台还没提供目前写死的数据
           this.$router.push("/index");
         }
@@ -196,8 +196,10 @@ export default {
         this.passwordType = "password";
       }
     },
-    changeLang() {
-      this.$i18n.locale = this.lang;
+    changeLang(val) {
+      this.$i18n.locale = val;
+      sessionStorage.setItem('lang', val)
+
     }
   },
   watch: {}
@@ -251,7 +253,7 @@ export default {
   position: relative;
   > footer {
     position: absolute;
-    bottom: 40px;
+    bottom: 0px;
     left: 0;
     height: 60px;
     width: 100%;

@@ -2,56 +2,12 @@
     {
         "path": "/workBench",
         "name": "工作台",
-        "children": [
-            {
-                "path": "/myApplication",
-                "name": "我的申请"
-            },
-            {
-                "path": "/myApproval",
-                "name": "我的审批"
-            },
-            {
-                "path": "/approvalQuery",
-                "name": "审批查询"
-            },
-            {
-                "path": "/news",
-                "name": "消息公告"
-            }
-        ]
-    },
-    {
-        "path": "/travelApply",
-        "name": "出差申请",
-        "children": [
-            {
-                "path": "/travelEntry",
-                "name": "出差申请录入"
-            },
-            {
-                "path": "/travelQuery",
-                "name": "出差申请查询"
-            }
-        ]
-    },
-    {
-        "path": "/reimbursement",
-        "name": "费用报销",
-        "children": [
-            {
-                "path": "/feeEntry",
-                "name": "费用报销录入"
-            },
-            {
-                "path": "/feeQuery",
-                "name": "费用报销查询"
-            }
-        ]
+        "icon": "el-icon-menu"
     },
     {
         "path": "/budgetManage",
         "name": "预算管理",
+        "icon": "el-icon-s-data",
         "children": [
             {
                 "path": "/budgetEntry",
@@ -67,19 +23,19 @@
             },
             {
                 "path": "/rightSetting",
-                "name": "审批签权设定"
+                "name": "审批签权"
             },
             {
                 "path": "/transSetting",
-                "name": "出差交通费设定"
+                "name": "出差交通费"
             },
             {
                 "path": "/subsidySetting",
-                "name": "出差补助设定"
+                "name": "出差补助"
             },
             {
                 "path": "/liveSetting",
-                "name": "出差住宿费设定"
+                "name": "出差住宿费"
             },
             {
                 "path": "/classMaintenance",
@@ -88,8 +44,39 @@
         ]
     },
     {
+        "path": "/travelApply",
+        "name": "出差申请",
+        "icon": "el-icon-s-promotion",
+        "children": [
+            {
+                "path": "/travelEntry",
+                "name": "出差申请录入"
+            },
+            {
+                "path": "/travelQuery",
+                "name": "出差申请查询"
+            }
+        ]
+    },
+    {
+        "path": "/reimbursement",
+        "name": "费用报销",
+        "icon": "el-icon-s-shop",
+        "children": [
+            {
+                "path": "/feeEntry",
+                "name": "费用报销录入"
+            },
+            {
+                "path": "/feeQuery",
+                "name": "费用报销查询"
+            }
+        ]
+    },
+    {
         "path": "/reportAnalysis",
         "name": "报表分析",
+        "icon": "el-icon-s-finance",
         "children": [
             {
                 "path": "/budget",
@@ -108,6 +95,7 @@
     {
         "path": "/personInfo",
         "name": "人事资料",
+        "icon": "el-icon-s-custom",
         "children": [
             {
                 "path": "/userInfo",
@@ -152,6 +140,7 @@
     {
         "path": "/sysManage",
         "name": "系统管理",
+        "icon": "el-icon-s-management",
         "children": [
             {
                 "path": "/globalData",

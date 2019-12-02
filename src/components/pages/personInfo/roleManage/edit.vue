@@ -44,7 +44,7 @@
             <el-form-item label="功能菜单"
               prop="resourceCodes">
               <el-tree ref="resTree" class="treeClass"
-                :data="treeList"
+                :data="routerList"
                 show-checkbox
                 :default-expand-all="false"
                 :default-checked-keys="defaultCheckedKeys"
@@ -68,7 +68,6 @@
 </template>
 
 <script>
-    import permissionList from  '../../../../assets/json/permission.json';
     export default {
         name: 'roleEdit',
         data (){
@@ -85,7 +84,6 @@
                     children: 'children',
                     label: 'path',
                 },
-                treeList: permissionList, // 在权限json里维护权限菜单列表
                 filterText: '',
                 defaultCheckedKeys: [],
                 rules: {
