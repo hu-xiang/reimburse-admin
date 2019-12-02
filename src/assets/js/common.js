@@ -51,5 +51,45 @@ export default {
 	getRandomID(length){  // 生成可控长度的随机数
 		let len = length ? parseInt(length) : 16;
 	    return Number(Math.random().toString().substr(3, len) + Date.now()).toString(36);
-	}
+	},
+	autoLoad(blob, name = 'data.xls') {
+		const n = `${name}`;
+		if (window.navigator.msSaveOrOpenBlob) {
+		  window.navigator.msSaveOrOpenBlob(blob, n);
+		} else {
+		  const urlObject = window.URL || window.webkitURL || window;
+		  const sl = document.createElementNS('http://www.w3.org/1999/xhtml', 'a');
+		  sl.href = urlObject.createObjectURL(blob);
+		  sl.download = n;
+		  if (document.all) {
+			sl.click();
+		  } else {
+			const ev = document.createEvent('MouseEvents');
+			ev.initMouseEvent('click', true, false, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
+			sl.dispatchEvent(ev);
+		  }
+		}
+	  },
+	  upload: (fileType = 'excel') => new Promise((resolve) => {
+		let elm = document.createElement('input');
+		elm.setAttribute('type', 'file');
+		// 根据文件类型设置可接收文件类别
+		switch (fileType) {
+		  case 'image':
+			elm.setAttribute('accept', 'image/gif,image/jpeg,image/jpg,image/png,image/svg');
+			break;
+		  case 'excel':
+			elm.setAttribute('accept', '.csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel');
+			break;
+		}
+		elm.style.display = 'none';
+		elm.addEventListener('change', async (e) => {
+		  const file = e.target.files[0] || e.dataTransfer.files[0];
+		  document.body.removeChild(elm);
+		  elm = null;
+		  resolve(file);
+		});
+		document.body.appendChild(elm);
+		elm.click();
+	  }),
 }
