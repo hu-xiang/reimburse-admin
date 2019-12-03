@@ -81,7 +81,7 @@ export default {
   data() {
     return {
       loading: false,
-      tableList: [{}],
+      tableList: [],
       searchContent: {
           roleName: '',
           time: '',
@@ -95,7 +95,7 @@ export default {
   },
   mounted() {
     this.$nextTick(function() {
-        this.getList();
+        this.getList(1);
     });
   },
   methods: {
@@ -115,11 +115,11 @@ export default {
     },
     handleSizeChange(val) {
       this.curSearchContent.pageSize = val;
-      this.getList();
+      this.getList(1);
     },
     handleCurrentChange(val) {
       this.curSearchContent.pageNum = val;
-      this.getList();
+      this.getList(1);
     },
   }
 };

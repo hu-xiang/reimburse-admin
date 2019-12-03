@@ -194,7 +194,7 @@ Vue.mixin({
       } else if (sessionStorage.getItem('resourceCodes').includes(to.path)) { // 白名单放行
         return next();
       } else { // 黑名单禁止并给出提示
-        ElementUI.Message.error({
+        this.$message.error({
           message: '您没有权限访问',
           duration: 3000,
           showClose: true
@@ -205,7 +205,7 @@ Vue.mixin({
       if (to.path === '/') {
         next();
       } else {
-        ElementUI.Message.error({
+        this.$message.error({
           message: '您还没登陆',
           duration: 3000,
           showClose: true
