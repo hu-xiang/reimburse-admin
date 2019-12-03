@@ -2,7 +2,7 @@ export default {
 	timeFix: function () {
 		const time = new Date();
 		const hour = time.getHours();
-		if (sessionStorage.getItem('lang') == 'cn') {
+		if (!sessionStorage.getItem('lang') || sessionStorage.getItem('lang') == 'cn') {
 			return hour < 9 ? '早上好' : (hour <= 11 ? '上午好' : (hour <= 13 ? '中午好' : (hour < 20 ? '下午好' : '晚上好')))
 		} else {
 			return hour < 9 ? 'good morning' : (hour <= 11 ? 'good morning' : (hour <= 13 ? 'good afternoon' : (hour < 20 ? 'good afternoon' : 'good evening')))
@@ -10,7 +10,7 @@ export default {
 
 	},
 	welcome: function () {
-		if (sessionStorage.getItem('lang') == 'cn') {
+		if (!sessionStorage.getItem('lang') || sessionStorage.getItem('lang') == 'cn') {
 			const arr = ['您是一位有恒心有毅力的人，我很佩服您！', '我很荣幸，认识你这样有内涵的漂亮朋友！', '愿你三冬暖，愿你春不寒！', '加油，你是最棒的！'];
 			let index = Math.floor((Math.random() * arr.length));
 			return arr[index]
