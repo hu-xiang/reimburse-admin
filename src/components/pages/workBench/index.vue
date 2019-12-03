@@ -112,7 +112,7 @@
                 background-color: #ffffff;
                 padding: 12px 12px 5px;
                 border-radius: 10px;
-                min-height: 300px;
+                min-height: 350px;
                 flex: 0.5;
             }
             .first {
