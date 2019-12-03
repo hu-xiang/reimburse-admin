@@ -87,6 +87,11 @@ const cn = {
         myApproval: '我的审批',
         approvalQuery: '审批查询',
         newsAnnouncement: '消息公告',
+
+        comCodeList:'公司代码列表',
+        comCodeAdd:'新增公司代码',
+        comCodeEdit:'编辑公司代码',
+        comCodeDelete:'删除公司代码'
     },
     ...zhLocale
 }

@@ -36,7 +36,11 @@ import roleAdd from '@/components/pages/personInfo/roleManage/add.vue';
 import roleEdit from '@/components/pages/personInfo/roleManage/edit.vue';
 // 系统管理页面
 import globalData from '@/components/pages/sysManage/globalData/index.vue';
+// 公司代码页面
 import comCode from '@/components/pages/sysManage/comCode/index.vue';
+import comCodeAdd from '@/components/pages/sysManage/comCode/add.vue';
+import comCodeEdit from '@/components/pages/sysManage/comCode/edit.vue';
+
 import accountSubject from '@/components/pages/sysManage/accountSubject/index.vue';
 import costCenter from '@/components/pages/sysManage/costCenter/index.vue';
 import zone from '@/components/pages/sysManage/zone/index.vue';
@@ -184,11 +188,27 @@ export default new Router({
           name: '系统全局参数',
           component: globalData,
         },
+
+        // 公司代码维护路由 //////////////////////////
+
         {
           path: '/comCode',
           name: '公司代码维护',
           component: comCode,
         },
+        {
+          path: '/comCodeEdit',
+          name: '编辑公司代码',
+          component: comCodeEdit,
+        },
+        {
+          path: '/comCodeAdd',
+          name: '增加公司代码',
+          component: comCodeAdd,
+        },
+
+        /////////////////////////////////////
+
         {
           path: '/accountSubject',
           name: '会计科目维护',

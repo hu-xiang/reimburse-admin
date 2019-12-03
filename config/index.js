@@ -14,11 +14,7 @@ module.exports = {
 
     // Various Dev Server settings
     // host: '0.0.0.0'  // 可以通过ip访问
-<<<<<<< HEAD
     host: '192.168.48.85', // can be overwritten by process.env.HOST
-=======
-    host: 'localhost', // can be overwritten by process.env.HOST
->>>>>>> refs/remotes/origin/master
     port: 8066, // can be overwritten by process.env.PORT, if port is in use, a free one will be determined
     autoOpenBrowser: true,  // 自动打开浏览器
     errorOverlay: true,

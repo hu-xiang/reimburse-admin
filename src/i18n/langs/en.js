@@ -87,6 +87,11 @@ const en = {
         myApproval: 'my approval',
         approvalQuery: 'approval query',
         newsAnnouncement: 'news announcement',
+
+        comCodeList:'company code list',
+        comCodeAdd:'add company code',
+        comCodeEdit:'edit company code',
+        comCodeDelete:'delete company code'
     },
     ...enLocale
 }

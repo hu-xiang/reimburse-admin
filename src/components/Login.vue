@@ -131,6 +131,8 @@ export default {
         "/sysManage",
         "/globalData",
         "/comCode",
+        "/comCodeAdd",
+        "/comCodeEdit",
         "/accountSubject",
         "/costCenter",
         "/zone"
