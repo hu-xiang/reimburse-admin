@@ -34,15 +34,27 @@ import position from '@/components/pages/personInfo/position/index.vue';
 import role from '@/components/pages/personInfo/roleManage/index.vue';
 import roleAdd from '@/components/pages/personInfo/roleManage/add.vue';
 import roleEdit from '@/components/pages/personInfo/roleManage/edit.vue';
+
 // 系统管理页面
 import globalData from '@/components/pages/sysManage/globalData/index.vue';
+import globalDataAdd from '@/components/pages/sysManage/globalData/add.vue';
+import globalDataEdit from '@/components/pages/sysManage/globalData/edit.vue';
+
 // 公司代码页面
 import comCode from '@/components/pages/sysManage/comCode/index.vue';
 import comCodeAdd from '@/components/pages/sysManage/comCode/add.vue';
 import comCodeEdit from '@/components/pages/sysManage/comCode/edit.vue';
 
+// 会计科目页面
 import accountSubject from '@/components/pages/sysManage/accountSubject/index.vue';
+import accountSubjectAdd from '@/components/pages/sysManage/accountSubject/add.vue';
+import accountSubjectEdit from '@/components/pages/sysManage/accountSubject/edit.vue';
+
+// 成本中心维护
 import costCenter from '@/components/pages/sysManage/costCenter/index.vue';
+import costCenterAdd from '@/components/pages/sysManage/costCenter/add.vue';
+import costCenterEdit from '@/components/pages/sysManage/costCenter/edit.vue';
+
 import zone from '@/components/pages/sysManage/zone/index.vue';
 
 Vue.use(Router)
@@ -182,11 +194,23 @@ export default new Router({
           name: '编辑角色',
           component: roleEdit,
         },
-        // 系统管理页面路由
+
+        // 系统管理页面路由 /////////////////////////////
+
         {
           path: '/globalData',
           name: '系统全局参数',
           component: globalData,
+        },
+        {
+          path: '/globalDataAdd',
+          name: '新增系统全局参数',
+          component: globalDataAdd,
+        },
+        {
+          path: '/globalDataEdit',
+          name: '编辑系统全局参数',
+          component: globalDataEdit,
         },
 
         // 公司代码维护路由 //////////////////////////
@@ -207,7 +231,7 @@ export default new Router({
           component: comCodeAdd,
         },
 
-        /////////////////////////////////////
+        // 会计科目维护路由///////////////////////////////
 
         {
           path: '/accountSubject',
@@ -215,10 +239,38 @@ export default new Router({
           component: accountSubject,
         },
         {
+          path: '/accountSubjectAdd',
+          name: '编辑会计科目',
+          component: accountSubjectAdd,
+        },
+        {
+          path: '/accountSubjectEdit',
+          name: '增加会计科目',
+          component: accountSubjectEdit,
+        },
+
+        // 成本中心维护路由///////////////////////////////////
+
+        {
           path: '/costCenter',
           name: '成本中心维护',
           component: costCenter,
         },
+        {
+          path: '/costCenterAdd',
+          name: '新增成本中心',
+          component: costCenterAdd,
+        },
+        {
+          path: '/costCenterEdit',
+          name: '编辑成本中心',
+          component: costCenterEdit,
+        },
+
+        ///////////////////////////////////////////////
+
+
+
         {
           path: '/zone',
           name: '地区区域维护',

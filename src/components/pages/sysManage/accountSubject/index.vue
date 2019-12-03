@@ -5,7 +5,7 @@
 
     <top-bar>
       <section>
-        <label>公司代码</label>
+        <label>科目编号</label>
         <el-input></el-input>
       </section>
       <section>
@@ -24,14 +24,14 @@
 
     <table-bar>
       <div slot="top">
-        <el-button type="primary" @click="$router.push('/comCodeAdd')" size="mini">{{$t('message.addBtn')}}</el-button>
+        <el-button type="primary" @click="$router.push('/accountSubjectAdd')" size="mini">{{$t('message.addBtn')}}</el-button>
       </div>
       <el-table slot="table"
                 v-loading="loading"
                 @selection-change="handleSelectionChange"
                 border
                 stripe
-                :data="comCodeTableList"
+                :data="accountSubjectTableList"
                 style="width: 100%">
         <el-table-column align="center"
                          fixed="left"
@@ -39,7 +39,7 @@
                          width="120">
           <template slot-scope="{row}">
             <el-button type="text"
-                       @click="$router.push({path:'/comCodeEdit',query:{row:row}})"
+                       @click="$router.push({path:'/accountSubjectEdit',query:{row:row}})"
                        size="mini">
               {{$t('message.editBtn')}}
             </el-button>
@@ -48,25 +48,31 @@
             </el-button>
           </template>
         </el-table-column>
-        <el-table-column prop="butxt" label="公司名称" show-overflow-tooltip>
+        <el-table-column prop="ktopl" label="帐目表" show-overflow-tooltip>
         </el-table-column>
-        <el-table-column prop="ktopl"
-                         label="账目表" show-overflow-tooltip>
+        <el-table-column prop="saknr"
+                         label="科目编码" show-overflow-tooltip>
         </el-table-column>
-        <el-table-column prop="curId"
-                         label="货币" show-overflow-tooltip>
+        <el-table-column prop="txt50"
+                         label="总帐科目名称" show-overflow-tooltip>
         </el-table-column>
-        <el-table-column prop="land1"
-                         label="国家" show-overflow-tooltip>
+        <el-table-column prop="xbilk"
+                         label="资产负债表科目" show-overflow-tooltip>
         </el-table-column>
-        <el-table-column prop="ort01"
-                         label="城市" show-overflow-tooltip>
+        <el-table-column prop="bilkt"
+                         label="组科目号" show-overflow-tooltip>
         </el-table-column>
-        <el-table-column prop="bukrs"
-                         label="公司代码" show-overflow-tooltip>
+        <el-table-column prop="gvtyp"
+                         label="损益表科目" show-overflow-tooltip>
         </el-table-column>
-        <el-table-column prop="ktext"
-                         label="货币名称" show-overflow-tooltip>
+        <el-table-column prop="ktoks"
+                         label="组科目号" show-overflow-tooltip>
+        </el-table-column>
+        <el-table-column prop="xloev"
+                         label="删除标记" show-overflow-tooltip>
+        </el-table-column>
+        <el-table-column prop="xspeb"
+                         label="冻结标记" show-overflow-tooltip>
         </el-table-column>
 
       </el-table>
@@ -89,7 +95,7 @@
     data() {
       return {
         loading: false,
-        comCodeTableList: [{}],
+        accountSubjectTableList: [{}],
         searchContent: {
           accountSubject: '',
           pageNo:'',
@@ -103,18 +109,18 @@
       };
     },
     created() {
-      this.getComCodeList()
+      this.getAccountSubjectList()
     },
 
     mounted() {
       this.$nextTick(function () {
-        this.getComCodeList();
+        this.getAccountSubjectList();
       });
     },
 
     methods: {
       handleSearch() {
-        this.getComCodeList(1);
+        this.getAccountSubjectList(1);
       },
       handleReset() {
 
@@ -129,13 +135,13 @@
 
       },
 
-      getComCodeList(bool) {
+      getAccountSubjectList(bool) {
         if (bool) Object.assign(this.curSearchContent, this.searchContent);
         this.loading = true;
         this.$axios.get(`concur/gloConfig/accountSubject/list?${this.$qs.stringify(this.curSearchContent)}`).then(res => {
           this.loading = false;
           if (res && res.success) {
-            this.comCodeTableList = res.result.records;
+            this.accountSubjectTableList = res.result.records;
             this.total = res.result.total;
           }
         });
@@ -148,12 +154,12 @@
 
       handleSizeChange(val) {
         this.curSearchContent.pageSize = val;
-        this.getComCodeList();
+        this.getAccountSubjectList();
       },
 
       handleCurrentChange(val) {
         this.curSearchContent.pageNum = val;
-        this.getComCodeList();
+        this.getAccountSubjectList();
       },
 
     }

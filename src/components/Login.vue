@@ -130,11 +130,17 @@ export default {
         "/roleDelete",
         "/sysManage",
         "/globalData",
+        "/globalDataAdd",
+        "/globalDataEdit",
         "/comCode",
         "/comCodeAdd",
         "/comCodeEdit",
         "/accountSubject",
+        "/accountSubjectAdd",
+        "/accountSubjectEdit",
         "/costCenter",
+        "/costCenterAdd",
+        "/costCenterEdit",
         "/zone"
       ],
       ruleForm: {
