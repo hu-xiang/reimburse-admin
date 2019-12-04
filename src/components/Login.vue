@@ -141,7 +141,12 @@ export default {
         "/costCenter",
         "/costCenterAdd",
         "/costCenterEdit",
-        "/zone"
+        "/zone",
+        "/zoneAdd",
+        "/zoneEdit",
+        "/wbs",
+        "/wbsAdd",
+        "/wbsEdit"
       ],
       ruleForm: {
         username: "",

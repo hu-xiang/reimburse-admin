@@ -24,7 +24,8 @@
 
     <table-bar>
       <div slot="top">
-        <el-button type="primary" @click="$router.push('/globalDataAdd')" size="mini">{{$t('message.addBtn')}}</el-button>
+        <el-button type="primary" @click="$router.push('/globalDataAdd')" size="mini">{{$t('message.addBtn')}}
+        </el-button>
       </div>
       <el-table slot="table"
                 v-loading="loading"
@@ -48,45 +49,34 @@
             </el-button>
           </template>
         </el-table-column>
-        <el-table-column prop="sysName"
-                         label="系统名称" show-overflow-tooltip>
+        <el-table-column prop="sysName" label="系统名称" show-overflow-tooltip>
         </el-table-column>
-        <el-table-column prop="logo"
-                         label="logo" show-overflow-tooltip>
+        <el-table-column prop="logo" label="logo" show-overflow-tooltip>
         </el-table-column>
-        <el-table-column prop="isShow"
-                         label="申请单显示预算费用" show-overflow-tooltip>
+        <el-table-column prop="isShow" label="申请单显示预算费用" show-overflow-tooltip>
         </el-table-column>
-        <el-table-column prop="isUse"
-                         label="是否启用预算审批" show-overflow-tooltip>
+        <el-table-column prop="isUse" label="是否启用预算审批" show-overflow-tooltip>
         </el-table-column>
-        <el-table-column prop="isRel"
-                         label="报销是否关联申请单" show-overflow-tooltip>
+        <el-table-column prop="isRel" label="报销是否关联申请单" show-overflow-tooltip>
         </el-table-column>
-        <el-table-column prop="createId"
-                         label="创建人" show-overflow-tooltip>
+        <el-table-column prop="createId" label="创建人" show-overflow-tooltip>
         </el-table-column>
-        <el-table-column prop="createDate"
-                         label="创建时间" show-overflow-tooltip>
+        <el-table-column prop="createDate" label="创建时间" show-overflow-tooltip>
         </el-table-column>
-        <el-table-column prop="updateId"
-                         label="操作人" show-overflow-tooltip>
+        <el-table-column prop="updateId" label="操作人" show-overflow-tooltip>
         </el-table-column>
-        <el-table-column prop="updateDate"
-                         label="操作时间" show-overflow-tooltip>
+        <el-table-column prop="updateDate" label="操作时间" show-overflow-tooltip>
         </el-table-column>
-        <el-table-column prop="curId"
-                         label="集团币别" show-overflow-tooltip>
+        <el-table-column prop="curId" label="集团币别" show-overflow-tooltip>
         </el-table-column>
-        <el-table-column prop="ktext"
-                         label="货币名称" show-overflow-tooltip>
+        <el-table-column prop="ktext" label="货币名称" show-overflow-tooltip>
         </el-table-column>
 
       </el-table>
       <el-pagination slot="page"
                      @size-change="handleSizeChange"
                      @current-change="handleCurrentChange"
-                     :current-page="curSearchContent.pageNum"
+                     :current-page="curSearchContent.pageNo"
                      :page-sizes="[20, 30, 50, 100]"
                      :page-size="curSearchContent.pageSize"
                      layout="total, sizes, prev, pager, next, jumper"
@@ -105,11 +95,11 @@
         globalDataTableList: [{}],
         searchContent: {
           gloConfig: '',
-          pageNo:'',
-          pageSize:''
+          pageNo: '',
+          pageSize: ''
         },
         curSearchContent: {
-          pageNum: 1, // 当前页
+          pageNo: 1, // 当前页
           pageSize: 20, // 每页显示数量
         },
         total: 0, // 总条数
@@ -165,7 +155,7 @@
       },
 
       handleCurrentChange(val) {
-        this.curSearchContent.pageNum = val;
+        this.curSearchContent.pageNo = val;
         this.getGlobalDataList();
       },
 

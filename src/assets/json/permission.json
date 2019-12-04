@@ -159,8 +159,12 @@
                 "name": "成本中心维护"
             },
             {
-                "path": "/zone",
-                "name": "地区区域维护"
+              "path": "/zone",
+              "name": "地区区域维护"
+            },
+            {
+              "path": "/wbs",
+              "name": "WBS维护"
             }
         ]
     }

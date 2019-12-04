@@ -55,7 +55,15 @@ import costCenter from '@/components/pages/sysManage/costCenter/index.vue';
 import costCenterAdd from '@/components/pages/sysManage/costCenter/add.vue';
 import costCenterEdit from '@/components/pages/sysManage/costCenter/edit.vue';
 
+// 地区区域维护
 import zone from '@/components/pages/sysManage/zone/index.vue';
+import zoneAdd from '@/components/pages/sysManage/zone/add.vue';
+import zoneEdit from '@/components/pages/sysManage/zone/edit.vue';
+
+// WBS维护
+import wbs from '@/components/pages/sysManage/wbs/index.vue';
+import wbsAdd from '@/components/pages/sysManage/wbs/add.vue';
+import wbsEdit from '@/components/pages/sysManage/wbs/edit.vue';
 
 Vue.use(Router)
 
@@ -267,15 +275,42 @@ export default new Router({
           component: costCenterEdit,
         },
 
-        ///////////////////////////////////////////////
-
-
+        // 地区区域维护///////////////////////////////////////
 
         {
           path: '/zone',
           name: '地区区域维护',
           component: zone,
         },
+        {
+          path: '/zoneAdd',
+          name: '新增地区区域',
+          component: zoneAdd,
+        },
+        {
+          path: '/zoneEdit',
+          name: '编辑地区区域',
+          component: zoneEdit,
+        },
+
+        // WBS维护///////////////////////////////////////
+
+        {
+          path: '/wbs',
+          name: 'wbs维护',
+          component: wbs,
+        },
+        {
+          path: '/zoneAdd',
+          name: '新增wbs',
+          component: wbsAdd,
+        },
+        {
+          path: '/zoneEdit',
+          name: '编辑wbs',
+          component: wbsEdit,
+        },
+
         // 错误页面路由
         {
           path: '/error',
