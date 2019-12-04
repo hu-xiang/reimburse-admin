@@ -45,11 +45,16 @@
             }
         },
         created() {
-            
         },
         mounted() {
 			this.$nextTick(function() {
-                this.$router.push('/workBench')
+                if (sessionStorage.getItem('editableTabsValue')) {
+                    this.editableTabsValue = sessionStorage.getItem('editableTabsValue')
+                }
+                this.$router.push(this.editableTabsValue)
+                if (JSON.parse(sessionStorage.getItem('editableTabs'))) {
+                    this.editableTabs = JSON.parse(sessionStorage.getItem('editableTabs'))
+                }
             });
         },
         methods: {
@@ -108,10 +113,12 @@
                     let item = this.editableTabs[i];
                     if(item.path === path){
                         this.editableTabsValue = path;
+                        sessionStorage.setItem('editableTabsValue', this.editableTabsValue)
+                        sessionStorage.setItem('editableTabs', JSON.stringify(this.editableTabs))
                         break;
                     }
                 }
-			}
+            }
         }
     }
 </script>

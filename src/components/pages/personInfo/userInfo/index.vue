@@ -15,13 +15,6 @@
       </section>
     </top-bar>
     <table-bar>
-      <div slot="top">
-        <el-button
-          type="primary"
-          @click="$router.push('/roleAdd')"
-          size="mini"
-        >{{$t('message.addBtn')}}</el-button>
-      </div>
       <el-table
         slot="table"
         v-loading="loading"
@@ -30,22 +23,13 @@
         :data="tableList"
         style="width: 100%"
       >
-        <el-table-column align="center" fixed="left" :label="$t('message.operate')" width="120">
-          <template slot-scope="{row}">
-            <el-button
-              type="text"
-              @click="$router.push({path:'/roleEdit',query:{row:row}})"
-              size="mini"
-            >{{$t('message.editBtn')}}</el-button>
-            <el-button type="text" size="mini" @click="eventDel(row)">{{$t('message.deleteBtn')}}</el-button>
-          </template>
-        </el-table-column>
         <el-table-column prop="memName" label="姓名" show-overflow-tooltip></el-table-column>
         <el-table-column prop="memJobno" label="工号" show-overflow-tooltip></el-table-column>
         <el-table-column prop="memSex" label="性别" show-overflow-tooltip></el-table-column>
         <el-table-column prop="memIdcard" label="身份证号码" show-overflow-tooltip></el-table-column>
         <el-table-column prop="memBirthday" label="出生日期" show-overflow-tooltip></el-table-column>
         <el-table-column prop="memJoinDate" label="入职日期" show-overflow-tooltip></el-table-column>
+        <el-table-column prop="memLeaveDate" label="离职日期" show-overflow-tooltip></el-table-column>
         <el-table-column prop="memEmail" label="邮箱" show-overflow-tooltip></el-table-column>
         <el-table-column prop="memPhone" label="手机号码" show-overflow-tooltip></el-table-column>
         <el-table-column prop="deptname" label="部门名称" show-overflow-tooltip></el-table-column>
