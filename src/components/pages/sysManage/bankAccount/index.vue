@@ -1,5 +1,5 @@
 <template>
-  <div class="wbs">
+  <div class="bankAccount">
 
     <!--搜索栏位-->
 
@@ -24,14 +24,14 @@
 
     <table-bar>
       <div slot="top">
-        <el-button type="primary" @click="$router.push('/wbsAdd')" size="mini">{{$t('message.addBtn')}}</el-button>
+        <el-button type="primary" @click="$router.push('/bankAccountAdd')" size="mini">{{$t('message.addBtn')}}</el-button>
       </div>
       <el-table slot="table"
                 v-loading="loading"
                 @selection-change="handleSelectionChange"
                 border
                 stripe
-                :data="wbsTableList"
+                :data="bankAccountTableList"
                 style="width: 100%">
         <el-table-column align="center"
                          fixed="left"
@@ -39,7 +39,7 @@
                          width="120">
           <template slot-scope="{row}">
             <el-button type="text"
-                       @click="$router.push({path:'/wbsEdit',query:{row:row}})"
+                       @click="$router.push({path:'/bankAccountEdit',query:{row:row}})"
                        size="mini">
               {{$t('message.editBtn')}}
             </el-button>
@@ -48,23 +48,65 @@
             </el-button>
           </template>
         </el-table-column>
-        <el-table-column prop="pspnr"
-                         label="WBS_ID" show-overflow-tooltip>
+        <el-table-column prop="comId"
+                         label="公司代码" show-overflow-tooltip>
         </el-table-column>
-        <el-table-column prop="posid"
-                         label="WBS" show-overflow-tooltip>
+        <el-table-column prop="banks"
+                         label="银行国家代码" show-overflow-tooltip>
         </el-table-column>
-        <el-table-column prop="post1"
-                         label="WBS描述" show-overflow-tooltip>
+        <el-table-column prop="bankl"
+                         label="银行编号" show-overflow-tooltip>
         </el-table-column>
-        <el-table-column prop="objnr"
-                         label="对象号" show-overflow-tooltip>
+        <el-table-column prop="zdimuscod"
+                         label="银行账号" show-overflow-tooltip>
         </el-table-column>
-        <el-table-column prop="pkokr"
-                         label="控制范围" show-overflow-tooltip>
+        <el-table-column prop="curId"
+                         label="货币码/币别表" show-overflow-tooltip>
         </el-table-column>
-        <el-table-column prop="prctr"
-                         label="利润中心" show-overflow-tooltip>
+        <el-table-column prop="zbtyp"
+                         label="账号类型" show-overflow-tooltip>
+        </el-table-column>
+        <el-table-column prop="txt50"
+                         label="账户名称" show-overflow-tooltip>
+        </el-table-column>
+        <el-table-column prop="swift"
+                         label="国际付款的 SWIFT/BIC" show-overflow-tooltip>
+        </el-table-column>
+        <el-table-column prop="zzhxz"
+                         label="账户性质" show-overflow-tooltip>
+        </el-table-column>
+        <el-table-column prop="zzhyt"
+                         label="账户用途" show-overflow-tooltip>
+        </el-table-column>
+        <el-table-column prop="zkhjl"
+                         label="客户经理" show-overflow-tooltip>
+        </el-table-column>
+        <el-table-column prop="telf1"
+                         label="第一个电话号" show-overflow-tooltip>
+        </el-table-column>
+        <el-table-column prop="telf2"
+                         label="第二个电话号" show-overflow-tooltip>
+        </el-table-column>
+        <el-table-column prop="telfx"
+                         label="传真号" show-overflow-tooltip>
+        </el-table-column>
+        <el-table-column prop="zkkrq"
+                         label="开户日期" show-overflow-tooltip>
+        </el-table-column>
+        <el-table-column prop="zzxrq"
+                         label="注销日期" show-overflow-tooltip>
+        </el-table-column>
+        <el-table-column prop="accId"
+                         label="会计科目" show-overflow-tooltip>
+        </el-table-column>
+        <el-table-column prop="butxt"
+                         label="公司名称" show-overflow-tooltip>
+        </el-table-column>
+        <el-table-column prop="ktext"
+                         label="货币名称" show-overflow-tooltip>
+        </el-table-column>
+        <el-table-column prop="atxt50"
+                         label="总帐科目名称" show-overflow-tooltip>
         </el-table-column>
 
       </el-table>
@@ -83,13 +125,13 @@
 
 <script>
   export default {
-    name: "wbs",
+    name: "bankAccount",
     data() {
       return {
         loading: false,
-        wbsTableList: [{}],
+        bankAccountTableList: [{}],
         searchContent: {
-          wbs: '',
+          bankAccount: '',
           pageNo:'',
           pageSize:''
         },
@@ -101,18 +143,18 @@
       };
     },
     created() {
-      this.getWbsList()
+      this.getBankAccountList()
     },
 
     mounted() {
       this.$nextTick(function () {
-        this.getWbsList();
+        this.getBankAccountList();
       });
     },
 
     methods: {
       handleSearch() {
-        this.getWbsList(1);
+        this.getBankAccountList(1);
       },
       handleReset() {
 
@@ -127,13 +169,13 @@
 
       },
 
-      getWbsList(bool) {
+      getBankAccountList(bool) {
         if (bool) Object.assign(this.curSearchContent, this.searchContent);
         this.loading = true;
-        this.$axios.get(`concur/gloConfig/wbs/list?${this.$qs.stringify(this.curSearchContent)}`).then(res => {
+        this.$axios.get(`concur/gloConfig/bankAccount/list?${this.$qs.stringify(this.curSearchContent)}`).then(res => {
           this.loading = false;
           if (res && res.success) {
-            this.wbsTableList = res.result.records;
+            this.bankAccountTableList = res.result.records;
             this.total = res.result.total;
           }
         });
@@ -146,12 +188,12 @@
 
       handleSizeChange(val) {
         this.curSearchContent.pageSize = val;
-        this.getWbsList();
+        this.getBankAccountList();
       },
 
       handleCurrentChange(val) {
         this.curSearchContent.pageNo = val;
-        this.getWbsList();
+        this.getBankAccountList();
       },
 
     }
@@ -159,7 +201,7 @@
 </script>
 
 <style lang="scss" scoped>
-  .wbs {
+  .bankAccount {
 
   }
 </style>

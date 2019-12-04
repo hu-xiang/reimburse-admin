@@ -1,5 +1,5 @@
 <template>
-  <div class="wbs">
+  <div class="exchangeRate">
 
     <!--搜索栏位-->
 
@@ -24,14 +24,14 @@
 
     <table-bar>
       <div slot="top">
-        <el-button type="primary" @click="$router.push('/wbsAdd')" size="mini">{{$t('message.addBtn')}}</el-button>
+        <el-button type="primary" @click="$router.push('/exchangeRateAdd')" size="mini">{{$t('message.addBtn')}}</el-button>
       </div>
       <el-table slot="table"
                 v-loading="loading"
                 @selection-change="handleSelectionChange"
                 border
                 stripe
-                :data="wbsTableList"
+                :data="exchangeRateTableList"
                 style="width: 100%">
         <el-table-column align="center"
                          fixed="left"
@@ -39,7 +39,7 @@
                          width="120">
           <template slot-scope="{row}">
             <el-button type="text"
-                       @click="$router.push({path:'/wbsEdit',query:{row:row}})"
+                       @click="$router.push({path:'/exchangeRateEdit',query:{row:row}})"
                        size="mini">
               {{$t('message.editBtn')}}
             </el-button>
@@ -48,23 +48,29 @@
             </el-button>
           </template>
         </el-table-column>
-        <el-table-column prop="pspnr"
-                         label="WBS_ID" show-overflow-tooltip>
+        <el-table-column prop="curId"
+                         label="源货币" show-overflow-tooltip>
         </el-table-column>
-        <el-table-column prop="posid"
-                         label="WBS" show-overflow-tooltip>
+        <el-table-column prop="targetCurId"
+                         label="目标货币" show-overflow-tooltip>
         </el-table-column>
-        <el-table-column prop="post1"
-                         label="WBS描述" show-overflow-tooltip>
+        <el-table-column prop="gdatu"
+                         label="汇率有效日期" show-overflow-tooltip>
         </el-table-column>
-        <el-table-column prop="objnr"
-                         label="对象号" show-overflow-tooltip>
+        <el-table-column prop="ukurs"
+                         label="汇率" show-overflow-tooltip>
         </el-table-column>
-        <el-table-column prop="pkokr"
-                         label="控制范围" show-overflow-tooltip>
+        <el-table-column prop="tfact"
+                         label="目标货币比率" show-overflow-tooltip>
         </el-table-column>
-        <el-table-column prop="prctr"
-                         label="利润中心" show-overflow-tooltip>
+        <el-table-column prop="ffact"
+                         label="源货币比率" show-overflow-tooltip>
+        </el-table-column>
+        <el-table-column prop="f_ktext"
+                         label="源货币名称" show-overflow-tooltip>
+        </el-table-column>
+        <el-table-column prop="t_ktext"
+                         label="目标货币名称" show-overflow-tooltip>
         </el-table-column>
 
       </el-table>
@@ -83,13 +89,13 @@
 
 <script>
   export default {
-    name: "wbs",
+    name: "exchangeRate",
     data() {
       return {
         loading: false,
-        wbsTableList: [{}],
+        exchangeRateTableList: [{}],
         searchContent: {
-          wbs: '',
+          exchangeRate: '',
           pageNo:'',
           pageSize:''
         },
@@ -101,18 +107,18 @@
       };
     },
     created() {
-      this.getWbsList()
+      this.getExchangeRateList()
     },
 
     mounted() {
       this.$nextTick(function () {
-        this.getWbsList();
+        this.getExchangeRateList();
       });
     },
 
     methods: {
       handleSearch() {
-        this.getWbsList(1);
+        this.getExchangeRateList(1);
       },
       handleReset() {
 
@@ -127,13 +133,13 @@
 
       },
 
-      getWbsList(bool) {
+      getExchangeRateList(bool) {
         if (bool) Object.assign(this.curSearchContent, this.searchContent);
         this.loading = true;
-        this.$axios.get(`concur/gloConfig/wbs/list?${this.$qs.stringify(this.curSearchContent)}`).then(res => {
+        this.$axios.get(`concur/gloConfig/exchangeRate/list?${this.$qs.stringify(this.curSearchContent)}`).then(res => {
           this.loading = false;
           if (res && res.success) {
-            this.wbsTableList = res.result.records;
+            this.exchangeRateTableList = res.result.records;
             this.total = res.result.total;
           }
         });
@@ -146,12 +152,12 @@
 
       handleSizeChange(val) {
         this.curSearchContent.pageSize = val;
-        this.getWbsList();
+        this.getExchangeRateList();
       },
 
       handleCurrentChange(val) {
         this.curSearchContent.pageNo = val;
-        this.getWbsList();
+        this.getExchangeRateList();
       },
 
     }
@@ -159,7 +165,7 @@
 </script>
 
 <style lang="scss" scoped>
-  .wbs {
+  .exchangeRate {
 
   }
 </style>

@@ -65,6 +65,21 @@ import wbs from '@/components/pages/sysManage/wbs/index.vue';
 import wbsAdd from '@/components/pages/sysManage/wbs/add.vue';
 import wbsEdit from '@/components/pages/sysManage/wbs/edit.vue';
 
+// 银行账号信息维护
+import bankAccount from '@/components/pages/sysManage/bankAccount/index.vue';
+import bankAccountAdd from '@/components/pages/sysManage/bankAccount/add.vue';
+import bankAccountEdit from '@/components/pages/sysManage/bankAccount/edit.vue';
+
+// 币别信息维护
+import curCurrency from '@/components/pages/sysManage/curCurrency/index.vue';
+import curCurrencyAdd from '@/components/pages/sysManage/curCurrency/add.vue';
+import curCurrencyEdit from '@/components/pages/sysManage/curCurrency/edit.vue';
+
+// 汇率转换维护
+import exchangeRate from '@/components/pages/sysManage/exchangeRate/index.vue';
+import exchangeRateAdd from '@/components/pages/sysManage/exchangeRate/add.vue';
+import exchangeRateEdit from '@/components/pages/sysManage/exchangeRate/edit.vue';
+
 Vue.use(Router)
 
 export default new Router({
@@ -301,15 +316,70 @@ export default new Router({
           component: wbs,
         },
         {
-          path: '/zoneAdd',
+          path: '/wbsAdd',
           name: '新增wbs',
           component: wbsAdd,
         },
         {
-          path: '/zoneEdit',
+          path: '/wbsEdit',
           name: '编辑wbs',
           component: wbsEdit,
         },
+
+        // 银行账号信息维护///////////////////////////////////////
+
+        {
+          path: '/bankAccount',
+          name: '银行账号信息维护',
+          component: bankAccount,
+        },
+        {
+          path: '/bankAccountAdd',
+          name: '新增银行账号信息',
+          component: bankAccountAdd,
+        },
+        {
+          path: '/bankAccountEdit',
+          name: '编辑银行账号信息',
+          component: bankAccountEdit,
+        },
+
+        // 汇率转换信息维护///////////////////////////////////////
+
+        {
+          path: '/exchangeRate',
+          name: '汇率转换维护',
+          component: exchangeRate,
+        },
+        {
+          path: '/exchangeRateAdd',
+          name: '新增汇率转换',
+          component: exchangeRateAdd,
+        },
+        {
+          path: '/exchangeRateEdit',
+          name: '编辑汇率转换',
+          component: exchangeRateEdit,
+        },
+
+        // 币别信息维护///////////////////////////////////////
+
+        {
+          path: '/curCurrency',
+          name: '币别信息维护',
+          component: exchangeRate,
+        },
+        {
+          path: '/curCurrencyAdd',
+          name: '新增币别信息',
+          component: curCurrencyAdd,
+        },
+        {
+          path: '/curCurrencyEdit',
+          name: '编辑币别信息',
+          component: curCurrencyEdit,
+        },
+
 
         // 错误页面路由
         {

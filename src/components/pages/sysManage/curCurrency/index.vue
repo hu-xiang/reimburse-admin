@@ -1,5 +1,5 @@
 <template>
-  <div class="wbs">
+  <div class="curCurrency">
 
     <!--搜索栏位-->
 
@@ -24,14 +24,14 @@
 
     <table-bar>
       <div slot="top">
-        <el-button type="primary" @click="$router.push('/wbsAdd')" size="mini">{{$t('message.addBtn')}}</el-button>
+        <el-button type="primary" @click="$router.push('/curCurrencyAdd')" size="mini">{{$t('message.addBtn')}}</el-button>
       </div>
       <el-table slot="table"
                 v-loading="loading"
                 @selection-change="handleSelectionChange"
                 border
                 stripe
-                :data="wbsTableList"
+                :data="curCurrencyTableList"
                 style="width: 100%">
         <el-table-column align="center"
                          fixed="left"
@@ -39,7 +39,7 @@
                          width="120">
           <template slot-scope="{row}">
             <el-button type="text"
-                       @click="$router.push({path:'/wbsEdit',query:{row:row}})"
+                       @click="$router.push({path:'/curCurrencyEdit',query:{row:row}})"
                        size="mini">
               {{$t('message.editBtn')}}
             </el-button>
@@ -48,23 +48,11 @@
             </el-button>
           </template>
         </el-table-column>
-        <el-table-column prop="pspnr"
-                         label="WBS_ID" show-overflow-tooltip>
+        <el-table-column prop="waers"
+                         label="货币码" show-overflow-tooltip>
         </el-table-column>
-        <el-table-column prop="posid"
-                         label="WBS" show-overflow-tooltip>
-        </el-table-column>
-        <el-table-column prop="post1"
-                         label="WBS描述" show-overflow-tooltip>
-        </el-table-column>
-        <el-table-column prop="objnr"
-                         label="对象号" show-overflow-tooltip>
-        </el-table-column>
-        <el-table-column prop="pkokr"
-                         label="控制范围" show-overflow-tooltip>
-        </el-table-column>
-        <el-table-column prop="prctr"
-                         label="利润中心" show-overflow-tooltip>
+        <el-table-column prop="ktext"
+                         label="货币名称" show-overflow-tooltip>
         </el-table-column>
 
       </el-table>
@@ -83,13 +71,13 @@
 
 <script>
   export default {
-    name: "wbs",
+    name: "curCurrency",
     data() {
       return {
         loading: false,
-        wbsTableList: [{}],
+        curCurrencyTableList: [{}],
         searchContent: {
-          wbs: '',
+          curCurrency: '',
           pageNo:'',
           pageSize:''
         },
@@ -101,18 +89,18 @@
       };
     },
     created() {
-      this.getWbsList()
+      this.getCurCurrencyList()
     },
 
     mounted() {
       this.$nextTick(function () {
-        this.getWbsList();
+        this.getCurCurrencyList();
       });
     },
 
     methods: {
       handleSearch() {
-        this.getWbsList(1);
+        this.getCurCurrencyList(1);
       },
       handleReset() {
 
@@ -127,13 +115,13 @@
 
       },
 
-      getWbsList(bool) {
+      getCurCurrencyList(bool) {
         if (bool) Object.assign(this.curSearchContent, this.searchContent);
         this.loading = true;
-        this.$axios.get(`concur/gloConfig/wbs/list?${this.$qs.stringify(this.curSearchContent)}`).then(res => {
+        this.$axios.get(`concur/gloConfig/curCurrency/list?${this.$qs.stringify(this.curSearchContent)}`).then(res => {
           this.loading = false;
           if (res && res.success) {
-            this.wbsTableList = res.result.records;
+            this.curCurrencyTableList = res.result.records;
             this.total = res.result.total;
           }
         });
@@ -146,12 +134,12 @@
 
       handleSizeChange(val) {
         this.curSearchContent.pageSize = val;
-        this.getWbsList();
+        this.getCurCurrencyList();
       },
 
       handleCurrentChange(val) {
         this.curSearchContent.pageNo = val;
-        this.getWbsList();
+        this.getCurCurrencyList();
       },
 
     }
@@ -159,7 +147,7 @@
 </script>
 
 <style lang="scss" scoped>
-  .wbs {
+  .curCurrency {
 
   }
 </style>

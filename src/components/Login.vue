@@ -129,24 +129,42 @@ export default {
         "/roleEdit",
         "/roleDelete",
         "/sysManage",
+
         "/globalData",
         "/globalDataAdd",
         "/globalDataEdit",
+
         "/comCode",
         "/comCodeAdd",
         "/comCodeEdit",
+
         "/accountSubject",
         "/accountSubjectAdd",
         "/accountSubjectEdit",
+
         "/costCenter",
         "/costCenterAdd",
         "/costCenterEdit",
+
         "/zone",
         "/zoneAdd",
         "/zoneEdit",
+
         "/wbs",
         "/wbsAdd",
-        "/wbsEdit"
+        "/wbsEdit",
+
+        "/bankAccount",
+        "/bankAccountAdd",
+        "/bankAccountEdit",
+
+        "/curCurrency",
+        "/curCurrencyAdd",
+        "/curCurrencyEdit",
+
+        "/exchangeRate",
+        "/exchangeRateAdd",
+        "/exchangeRateEdit",
       ],
       ruleForm: {
         username: "",
