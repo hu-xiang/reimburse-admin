@@ -58,7 +58,7 @@ export default {
       this.$axios.get("/concur/hrinfo/department/list").then(res => {
         this.loading = false;
         if (res && res.success) {
-          this.list = res.result.records;
+          this.list = res.result;
         }
       });
     }

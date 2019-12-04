@@ -65,7 +65,7 @@
       <el-pagination slot="page"
         @size-change="handleSizeChange"
         @current-change="handleCurrentChange"
-        :current-page="curSearchContent.pageNum"
+        :current-page="curSearchContent.pageNo"
         :page-sizes="[20, 30, 50, 100]"
         :page-size="curSearchContent.pageSize"
         layout="total, sizes, prev, pager, next, jumper"
@@ -87,7 +87,7 @@ export default {
           time: '',
       },
       curSearchContent: {
-        pageNum: 1, // （当前页）
+        pageNo: 1, // （当前页）
         pageSize: 20, // 每页显示数量
       },
       total: 0, // 总条数
@@ -118,7 +118,7 @@ export default {
       this.getList(1);
     },
     handleCurrentChange(val) {
-      this.curSearchContent.pageNum = val;
+      this.curSearchContent.pageNo = val;
       this.getList(1);
     },
   }
