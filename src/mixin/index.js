@@ -170,6 +170,22 @@ Vue.mixin({
             {
               path: "/zone",
               name: this.$t('message.districtMaintenance')
+            },
+            {
+              "path": "/wbs",
+              "name": "WBS维护"
+            },
+            {
+              "path": "/bankAccount",
+              "name": "银行账户信息维护"
+            },
+            {
+              "path": "/curCurrency",
+              "name": "币别信息维护"
+            },
+            {
+              "path": "/exchangeRate",
+              "name": "汇率信息维护"
             }
           ]
         }
