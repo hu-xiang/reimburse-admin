@@ -55,7 +55,7 @@ export default {
     },
     getList() {
       this.loading = true;
-      this.$axios.get("/concur/hrinfo/department/list").then(res => {
+      this.$axios.get("/concur/hrinfo/department/treelist").then(res => {
         this.loading = false;
         if (res && res.success) {
           this.list = res.result;

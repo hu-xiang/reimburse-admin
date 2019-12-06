@@ -4,6 +4,7 @@ import router from '../router'
 import ElementUI from 'element-ui';
 Vue.use(ElementUI);
 import qs from 'qs';
+import { log } from 'util';
 
 const axiosBaseUrl = "http://192.168.48.89:8080/jeecg-boot";
 axios.defaults.baseURL = axiosBaseUrl;
@@ -21,7 +22,6 @@ axios.interceptors.request.use((config) => {
 }, (error) => {
 	Promise.reject(error);
 });
-
 axios.interceptors.response.use(response => {
 	setTimeout(() => {
 		loadingInstance.close();
