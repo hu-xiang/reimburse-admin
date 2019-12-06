@@ -28,6 +28,8 @@ import fee from '@/components/pages/reportAnalysis/fee/index.vue';
 import travel from '@/components/pages/reportAnalysis/travel/index.vue';
 // 人事资料页面
 import userInfo from '@/components/pages/personInfo/userInfo/index.vue';
+import userAdd from '@/components/pages/personInfo/userInfo/add.vue';
+import userEdit from '@/components/pages/personInfo/userInfo/edit.vue';
 import depart from '@/components/pages/personInfo/depart/index.vue';
 import rank from '@/components/pages/personInfo/rank/index.vue';
 import position from '@/components/pages/personInfo/position/index.vue';
@@ -188,6 +190,16 @@ export default new Router({
           component: userInfo,
         },
         {
+          path: '/userAdd',
+          name: '新增人员',
+          component: userAdd,
+        },
+        {
+          path: '/userEdit',
+          name: '编辑人员',
+          component: userEdit,
+        },
+        {
           path: '/depart',
           name: '部门组织结构',
           component: depart,
@@ -207,12 +219,12 @@ export default new Router({
           name: '角色管理',
           component: role,
         },
-        { // 在nav.json不需要配置，不用新开tab
+        {
           path: '/roleAdd',
           name: '新增角色',
           component: roleAdd,
         },
-        { // 在nav.json不需要配置，不用新开tab
+        {
           path: '/roleEdit',
           name: '编辑角色',
           component: roleEdit,
