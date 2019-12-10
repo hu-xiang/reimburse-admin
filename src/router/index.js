@@ -367,7 +367,7 @@ export default new Router({
         {
           path: '/curCurrency',
           name: '币别信息维护',
-          component: exchangeRate,
+          component: curCurrency,
         },
         {
           path: '/curCurrencyAdd',

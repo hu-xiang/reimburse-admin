@@ -6,11 +6,7 @@
     <top-bar>
       <section>
         <label>系统名称</label>
-        <el-input></el-input>
-      </section>
-      <section>
-        <label>占个位子</label>
-        <el-input></el-input>
+        <el-input v-model="searchContent.sysName"></el-input>
       </section>
       <section>
         <el-button type="primary" @click="handleSearch" size="mini">{{$t('message.searchBtn')}}</el-button>
@@ -23,10 +19,12 @@
     <!--表格数据区域-->
 
     <table-bar>
+      <!--
       <div slot="top">
         <el-button type="primary" @click="$router.push('/globalDataAdd')" size="mini">{{$t('message.addBtn')}}
         </el-button>
       </div>
+      -->
       <el-table slot="table"
                 v-loading="loading"
                 @selection-change="handleSelectionChange"
@@ -34,6 +32,7 @@
                 stripe
                 :data="globalDataTableList"
                 style="width: 100%">
+        <!--
         <el-table-column align="center"
                          fixed="left"
                          :label="$t('message.operate')"
@@ -49,11 +48,16 @@
             </el-button>
           </template>
         </el-table-column>
+        -->
         <el-table-column prop="sysName" label="系统名称" show-overflow-tooltip>
         </el-table-column>
         <el-table-column prop="logo" label="logo" show-overflow-tooltip>
         </el-table-column>
         <el-table-column prop="isShow" label="申请单显示预算费用" show-overflow-tooltip>
+          <template slot-scope="scope">
+            <el-radio v-model="radio" label="1">显示</el-radio>
+            <el-radio v-model="radio" label="0">不显示</el-radio>
+          </template>
         </el-table-column>
         <el-table-column prop="isUse" label="是否启用预算审批" show-overflow-tooltip>
         </el-table-column>
@@ -94,10 +98,11 @@
         loading: false,
         globalDataTableList: [{}],
         searchContent: {
-          gloConfig: '',
+          sysName: '',
           pageNo: '',
           pageSize: ''
         },
+        radio: '1',
         curSearchContent: {
           pageNo: 1, // 当前页
           pageSize: 20, // 每页显示数量
@@ -120,7 +125,8 @@
         this.getGlobalDataList(1);
       },
       handleReset() {
-
+        this.searchContent = {}
+        this.getGlobalDataList()
       },
       handleAdd() {
 
@@ -140,6 +146,9 @@
           if (res && res.success) {
             this.globalDataTableList = res.result.records;
             this.total = res.result.total;
+            for(let i=0;i<this.globalDataTableList.length;i++){
+              this.radio=this.globalDataTableList[i].isShow
+            }
           }
         });
         Object.assign(this.searchContent, this.curSearchContent);
