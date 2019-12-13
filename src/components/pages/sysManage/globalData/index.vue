@@ -18,7 +18,6 @@
     <!--表格数据区域-->
 
     <table-bar>
-<<<<<<< HEAD
       <el-table
         slot="table"
         v-loading="loading"
@@ -28,26 +27,6 @@
         style="width: 100%"
       >
         <el-table-column align="center" fixed="left" :label="$t('message.operate')">
-=======
-      <!--
-      <div slot="top">
-        <el-button type="primary" @click="$router.push('/globalDataAdd')" size="mini">{{$t('message.addBtn')}}
-        </el-button>
-      </div>
-      -->
-      <el-table slot="table"
-                v-loading="loading"
-                @selection-change="handleSelectionChange"
-                border
-                stripe
-                :data="globalDataTableList"
-                style="width: 100%">
-        <!--
-        <el-table-column align="center"
-                         fixed="left"
-                         :label="$t('message.operate')"
-                         width="120">
->>>>>>> 69293c9606d259881f6f2e67956040c62679d13b
           <template slot-scope="{row}">
             <el-button @click="eventEdit(row)" type="text" size="mini">
               <span v-if="!row.disabled">保存</span>
@@ -55,7 +34,6 @@
             </el-button>
           </template>
         </el-table-column>
-<<<<<<< HEAD
         <el-table-column prop="sysName" label="系统名称" show-overflow-tooltip></el-table-column>
         <el-table-column prop="logo" label="logo" show-overflow-tooltip></el-table-column>
         <el-table-column prop="isShow" label="申请单显示预算费用" show-overflow-tooltip min-width="120px">
@@ -65,30 +43,6 @@
               <el-option label="不显示" value="0"></el-option>
             </el-select>
           </template>
-=======
-        -->
-        <el-table-column prop="sysName" label="系统名称" show-overflow-tooltip>
-        </el-table-column>
-        <el-table-column prop="logo" label="logo" show-overflow-tooltip>
-        </el-table-column>
-        <el-table-column prop="isShow" label="申请单显示预算费用" show-overflow-tooltip>
-          <template slot-scope="scope">
-            <el-radio v-model="radio" label="1">显示</el-radio>
-            <el-radio v-model="radio" label="0">不显示</el-radio>
-          </template>
-        </el-table-column>
-        <el-table-column prop="isUse" label="是否启用预算审批" show-overflow-tooltip>
-        </el-table-column>
-        <el-table-column prop="isRel" label="报销是否关联申请单" show-overflow-tooltip>
-        </el-table-column>
-        <el-table-column prop="createId" label="创建人" show-overflow-tooltip>
-        </el-table-column>
-        <el-table-column prop="createDate" label="创建时间" show-overflow-tooltip>
-        </el-table-column>
-        <el-table-column prop="updateId" label="操作人" show-overflow-tooltip>
-        </el-table-column>
-        <el-table-column prop="updateDate" label="操作时间" show-overflow-tooltip>
->>>>>>> 69293c9606d259881f6f2e67956040c62679d13b
         </el-table-column>
         <el-table-column prop="isUse" label="是否启用预算审批" show-overflow-tooltip min-width="120px">
           <template slot-scope="{row}">
