@@ -20,7 +20,7 @@ Vue.mixin({
           children: [
             {
               path: "/budgetEntry",
-              name: this.$t('message.budgetEntry')
+              name: this.$t('message.budgetApplication')
             },
             {
               path: "/budgetChange",

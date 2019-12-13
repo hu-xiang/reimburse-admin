@@ -46,7 +46,7 @@ const en = {
         updateTime: 'update time',
         workbench: 'workbench',
         budgetManagement: 'budget management',
-        budgetEntry: 'budget entry',
+        budgetApplication: 'budget application',
         budgetAdjustment: 'budget adjustment',
         budgetApproval: 'budget approval',
         approveAndSignRights: 'approve and sign rights',

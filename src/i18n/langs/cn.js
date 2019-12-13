@@ -4,7 +4,7 @@ import zhLocale from 'element-ui/lib/locale/lang/zh-CN'
 const cn = {
     message: {
         comName: '闻泰科技',
-        comFullName: '深圳闻泰通讯科技股份有限公司',
+        comFullName: '闻泰通讯科技股份有限公司',
         systemName: '报账系统',
         systemInfo1: '智能财务协同',
         systemInfo2: '内外系统互连互通',
@@ -46,7 +46,7 @@ const cn = {
         updateTime: '更新时间',
         workbench: '工作台',
         budgetManagement: '预算管理',
-        budgetEntry: '预算录入',
+        budgetApplication: '预算申请',
         budgetAdjustment: '预算调整',
         budgetApproval: '预算审批',
         approveAndSignRights: '审批签权',

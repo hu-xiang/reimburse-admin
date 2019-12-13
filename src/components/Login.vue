@@ -107,6 +107,8 @@ export default {
         "/feeQuery",
         "/budgetManage",
         "/budgetEntry",
+        "/budAppAdd",
+        "/budAppEdit",
         "/budgetChange",
         "/budgetApproval",
         "/rightSetting",

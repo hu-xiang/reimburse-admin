@@ -30,8 +30,22 @@
       </el-row>
     </div>
     <div class="workbench-content">
-      <div class="workbench-content-item first">{{$t('message.myApplication')}}</div>
-      <div class="workbench-content-item">{{$t('message.myApproval')}}</div>
+      <div class="workbench-content-item first">
+        <!-- {{$t('message.myApplication')}} -->
+        <el-tabs v-model="activeName" @tab-click="handleClick">
+          <el-tab-pane label="出差申请" name="first">出差申请</el-tab-pane>
+          <el-tab-pane label="预算申请" name="second">预算申请</el-tab-pane>
+          <el-tab-pane label="报销申请" name="third">报销申请</el-tab-pane>
+        </el-tabs>
+      </div>
+      <div class="workbench-content-item">
+        <!-- {{$t('message.myApproval')}} -->
+        <el-tabs v-model="activeName" @tab-click="handleClick">
+          <el-tab-pane label="出差审批" name="first">出差审批</el-tab-pane>
+          <el-tab-pane label="预算审批" name="second">预算审批</el-tab-pane>
+          <el-tab-pane label="报销审批" name="third">报销审批</el-tab-pane>
+        </el-tabs>
+      </div>
     </div>
     <div class="workbench-content">
       <div class="workbench-content-item first">{{$t('message.approvalQuery')}}</div>

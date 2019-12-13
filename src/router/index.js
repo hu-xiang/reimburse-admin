@@ -17,6 +17,8 @@ import feeQuery from '@/components/pages/reimbursement/feeQuery/index.vue';
 import budgetApproval from '@/components/pages/budgetManage/budgetApproval/index.vue';
 import budgetChange from '@/components/pages/budgetManage/budgetChange/index.vue';
 import budgetEntry from '@/components/pages/budgetManage/budgetEntry/index.vue';
+import budAppAdd from '@/components/pages/budgetManage/budgetEntry/add.vue';
+import budAppEdit from '@/components/pages/budgetManage/budgetEntry/edit.vue';
 import classMaintenance from '@/components/pages/budgetManage/classMaintenance/index.vue';
 import liveSetting from '@/components/pages/budgetManage/liveSetting/index.vue';
 import rightSetting from '@/components/pages/budgetManage/rightSetting/index.vue';
@@ -129,8 +131,18 @@ export default new Router({
         // 预算管理页面路由
         {
           path: '/budgetEntry',
-          name: '预算录入',
+          name: '预算申请',
           component: budgetEntry,
+        },
+        {
+          path: '/budAppAdd',
+          name: '预算申请新增',
+          component: budAppAdd,
+        },
+        {
+          path: '/budAppEdit',
+          name: '预算申请编辑',
+          component: budAppEdit,
         },
         {
           path: '/budgetChange',
@@ -379,7 +391,7 @@ export default new Router({
         {
           path: '/curCurrency',
           name: '币别信息维护',
-          component: exchangeRate,
+          component: curCurrency,
         },
         {
           path: '/curCurrencyAdd',
