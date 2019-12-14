@@ -32,7 +32,7 @@
             <div class="api" slot="content">
               <!-- <el-button type="primary" size="mini" @click="add(data, node)">新增</el-button> -->
               <el-button type="success" size="mini" @click="edit(data, node)">编辑</el-button>
-              <el-button type="error" size="mini" @click="del(data)">删除</el-button>
+              <!-- <el-button type="error" size="mini" @click="del(data)">删除</el-button> -->
             </div>
           </el-tooltip>
         </el-tree>

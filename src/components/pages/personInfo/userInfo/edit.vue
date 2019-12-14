@@ -80,15 +80,20 @@
         </el-row>
         <el-row>
           <el-col :span="8">
+            <el-form-item label="部门" prop="depId">
+              <el-input v-model="deptName" @focus="eventFocus"></el-input>
+            </el-form-item>
+          </el-col>
+          <el-col :span="8">
             <el-form-item label="职级名称" prop="rankId">
               <rank v-model="form.rankId"></rank>
             </el-form-item>
           </el-col>
-          <el-col :span="8">
+          <!-- <el-col :span="8">
             <el-form-item label="部门" prop="depId">
               <depart v-model="form.depId"></depart>
             </el-form-item>
-          </el-col>
+          </el-col> -->
           <el-col :span="8">
             <el-form-item label="岗位描述" prop="postId">
               <position v-model="form.postId"></position>
@@ -107,6 +112,43 @@
         </el-row>
       </content-item>
     </el-form>
+    <!-- 部门树形弹框 -->
+    <el-dialog title="部门组织结构" :visible.sync="dialogVisible" width="500px">
+      <el-input
+        v-model="deptname"
+        clearable
+        placeholder="请输入关键字进行过滤"
+        style="width:300px;margin-right:10px;margin-bottom:10px;"
+      ></el-input>
+      <el-button type="primary" @click="eventSearchDep" size="mini">{{$t('message.searchBtn')}}</el-button>
+      <el-button @click="eventResetDep" size="mini">{{$t('message.resetBtn')}}</el-button>
+      <el-tree
+        class="filter-tree"
+        :data="list"
+        show-checkbox
+        :props="listProps"
+        :filter-node-method="filterNode"
+        :check-strictly="true"
+        ref="depTree"
+        node-key="id"
+        @check="checkDept"
+      ></el-tree>
+      <el-pagination
+        style="margin-top:10px;"
+        small
+        @size-change="handleSizeChange1"
+        @current-change="handleCurrentChange1"
+        :current-page="curSearchContent1.pageNo"
+        :page-sizes="[10, 20, 50]"
+        :page-size="curSearchContent1.pageSize"
+        layout="total, sizes, prev, pager, next"
+        :total="total1"
+      ></el-pagination>
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="dialogVisible = false" size="mini">取 消</el-button>
+        <el-button type="primary" @click="selectSure" size="mini">确 定</el-button>
+      </span>
+    </el-dialog>
   </content-bar>
 </template>
 
@@ -188,7 +230,20 @@ export default {
         postId: [
           { required: true, message: "请选择岗位描述", trigger: "change" }
         ]
-      }
+      },
+      deptName: "",
+      curSearchContent1: {
+        pageNo: 1, // （当前页）
+        pageSize: 10 // 每页显示数量
+      },
+      total1: 0, // 总条数
+      dialogVisible: false,
+      list: [],
+      listProps: {
+        children: "children",
+        label: "deptname"
+      },
+      deptname: "",
     };
   },
   // computed: {
@@ -198,6 +253,7 @@ export default {
   // },
   mounted() {
     this.$nextTick(function() {
+      this.deptName = this.$route.query.row.deptname;
       this.form = {
         id: this.$route.query.row.id,
         memName: this.$route.query.row.memName,
@@ -217,6 +273,50 @@ export default {
     });
   },
   methods: {
+    checkDept(value, data) {
+      if (data.checkedNodes.length > 1) {
+        this.$message.warning("只能选择一个部门");
+        this.$refs.depTree.setChecked(value, false);
+      }
+    },
+    filterNode(value, data) {
+      if (!value) return true;
+      return data.deptname.indexOf(value) > -1;
+    },
+    eventSearchDep() {
+      this.$refs.depTree.filter(this.deptname);
+    },
+    eventResetDep() {
+      this.deptname = "";
+      this.$refs.depTree.filter(this.deptname);
+    },
+    eventFocus() {
+      this.dialogVisible = true;
+      this.$axios.get(`/concur/hrinfo/department/treelist?${this.$qs.stringify(
+            this.curSearchContent1
+          )}`).then(res => {
+        if (res && res.success) {
+          this.list = res.result;
+          this.total1 = res.total;
+        }
+      });
+    },
+    selectSure() {
+      const list = this.$refs.depTree.getCheckedNodes();
+      if (list.length > 0) {
+        this.form.depId = list[0].id;
+        this.deptName = list[0].deptname;
+      }
+      this.dialogVisible = false;
+    },
+    handleSizeChange1(val) {
+      this.curSearchContent1.pageSize = val;
+      this.eventFocus();
+    },
+    handleCurrentChange1(val) {
+      this.curSearchContent1.pageNo = val;
+      this.eventFocus();
+    },
     submit() {
       this.$refs.form.validate(valid => {
         if (valid) {

@@ -108,7 +108,6 @@
       <el-button @click="eventResetDep" size="mini">{{$t('message.resetBtn')}}</el-button>
       <el-tree
         class="filter-tree"
-        :default-expand-all="true"
         :data="list"
         show-checkbox
         :props="listProps"
@@ -118,6 +117,17 @@
         node-key="id"
         @check="checkDept"
       ></el-tree>
+      <el-pagination
+        style="margin-top:10px;"
+        small
+        @size-change="handleSizeChange1"
+        @current-change="handleCurrentChange1"
+        :current-page="curSearchContent1.pageNo"
+        :page-sizes="[10, 20, 50]"
+        :page-size="curSearchContent1.pageSize"
+        layout="total, sizes, prev, pager, next"
+        :total="total1"
+      ></el-pagination>
       <span slot="footer" class="dialog-footer">
         <el-button @click="dialogVisible = false" size="mini">取 消</el-button>
         <el-button type="primary" @click="selectSure" size="mini">确 定</el-button>
@@ -302,6 +312,11 @@ export default {
       },
       total: 0,// 总条数
       selectedCode: [],
+      curSearchContent1: {
+        pageNo: 1, // （当前页）
+        pageSize: 10 // 每页显示数量
+      },
+      total1: 0, // 总条数
     };
   },
   mounted() {
@@ -353,6 +368,14 @@ export default {
       this.curSearchContent.pageNo = val;
       this.eventFocus2(1);
     },
+    handleSizeChange1(val) {
+      this.curSearchContent1.pageSize = val;
+      this.eventFocus();
+    },
+    handleCurrentChange1(val) {
+      this.curSearchContent1.pageNo = val;
+      this.eventFocus();
+    },
     checkDept(value, data) {
       if (data.checkedNodes.length > 1) {
         this.$message.warning("只能选择一个部门");
@@ -389,9 +412,12 @@ export default {
     },
     eventFocus() {
       this.dialogVisible = true;
-      this.$axios.get("/concur/hrinfo/department/treelist").then(res => {
+      this.$axios.get(`/concur/hrinfo/department/treelist?${this.$qs.stringify(
+            this.curSearchContent1
+          )}`).then(res => {
         if (res && res.success) {
           this.list = res.result;
+          this.total1 = res.total;
         }
       });
     },
