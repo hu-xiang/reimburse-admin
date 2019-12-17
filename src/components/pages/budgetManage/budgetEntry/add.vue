@@ -165,7 +165,7 @@
       <top-bar>
         <section>
           <label>货币码</label>
-          <el-input v-model="searchContent.waers"></el-input>
+          <el-input v-model="searchContent2.waers"></el-input>
         </section>
         <section>
           <el-button type="primary" @click="eventSearchCode" size="mini">{{$t('message.searchBtn')}}</el-button>
@@ -181,13 +181,13 @@
         </el-table>
         <el-pagination
           slot="page"
-          @size-change="handleSizeChange"
-          @current-change="handleCurrentChange"
-          :current-page="curSearchContent.pageNo"
+          @size-change="handleSizeChange2"
+          @current-change="handleCurrentChange2"
+          :current-page="curSearchContent2.pageNo"
           :page-sizes="[10, 20, 50]"
-          :page-size="curSearchContent.pageSize"
+          :page-size="curSearchContent2.pageSize"
           layout="total, sizes, prev, pager, next, jumper"
-          :total="total"
+          :total="total2"
         ></el-pagination>
       </table-bar>
       <span slot="footer" class="dialog-footer">
@@ -199,6 +199,7 @@
 </template>
 
 <script>
+import { log } from 'util';
 export default {
   name: "budAppAdd",
   data() {
@@ -303,14 +304,14 @@ export default {
       },
       dialogVisible2: false,
       curCurrencyTableList: [],
-      searchContent: {
+      searchContent2: {
         waers: ""
       },
-      curSearchContent: {
+      curSearchContent2: {
         pageNo: 1, // 当前页
         pageSize: 10 // 每页显示数量
       },
-      total: 0,// 总条数
+      total2: 0,// 总条数
       selectedCode: [],
       curSearchContent1: {
         pageNo: 1, // （当前页）
@@ -335,37 +336,42 @@ export default {
       this.dialogVisible2 = false;
     },
     eventSearchCode() {
+      this.curSearchContent2.pageNo = 1;
       this.eventFocus2(1);
     },
     eventResetCode() {
-      this.searchContent = {
+      this.curSearchContent2.pageNo = 1;
+      this.searchContent2 = {
         waers: ""
       };
       this.eventFocus2(1);
     },
     eventFocus2(bool) {
       this.dialogVisible2 = true;
-      if (bool) Object.assign(this.curSearchContent, this.searchContent);
+      //if (bool) Object.assign(this.curSearchContent2, this.searchContent2);
+      if (bool) {
+        this.curSearchContent2.waers = this.searchContent2.waers
+      }
       this.$axios
         .get(
           `concur/gloConfig/curCurrency/list?${this.$qs.stringify(
-            this.curSearchContent
+            this.curSearchContent2
           )}`
         )
         .then(res => {
           if (res && res.success) {
             this.curCurrencyTableList = res.result.records;
-            this.total = res.result.total;
+            this.total2 = res.result.total;
           }
         });
-      Object.assign(this.searchContent, this.curSearchContent);
+      Object.assign(this.searchContent2, this.curSearchContent2);
     },
-    handleSizeChange(val) {
-      this.curSearchContent.pageSize = val;
+    handleSizeChange2(val) {
+      this.curSearchContent2.pageSize = val;
       this.eventFocus2(1);
     },
-    handleCurrentChange(val) {
-      this.curSearchContent.pageNo = val;
+    handleCurrentChange2(val) {
+      this.curSearchContent2.pageNo = val;
       this.eventFocus2(1);
     },
     handleSizeChange1(val) {

@@ -95,7 +95,7 @@
           </el-col>
         </el-row>
 
-        <el-row>
+        <!-- <el-row>
           <el-col :span="8">
             <el-form-item label="审批状态" prop="auditStatus">
               <el-select v-model="form.auditStatus" clearable>
@@ -112,7 +112,7 @@
               </el-select>
             </el-form-item>
           </el-col>
-        </el-row>
+        </el-row> -->
       </content-item>
     </el-form>
     <!-- 部门树形弹框 -->
@@ -275,8 +275,8 @@ export default {
         amount: '',
         lamount: '',
         isshare: '',
-        auditStatus: '',
-        status: ''
+        //auditStatus: '',
+        //status: ''
       },
       rules: {
         mainType: [
@@ -308,12 +308,12 @@ export default {
           { required: true, message: "请选择预算结束时间", trigger: "change" }
         ],
         deptId: [{ required: true, message: "请选择部门", trigger: "change" }],
-        auditStatus: [
-          { required: true, message: "请选择审批状态", trigger: "change" }
-        ],
-        status: [
-          { required: true, message: "请选择是否下达", trigger: "change" }
-        ],
+        // auditStatus: [
+        //   { required: true, message: "请选择审批状态", trigger: "change" }
+        // ],
+        // status: [
+        //   { required: true, message: "请选择是否下达", trigger: "change" }
+        // ],
       },
       dialogVisible: false,
       list: [],
@@ -364,8 +364,8 @@ export default {
         amount: this.$route.query.row.amount,
         lamount: this.$route.query.row.lamount,
         isshare: this.$route.query.row.isshare,
-        auditStatus: this.$route.query.row.auditStatus,
-        status: this.$route.query.row.status
+        //auditStatus: this.$route.query.row.auditStatus,
+        //status: this.$route.query.row.status
       };
     });
   },

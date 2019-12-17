@@ -23,14 +23,6 @@ Vue.mixin({
               name: this.$t('message.budgetApplication')
             },
             {
-              path: "/budgetChange",
-              name: this.$t('message.budgetAdjustment')
-            },
-            {
-              path: "/budgetApproval",
-              name: this.$t('message.budgetApproval')
-            },
-            {
               path: "/rightSetting",
               name: this.$t('message.approveAndSignRights')
             },
@@ -49,7 +41,15 @@ Vue.mixin({
             {
               path: "/classMaintenance",
               name: this.$t('message.budgetCategoryMaintenance')
-            }
+            },
+            {
+              path: "/budgetTime",
+              name: this.$t('message.budgetTime')
+            },
+            {
+              path: "/budgetControl",
+              name: this.$t('message.budgetControl')
+            },
           ]
         },
         {

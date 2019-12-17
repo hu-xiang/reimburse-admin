@@ -18,12 +18,11 @@
       <section>
         <label>汇率有效日期</label>
         <el-date-picker
+        class="dateInput"
           v-model="searchContent.gdatu"
-          type="daterange"
-          value-format="yyyy-MM-dd"
-          :range-separator="$t('message.to')"
-          :start-placeholder="$t('message.startDate')"
-          :end-placeholder="$t('message.endDate')"
+          type="date"
+          value-format="yyyy-MM-dd HH:mm:ss"
+          placeholder="汇率有效日期"
         ></el-date-picker>
       </section>
       <section>
@@ -140,5 +139,8 @@ export default {
 
 <style lang="scss" scoped>
 .exchangeRate {
+  /deep/ .dateInput .el-input__inner{
+    padding-left: 30px;
+  }
 }
 </style>

@@ -13,7 +13,8 @@
         <label>审批状态</label>
         <el-select v-model="searchContent.auditStatus" clearable>
           <el-option label="审批通过" :value="1"></el-option>
-          <el-option label="审批未通过" :value="0"></el-option>
+          <el-option label="审批未通过" :value="2"></el-option>
+          <el-option label="待审批" :value="0"></el-option>
         </el-select>
       </section>
       <section>
@@ -41,14 +42,17 @@
           @click="$router.push('/budAppAdd')"
           size="mini"
         >{{$t('message.addBtn')}}</el-button>
+        <el-button type="success" size="mini" @click="eventApproval">审批</el-button>
       </div>
       <el-table
+        ref="table"
         slot="table"
         v-loading="loading"
         border
         stripe
         :data="tableList"
         style="width: 100%"
+        @selection-change="handleSelectionChange"
       >
         <el-table-column align="center" fixed="left" :label="$t('message.operate')" width="120">
           <template slot-scope="{row}">
@@ -58,6 +62,14 @@
               size="mini"
             >{{$t('message.editBtn')}}</el-button>
             <el-button type="text" size="mini" @click="eventDel(row)">{{$t('message.deleteBtn')}}</el-button>
+          </template>
+        </el-table-column>
+        <el-table-column type="selection" width="40" align="center" fixed="left" :selectable="checkSelectable"></el-table-column>
+        <el-table-column prop="auditStatus" label="审批状态" show-overflow-tooltip>
+          <template slot-scope="{row}">
+            <span v-if="row.auditStatus==='1'" style="color:#67C23A">审批通过</span>
+            <span v-if="row.auditStatus==='2'" style="color:red">审批未通过</span>
+            <span v-if="row.auditStatus==='0'">待审批</span>
           </template>
         </el-table-column>
         <el-table-column prop="applyId" label="预算申请单号" show-overflow-tooltip min-width="100px"></el-table-column>
@@ -86,12 +98,6 @@
           <template slot-scope="{row}">
             <span v-if="row.isshare==='1'">是</span>
             <span v-if="row.isshare==='0'">否</span>
-          </template>
-        </el-table-column>
-        <el-table-column prop="auditStatus" label="审批状态" show-overflow-tooltip>
-          <template slot-scope="{row}">
-            <span v-if="row.auditStatus==='1'">审批通过</span>
-            <span v-if="row.auditStatus==='0'">审批未通过</span>
           </template>
         </el-table-column>
         <el-table-column prop="status" label="是否下达" show-overflow-tooltip>
@@ -154,7 +160,12 @@
     </el-dialog>
     <!-- 预算类型树形弹框 -->
     <el-dialog title="预算类型" :visible.sync="dialogVisible1" width="500px">
-      <el-input v-model="budName" clearable placeholder="请输入关键字进行过滤" style="width:300px;margin-right:10px;"></el-input>
+      <el-input
+        v-model="budName"
+        clearable
+        placeholder="请输入关键字进行过滤"
+        style="width:300px;margin-right:10px;"
+      ></el-input>
       <el-button type="primary" @click="eventSearchType" size="mini">{{$t('message.searchBtn')}}</el-button>
       <el-button @click="eventResetType" size="mini">{{$t('message.resetBtn')}}</el-button>
       <el-tree
@@ -174,10 +185,25 @@
         <el-button type="primary" @click="selectSure1" size="mini">确 定</el-button>
       </span>
     </el-dialog>
+    <el-dialog title="审批" :visible.sync="dialogVisible3" width="500px">
+      <el-form :model="form" ref="form" :rules="rules" label-width="120px">
+        <el-form-item label="审批状态" prop="auditStatus">
+          <el-select v-model="form.auditStatus" clearable style="width:300px;">
+            <el-option label="审批通过" value="1"></el-option>
+            <el-option label="审批未通过" value="2"></el-option>
+          </el-select>
+        </el-form-item>
+      </el-form>
+      <div slot="footer" class="dialog-footer">
+        <el-button @click="dialogVisible3 = false" size="mini">取 消</el-button>
+        <el-button type="primary" @click="eventSure" size="mini">确 定</el-button>
+      </div>
+    </el-dialog>
   </div>
 </template>
 
 <script>
+import { log } from 'util';
 export default {
   name: "budgetEntry",
   data() {
@@ -217,6 +243,16 @@ export default {
         pageSize: 10 // 每页显示数量
       },
       total1: 0, // 总条数
+      multipleSelection: [],
+      dialogVisible3: false,
+      form: {
+        auditStatus: ""
+      },
+      rules: {
+        auditStatus: [
+          { required: true, message: "请选择审批状态", trigger: "change" }
+        ]
+      }
     };
   },
   mounted() {
@@ -261,14 +297,18 @@ export default {
     },
     eventFocus() {
       this.dialogVisible = true;
-      this.$axios.get(`/concur/hrinfo/department/treelist?${this.$qs.stringify(
+      this.$axios
+        .get(
+          `/concur/hrinfo/department/treelist?${this.$qs.stringify(
             this.curSearchContent1
-          )}`).then(res => {
-        if (res && res.success) {
-          this.list = res.result;
-          this.total1 = res.total;
-        }
-      });
+          )}`
+        )
+        .then(res => {
+          if (res && res.success) {
+            this.list = res.result;
+            this.total1 = res.total;
+          }
+        });
     },
     selectSure() {
       const list = this.$refs.depTree.getCheckedNodes();
@@ -364,6 +404,42 @@ export default {
     handleCurrentChange1(val) {
       this.curSearchContent1.pageNo = val;
       this.eventFocus();
+    },
+    handleSelectionChange(val) {
+      this.multipleSelection = val;
+    },
+    checkSelectable(row) {
+      return (row.auditStatus!=='2'&&row.auditStatus!=='1')
+    },
+    eventApproval() {
+      if (!this.multipleSelection.length > 0) {
+        this.$message.warning("请选择您需要审批的预算申请");
+        return;
+      }
+      this.dialogVisible3 = true;
+    },
+    eventSure() {
+      const list = [];
+      this.$refs.form.validate(valid => {
+        if (valid) {
+          this.multipleSelection.forEach((item) =>{
+            list.push(item.applyId)
+          })
+          const submitForm = {
+            list: list,
+            auditStatus: this.form.auditStatus
+          }
+          this.$axios
+            .put("/concur/budget/budgetApply/auditList", this.$qs.stringify(submitForm,{arrayFormat: 'repeat'}))
+            .then(res => {
+              if (res && res.success) {
+                this.$message.success(res.message);
+                this.dialogVisible3 = false;
+                this.getList(1);
+              }
+            });
+        }
+      });
     }
   }
 };

@@ -40,6 +40,10 @@
       {
         "path": "/classMaintenance",
         "name": "预算类别维护"
+      },
+      {
+        "path": "/budgetTime",
+        "name": "预算时间"
       }
     ]
   },

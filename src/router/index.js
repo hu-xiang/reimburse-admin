@@ -14,8 +14,6 @@ import travelQuery from '@/components/pages/travelApply/travelQuery/index.vue';
 import feeEntry from '@/components/pages/reimbursement/feeEntry/index.vue';
 import feeQuery from '@/components/pages/reimbursement/feeQuery/index.vue';
 // 预算管理页面
-import budgetApproval from '@/components/pages/budgetManage/budgetApproval/index.vue';
-import budgetChange from '@/components/pages/budgetManage/budgetChange/index.vue';
 import budgetEntry from '@/components/pages/budgetManage/budgetEntry/index.vue';
 import budAppAdd from '@/components/pages/budgetManage/budgetEntry/add.vue';
 import budAppEdit from '@/components/pages/budgetManage/budgetEntry/edit.vue';
@@ -24,6 +22,8 @@ import liveSetting from '@/components/pages/budgetManage/liveSetting/index.vue';
 import rightSetting from '@/components/pages/budgetManage/rightSetting/index.vue';
 import subsidySetting from '@/components/pages/budgetManage/subsidySetting/index.vue';
 import transSetting from '@/components/pages/budgetManage/transSetting/index.vue';
+import budgetTime from '@/components/pages/budgetManage/budgetTime/index.vue';
+import budgetControl from '@/components/pages/budgetManage/budgetControl/index.vue';
 // 报表分析页面
 import budget from '@/components/pages/reportAnalysis/budget/index.vue';
 import fee from '@/components/pages/reportAnalysis/fee/index.vue';
@@ -145,16 +145,6 @@ export default new Router({
           component: budAppEdit,
         },
         {
-          path: '/budgetChange',
-          name: '预算调整',
-          component: budgetChange,
-        },
-        {
-          path: '/budgetApproval',
-          name: '预算审批',
-          component: budgetApproval,
-        },
-        {
           path: '/rightSetting',
           name: '审批签权',
           component: rightSetting,
@@ -176,8 +166,18 @@ export default new Router({
         },
         {
           path: '/classMaintenance',
-          name: '预算类别维护',
+          name: '预算类型',
           component: classMaintenance,
+        },
+        {
+          path: '/budgetTime',
+          name: '预算时间',
+          component: budgetTime,
+        },
+        {
+          path: '/budgetControl',
+          name: '预算管控',
+          component: budgetControl,
         },
         // 报表分析页面路由
         {

@@ -1,10 +1,10 @@
 <template>
   <div class="login-container pull-height" @keyup.enter.native="submitForm('ruleForm')">
-    <div class="video_wrapper">
+    <!-- <div class="video_wrapper">
       <video autoplay muted loop>
         <source src="../assets/img/login/login-bg.mp4" type="video/mp4" />
       </video>
-    </div>
+    </div> -->
     <div class="login-info text-whit fadeInLeft">
       <h2 class="login-info-title">{{$t('message.comName')}} - {{$t('message.systemName')}}</h2>
       <ul class="login-info-list">
@@ -109,13 +109,13 @@ export default {
         "/budgetEntry",
         "/budAppAdd",
         "/budAppEdit",
-        "/budgetChange",
-        "/budgetApproval",
         "/rightSetting",
         "/transSetting",
         "/subsidySetting",
         "/liveSetting",
         "/classMaintenance",
+        "/budgetTime",
+        "/budgetControl",
         "/reportAnalysis",
         "/budget",
         "/fee",
@@ -322,7 +322,7 @@ export default {
   top: 0;
   width: 100%;
   height: 100%;
-  background-image: url("../assets/img/login/login.jpg");
+  background-image: url("../assets/img/login/login.png");
   background-size: cover;
 }
 
@@ -353,8 +353,8 @@ export default {
   justify-content: center;
   flex-direction: column;
   padding: 30px 40px 25px 40px;
-  background-color: rgba(0,0,0,0.5);
-  box-shadow: 1px 1px 2px #eee;
+  background-color: rgba(256,256,256,0.1);
+  //box-shadow: 1px 1px 2px #eee;
   border-radius: 6px;
 }
 
