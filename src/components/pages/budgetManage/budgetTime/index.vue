@@ -92,6 +92,7 @@
         <el-form-item label="预算年度" prop="budYear">
           <el-date-picker
             value-format="yyyy"
+            format="yyyy"
             v-model="form.budYear"
             type="year"
             placeholder="选择年"
@@ -203,7 +204,7 @@ export default {
       (this.isAdd = false),
         (this.form = {
           id: row.id,
-          budYear: row.budYear,
+          budYear: new Date(`${row.budYear}-01-01 00:00:00`),
           startDate: row.startDate,
           endDate: row.endDate,
           status: row.status
