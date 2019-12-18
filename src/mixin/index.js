@@ -23,10 +23,6 @@ Vue.mixin({
               name: this.$t('message.budgetApplication')
             },
             {
-              path: "/rightSetting",
-              name: this.$t('message.approveAndSignRights')
-            },
-            {
               path: "/transSetting",
               name: this.$t('message.travelExpenses')
             },
@@ -79,7 +75,11 @@ Vue.mixin({
             {
               path: "/feeQuery",
               name: this.$t('message.reimbursementInquiry')
-            }
+            },
+            {
+              path: "/rightSetting",
+              name: this.$t('message.approveAndSignRights')
+            },
           ]
         },
         {

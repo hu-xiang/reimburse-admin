@@ -50,8 +50,8 @@
         <el-table-column prop="ukurs" label="汇率" show-overflow-tooltip></el-table-column>
         <el-table-column prop="tfact" label="目标货币比率" show-overflow-tooltip></el-table-column>
         <el-table-column prop="ffact" label="源货币比率" show-overflow-tooltip></el-table-column>
-        <el-table-column prop="f_ktext" label="源货币名称" show-overflow-tooltip></el-table-column>
-        <el-table-column prop="t_ktext" label="目标货币名称" show-overflow-tooltip></el-table-column>
+        <el-table-column prop="fktext" label="源货币名称" show-overflow-tooltip></el-table-column>
+        <el-table-column prop="tktext" label="目标货币名称" show-overflow-tooltip></el-table-column>
       </el-table>
       <el-pagination
         slot="page"

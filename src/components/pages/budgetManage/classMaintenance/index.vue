@@ -13,7 +13,7 @@
     <el-card class="box-card">
       <div slot="header" class="clearfix">
         <span>预算类型</span>
-        <el-button style="float: right; padding: 3px 0" type="text" @click="add">新增一级分类</el-button>
+        <el-button style="float: right; padding: 3px 0" type="text" @click="add('0')">新增一级分类</el-button>
       </div>
       <div class="text item">
         <el-tree
@@ -27,7 +27,7 @@
         >
           <el-tooltip slot-scope="{ node, data }" placement="right" trigger="hover" effect="light">
             <span>
-              <span class="node-name" @click.stop="curRow(data, node)">{{ data.budName}}</span>
+              <span class="node-name">{{ data.budName}}</span>
             </span>
             <div class="api" slot="content">
               <el-button type="primary" size="mini" @click="add(data, node)">新增</el-button>
@@ -111,9 +111,10 @@ export default {
       this.$refs.menuTree.filter(this.searchContent.budName);
     },
     add(data) {
+      console.log(data)
       this.type = "add";
       this.isShow = true;
-      if (data) {
+      if (data!=='0') {
         this.form = {
           parentId: data.id,
           budName: ""
@@ -126,6 +127,7 @@ export default {
       }
     },
     edit(data) {
+      console.log(data)
       this.type = "edit";
       this.isShow = true;
       this.form = {

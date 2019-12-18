@@ -13,13 +13,13 @@ import travelQuery from '@/components/pages/travelApply/travelQuery/index.vue';
 // 费用报销页面
 import feeEntry from '@/components/pages/reimbursement/feeEntry/index.vue';
 import feeQuery from '@/components/pages/reimbursement/feeQuery/index.vue';
+import rightSetting from '@/components/pages/reimbursement/rightSetting/index.vue';
 // 预算管理页面
 import budgetEntry from '@/components/pages/budgetManage/budgetEntry/index.vue';
 import budAppAdd from '@/components/pages/budgetManage/budgetEntry/add.vue';
 import budAppEdit from '@/components/pages/budgetManage/budgetEntry/edit.vue';
 import classMaintenance from '@/components/pages/budgetManage/classMaintenance/index.vue';
 import liveSetting from '@/components/pages/budgetManage/liveSetting/index.vue';
-import rightSetting from '@/components/pages/budgetManage/rightSetting/index.vue';
 import subsidySetting from '@/components/pages/budgetManage/subsidySetting/index.vue';
 import transSetting from '@/components/pages/budgetManage/transSetting/index.vue';
 import budgetTime from '@/components/pages/budgetManage/budgetTime/index.vue';
@@ -128,6 +128,11 @@ export default new Router({
           name: '费用报销查询',
           component: feeQuery,
         },
+        {
+          path: '/rightSetting',
+          name: '审批签权',
+          component: rightSetting,
+        },
         // 预算管理页面路由
         {
           path: '/budgetEntry',
@@ -143,11 +148,6 @@ export default new Router({
           path: '/budAppEdit',
           name: '预算申请编辑',
           component: budAppEdit,
-        },
-        {
-          path: '/rightSetting',
-          name: '审批签权',
-          component: rightSetting,
         },
         {
           path: '/transSetting',
