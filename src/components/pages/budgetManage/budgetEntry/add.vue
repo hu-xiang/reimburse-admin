@@ -23,7 +23,7 @@
           <el-col :span="8">
             <el-form-item label="预算大类" prop="mainType">
               <el-select v-model="form.mainType" clearable>
-                <el-option label="费用类" :value="1"></el-option>
+                <el-option label="费用类" value="费用类"></el-option>
               </el-select>
             </el-form-item>
           </el-col>

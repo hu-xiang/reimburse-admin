@@ -75,9 +75,6 @@
         <el-table-column prop="applyId" label="预算申请单号" show-overflow-tooltip min-width="100px"></el-table-column>
         <el-table-column prop="deptName" label="部门名称" show-overflow-tooltip></el-table-column>
         <el-table-column prop="mainType" label="预算大类" show-overflow-tooltip>
-          <template slot-scope="{row}">
-            <span v-if="row.mainType===1">费用类</span>
-          </template>
         </el-table-column>
         <el-table-column prop="budName" label="预算类型" show-overflow-tooltip></el-table-column>
         <el-table-column prop="contype" label="管控方式" show-overflow-tooltip>

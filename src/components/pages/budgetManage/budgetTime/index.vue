@@ -168,7 +168,9 @@ export default {
         endDate: [
           { required: true, message: "请选择预算结束日期", trigger: "blur" }
         ],
-        status: [{ required: true, message: "请选择是否关闭", trigger: "change" }]
+        status: [
+          { required: true, message: "请选择是否关闭", trigger: "change" }
+        ]
       }
     };
   },
@@ -225,8 +227,15 @@ export default {
                 }
               });
           } else {
+            const submitForm = {
+              id: this.form.id,
+              budYear: new Date(this.form.budYear).getFullYear(),
+              startDate: this.form.startDate,
+              endDate: this.form.endDate,
+              status: this.form.status
+            };
             this.$axios
-              .put("/concur/budget/budgetDate/edit", this.form)
+              .put("/concur/budget/budgetDate/edit", submitForm)
               .then(res => {
                 if (res && res.success) {
                   this.$message.success(res.message);

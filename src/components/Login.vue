@@ -4,15 +4,17 @@
       <video autoplay muted loop>
         <source src="../assets/img/login/login-bg.mp4" type="video/mp4" />
       </video>
-    </div> -->
+    </div>-->
     <div class="login-info text-whit fadeInLeft">
       <h2 class="login-info-title">{{$t('message.comName')}} - {{$t('message.systemName')}}</h2>
       <ul class="login-info-list">
         <li class="login-info-item">
-          <i class="el-icon-check"></i>&nbsp;{{$t('message.systemInfo1')}}
+          <i class="el-icon-check"></i>
+          &nbsp;{{$t('message.systemInfo1')}}
         </li>
         <li class="login-info-item">
-          <i class="el-icon-check"></i>&nbsp;{{$t('message.systemInfo2')}}
+          <i class="el-icon-check"></i>
+          &nbsp;{{$t('message.systemInfo2')}}
         </li>
       </ul>
     </div>
@@ -29,7 +31,6 @@
         >
           <el-form-item prop="username">
             <el-input
-              size="small"
               @keyup.enter.native="submitForm('ruleForm')"
               v-model="ruleForm.username"
               auto-complete="off"
@@ -40,7 +41,6 @@
           </el-form-item>
           <el-form-item prop="password">
             <el-input
-              size="small"
               @keyup.enter.native="submitForm('ruleForm')"
               :type="passwordType"
               v-model="ruleForm.password"
@@ -50,6 +50,27 @@
               <i class="el-icon-view el-input__icon" slot="suffix" @click="showPassword"></i>
               <i slot="prefix" class="el-icon-unlock"></i>
             </el-input>
+          </el-form-item>
+
+          <el-form-item prop="captcha">
+            <el-row :span="24" type="flex">
+              <el-col :span="14">
+                <el-input
+                  size="small"
+                  @keyup.enter.native="submitForm('ruleForm')"
+                  v-model="ruleForm.captcha"
+                  auto-complete="off"
+                  placeholder="请输入验证码"
+                >
+                  <i slot="prefix" class="el-icon-key"></i>
+                </el-input>
+              </el-col>
+              <el-col :span="10">
+                <div class="login-code">
+                  <verified-code @success="generateCode" ref="verifiedCode" remote></verified-code>
+                </div>
+              </el-col>
+            </el-row>
           </el-form-item>
           <el-form-item>
             <el-button
@@ -71,7 +92,7 @@
       </div>
     </div>
     <footer>
-        <p>COPYRIGHT  ©  2019 {{$t('message.comFullName')}}  {{$t('message.allRightsReserved')}}</p>
+      <p>COPYRIGHT © 2019 {{$t('message.comFullName')}} {{$t('message.allRightsReserved')}}</p>
     </footer>
   </div>
   <!-- <div class="login-app">
@@ -92,8 +113,12 @@
 </template>
 
 <script>
+import verifiedCode from "./common/verifiedCode.vue";
 export default {
   name: "login",
+  components: {
+    verifiedCode
+  },
   data() {
     return {
       // 目前写死的路由权限配置数据
@@ -169,14 +194,17 @@ export default {
 
         "/exchangeRate",
         "/exchangeRateAdd",
-        "/exchangeRateEdit",
+        "/exchangeRateEdit"
       ],
       ruleForm: {
         username: "",
-        password: ""
+        password: "",
+        captcha: "",
+        checkKey: ""
       },
       passwordType: "password",
-      lang: ""
+      lang: "",
+      verifiedCode: "",
     };
   },
   computed: {
@@ -195,14 +223,37 @@ export default {
             message: this.$t("message.passwordTips"),
             trigger: "blur"
           }
+        ],
+        captcha: [
+          { 
+            required: true,
+            validator: (rule, value, callback) => {
+              console.log(this.verifiedCode)
+              console.log(value.toLowerCase())
+              if (value && this.verifiedCode == value.toLowerCase()) {
+                callback();
+              } else {
+                callback("验证码输入不正确!");
+              }
+            },
+            trigger: "blur"
+          }
         ]
       };
     }
   },
+  created(){
+    const checkedCaptcha = (rule, value, callback) => {
+      if (!value || this.verifiedCode == this.inputCodeContent) {
+        callback();
+      } else {
+        callback("The verification code you entered is incorrect!");
+      }
+    };
+  },
   mounted() {
     this.lang = this.$i18n.locale;
-    this.$nextTick(function() {
-    });
+    this.$nextTick(function() {});
   },
   methods: {
     submitForm(formName) {
@@ -216,10 +267,17 @@ export default {
     },
     login() {
       // 登录
+      let checkParams = this.$refs.verifiedCode.getLoginParam();
+      this.ruleForm.captcha = checkParams.checkCode;
+      this.ruleForm.checkKey = checkParams.checkKey;
+
       this.$axios.post("/sys/login", this.ruleForm).then(res => {
         if (res && res.success) {
           sessionStorage.setItem("token", res.result.token);
-          sessionStorage.setItem("userInfo", JSON.stringify(res.result.userInfo));
+          sessionStorage.setItem(
+            "userInfo",
+            JSON.stringify(res.result.userInfo)
+          );
           sessionStorage.setItem("resourceCodes", this.resourceCodes); // 后台还没提供目前写死的数据
           this.$router.push("/index");
         }
@@ -234,9 +292,11 @@ export default {
     },
     changeLang(val) {
       this.$i18n.locale = val;
-      sessionStorage.setItem('lang', val)
-
-    }
+      sessionStorage.setItem("lang", val);
+    },
+    generateCode(value) {
+      this.verifiedCode = value.toLowerCase();
+    },
   },
   watch: {}
 };
@@ -302,18 +362,18 @@ export default {
   }
 }
 
-.video_wrapper {
-  position: absolute;
-  left: 0;
-  top: 0;
-  height: 100%;
-  z-index: 0;
-  overflow: hidden;
-  > video {
-    object-fit: cover;
-    background-size: cover;
-  }
-}
+// .video_wrapper {
+//   position: absolute;
+//   left: 0;
+//   top: 0;
+//   height: 100%;
+//   z-index: 0;
+//   overflow: hidden;
+//   > video {
+//     object-fit: cover;
+//     background-size: cover;
+//   }
+// }
 .login-container::before {
   z-index: -999;
   content: "";
@@ -353,7 +413,7 @@ export default {
   justify-content: center;
   flex-direction: column;
   padding: 30px 40px 25px 40px;
-  background-color: rgba(256,256,256,0.1);
+  background-color: rgba(256, 256, 256, 0.1);
   //box-shadow: 1px 1px 2px #eee;
   border-radius: 6px;
 }
@@ -409,5 +469,11 @@ export default {
       }
     }
   }
+}
+.login-code {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  margin: 0 0 0 10px;
 }
 </style>
