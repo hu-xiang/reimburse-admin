@@ -13,7 +13,7 @@
         </template>
         <el-menu-item :index="i.path" v-for="i in item.children" v-if="$auths(i.path)" :key="i.path">{{i.name}}</el-menu-item>
       </el-submenu>
-      <el-menu-item :index="item.path" v-else-if="$auths(item.path)">
+      <el-menu-item :index="item.path" v-else-if="$auths(item.path)" style="margin-left:0px;color: #303133;font-size: 15px !important;">
         <i :class="item.icon" style="color: #f45d2f"></i>
         <span slot="title">{{item.name}}</span>
       </el-menu-item>
@@ -72,5 +72,7 @@
     /deep/ .el-menu-item{
         height: 40px;
         line-height: 40px;
+        margin-left: 20px;
+        color: #76879d;
     }
 </style>
