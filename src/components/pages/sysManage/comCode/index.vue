@@ -102,11 +102,11 @@ export default {
     },
     handleSizeChange(val) {
       this.curSearchContent.pageSize = val;
-      this.getComCodeList(1);
+      this.getComCodeList();
     },
     handleCurrentChange(val) {
       this.curSearchContent.pageNo = val;
-      this.getComCodeList(1);
+      this.getComCodeList();
     }
   }
 };

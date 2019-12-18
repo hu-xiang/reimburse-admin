@@ -6,7 +6,7 @@ Vue.use(ElementUI);
 import qs from 'qs';
 import { log } from 'util';
 
-const axiosBaseUrl = "http://192.168.48.89:8080/jeecg-boot";
+const axiosBaseUrl = "http://192.168.49.82:8080/jeecg-boot";
 axios.defaults.baseURL = axiosBaseUrl;
 axios.defaults.headers.post['Content-Type'] = 'application/json';
 axios.defaults.timeout = 30 * 1000;

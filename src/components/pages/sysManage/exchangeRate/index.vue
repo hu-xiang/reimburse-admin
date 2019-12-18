@@ -126,12 +126,12 @@ export default {
     },
     handleSizeChange(val) {
       this.curSearchContent.pageSize = val;
-      this.getExchangeRateList(1);
+      this.getExchangeRateList();
     },
 
     handleCurrentChange(val) {
       this.curSearchContent.pageNo = val;
-      this.getExchangeRateList(1);
+      this.getExchangeRateList();
     }
   }
 };

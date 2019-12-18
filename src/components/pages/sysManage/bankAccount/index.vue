@@ -138,11 +138,11 @@ export default {
     },
     handleSizeChange(val) {
       this.curSearchContent.pageSize = val;
-      this.getBankAccountList(1);
+      this.getBankAccountList();
     },
     handleCurrentChange(val) {
       this.curSearchContent.pageNo = val;
-      this.getBankAccountList(1);
+      this.getBankAccountList();
     }
   }
 };

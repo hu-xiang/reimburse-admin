@@ -110,12 +110,12 @@ export default {
     },
     handleSizeChange(val) {
       this.curSearchContent.pageSize = val;
-      this.getAccountSubjectList(1);
+      this.getAccountSubjectList();
     },
 
     handleCurrentChange(val) {
       this.curSearchContent.pageNo = val;
-      this.getAccountSubjectList(1);
+      this.getAccountSubjectList();
     }
   }
 };

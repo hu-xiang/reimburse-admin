@@ -169,11 +169,11 @@ export default {
     },
     handleSizeChange(val) {
       this.curSearchContent.pageSize = val;
-      this.getGlobalDataList(1);
+      this.getGlobalDataList();
     },
     handleCurrentChange(val) {
       this.curSearchContent.pageNo = val;
-      this.getGlobalDataList(1);
+      this.getGlobalDataList();
     }
   }
 };

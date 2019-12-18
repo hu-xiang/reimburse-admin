@@ -289,11 +289,11 @@ export default {
     },
     handleSizeChange(val) {
       this.curSearchContent.pageSize = val;
-      this.getList(1);
+      this.getList();
     },
     handleCurrentChange(val) {
       this.curSearchContent.pageNo = val;
-      this.getList(1);
+      this.getList();
     }
   }
 };

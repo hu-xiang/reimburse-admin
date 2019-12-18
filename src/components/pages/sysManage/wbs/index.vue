@@ -106,11 +106,11 @@ export default {
     },
     handleSizeChange(val) {
       this.curSearchContent.pageSize = val;
-      this.getWbsList(1);
+      this.getWbsList();
     },
     handleCurrentChange(val) {
       this.curSearchContent.pageNo = val;
-      this.getWbsList(1);
+      this.getWbsList();
     }
   }
 };

@@ -102,11 +102,11 @@ export default {
     },
     handleSizeChange(val) {
       this.curSearchContent.pageSize = val;
-      this.getCurCurrencyList(1);
+      this.getCurCurrencyList();
     },
     handleCurrentChange(val) {
       this.curSearchContent.pageNo = val;
-      this.getCurCurrencyList(1);
+      this.getCurCurrencyList();
     }
   }
 };

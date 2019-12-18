@@ -156,11 +156,11 @@ export default {
     },
     handleSizeChange(val) {
       this.curSearchContent.pageSize = val;
-      this.getZoneList(1);
+      this.getZoneList();
     },
     handleCurrentChange(val) {
       this.curSearchContent.pageNo = val;
-      this.getZoneList(1);
+      this.getZoneList();
     }
   }
 };
