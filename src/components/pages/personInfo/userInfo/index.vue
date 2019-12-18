@@ -53,6 +53,7 @@
             >{{$t('message.deleteBtn')}}</el-button>
           </template>
         </el-table-column>
+        <el-table-column type="index" width="40" align="center"></el-table-column>
         <el-table-column prop="memName" label="姓名" show-overflow-tooltip></el-table-column>
         <el-table-column prop="memJobno" label="工号" show-overflow-tooltip></el-table-column>
         <el-table-column prop="memSex" label="性别" show-overflow-tooltip>

@@ -174,6 +174,7 @@
       </top-bar>
       <table-bar>
         <el-table ref="codeTable" slot="table" border stripe :data="curCurrencyTableList" style="width: 100%" @selection-change="handleSelectionChange">
+          <el-table-column type="index" width="40" align="center"></el-table-column>
           <el-table-column type="selection" width="40" align="center"></el-table-column>
 
           <el-table-column prop="waers" label="货币码" show-overflow-tooltip></el-table-column>

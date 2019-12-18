@@ -18,7 +18,7 @@
       <section>
         <label>汇率有效日期</label>
         <el-date-picker
-        class="dateInput"
+          class="dateInput"
           v-model="searchContent.gdatu"
           type="date"
           value-format="yyyy-MM-dd HH:mm:ss"
@@ -44,6 +44,7 @@
         :data="exchangeRateTableList"
         style="width: 100%"
       >
+        <el-table-column type="index" width="40" align="center"></el-table-column>
         <el-table-column prop="curId" label="源货币" show-overflow-tooltip></el-table-column>
         <el-table-column prop="targetCurId" label="目标货币" show-overflow-tooltip></el-table-column>
         <el-table-column prop="gdatu" label="汇率有效日期" show-overflow-tooltip></el-table-column>
@@ -78,7 +79,7 @@ export default {
         curId: "",
         targetCurId: "",
         ukurs: "",
-        gdatu: "",
+        gdatu: ""
       },
       curSearchContent: {
         pageNo: 1, // 当前页
@@ -102,7 +103,7 @@ export default {
         curId: "",
         targetCurId: "",
         ukurs: "",
-        gdatu: "",
+        gdatu: ""
       };
       this.getExchangeRateList(1);
     },
@@ -139,7 +140,7 @@ export default {
 
 <style lang="scss" scoped>
 .exchangeRate {
-  /deep/ .dateInput .el-input__inner{
+  /deep/ .dateInput .el-input__inner {
     padding-left: 30px;
   }
 }

@@ -194,7 +194,10 @@ export default {
 
         "/exchangeRate",
         "/exchangeRateAdd",
-        "/exchangeRateEdit"
+        "/exchangeRateEdit",
+
+        "/dataDic",
+        "/dicConfig"
       ],
       ruleForm: {
         username: "",

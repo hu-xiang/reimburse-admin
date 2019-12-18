@@ -30,6 +30,7 @@
         :data="wbsTableList"
         style="width: 100%"
       >
+        <el-table-column type="index" width="40" align="center"></el-table-column>
         <el-table-column prop="pspnr" label="WBS_ID" show-overflow-tooltip></el-table-column>
         <el-table-column prop="posid" label="WBS" show-overflow-tooltip></el-table-column>
         <el-table-column prop="post1" label="WBS描述" show-overflow-tooltip></el-table-column>
@@ -60,7 +61,7 @@ export default {
       wbsTableList: [{}],
       searchContent: {
         posid: "",
-        post1: "",
+        post1: ""
       },
       curSearchContent: {
         pageNo: 1, // 当前页
@@ -82,7 +83,7 @@ export default {
     handleReset() {
       this.searchContent = {
         posid: "",
-        post1: "",
+        post1: ""
       };
       this.getWbsList(1);
     },

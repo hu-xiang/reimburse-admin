@@ -84,6 +84,10 @@ import exchangeRate from '@/components/pages/sysManage/exchangeRate/index.vue';
 import exchangeRateAdd from '@/components/pages/sysManage/exchangeRate/add.vue';
 import exchangeRateEdit from '@/components/pages/sysManage/exchangeRate/edit.vue';
 
+// 数据字典
+import dataDic from '@/components/pages/sysManage/dataDic/index.vue';
+import dicConfig from '@/components/pages/sysManage/dataDic/dicConfig.vue';
+
 Vue.use(Router)
 
 export default new Router({
@@ -403,7 +407,16 @@ export default new Router({
           name: '编辑币别信息',
           component: curCurrencyEdit,
         },
-
+        {
+          path: '/dataDic',
+          name: '数据字典',
+          component: dataDic,
+        },
+        {
+          path: '/dicConfig',
+          name: '字典配置',
+          component: dicConfig,
+        },
 
         // 错误页面路由
         {

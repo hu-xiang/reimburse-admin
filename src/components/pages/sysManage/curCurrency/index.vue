@@ -30,6 +30,7 @@
         :data="curCurrencyTableList"
         style="width: 100%"
       >
+        <el-table-column type="index" width="40" align="center"></el-table-column>
         <el-table-column prop="waers" label="货币码" show-overflow-tooltip></el-table-column>
         <el-table-column prop="ktext" label="货币名称" show-overflow-tooltip></el-table-column>
       </el-table>
@@ -56,7 +57,7 @@ export default {
       curCurrencyTableList: [{}],
       searchContent: {
         waers: "",
-        ktext: "",
+        ktext: ""
       },
       curSearchContent: {
         pageNo: 1, // 当前页
@@ -78,7 +79,7 @@ export default {
     handleReset() {
       this.searchContent = {
         waers: "",
-        ktext: "",
+        ktext: ""
       };
       this.getCurCurrencyList(1);
     },

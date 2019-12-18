@@ -26,6 +26,7 @@
         :data="comCodeTableList"
         style="width: 100%"
       >
+        <el-table-column type="index" width="40" align="center"></el-table-column>
         <el-table-column prop="butxt" label="公司名称" show-overflow-tooltip></el-table-column>
         <el-table-column prop="ktopl" label="账目表" show-overflow-tooltip></el-table-column>
         <el-table-column prop="curId" label="货币" show-overflow-tooltip></el-table-column>
@@ -56,7 +57,7 @@ export default {
       loading: false,
       comCodeTableList: [{}],
       searchContent: {
-        bukrs: "",
+        bukrs: ""
       },
       curSearchContent: {
         pageNo: 1, // 当前页
@@ -78,7 +79,7 @@ export default {
     },
     handleReset() {
       this.searchContent = {
-        bukrs: "",
+        bukrs: ""
       };
       this.getComCodeList(1);
     },

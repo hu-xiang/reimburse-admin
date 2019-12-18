@@ -34,6 +34,7 @@
             </el-button>
           </template>
         </el-table-column>
+        <el-table-column type="index" width="40" align="center"></el-table-column>
         <el-table-column prop="sysName" label="系统名称" show-overflow-tooltip></el-table-column>
         <el-table-column prop="logo" label="logo" show-overflow-tooltip></el-table-column>
         <el-table-column prop="isShow" label="申请单显示预算费用" show-overflow-tooltip min-width="120px">

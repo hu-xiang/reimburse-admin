@@ -39,6 +39,7 @@
         :data="bankAccountTableList"
         style="width: 100%"
       >
+        <el-table-column type="index" width="40" align="center"></el-table-column>
         <el-table-column prop="comId" label="公司代码" show-overflow-tooltip></el-table-column>
         <el-table-column prop="banks" label="银行国家代码" show-overflow-tooltip min-width="90px"></el-table-column>
         <el-table-column prop="bankl" label="银行编号" show-overflow-tooltip></el-table-column>
@@ -53,7 +54,12 @@
           </template>
         </el-table-column>
         <el-table-column prop="txt50" label="账户名称" show-overflow-tooltip></el-table-column>
-        <el-table-column prop="swift" label="国际付款的 SWIFT/BIC" show-overflow-tooltip min-width="140px"></el-table-column>
+        <el-table-column
+          prop="swift"
+          label="国际付款的 SWIFT/BIC"
+          show-overflow-tooltip
+          min-width="140px"
+        ></el-table-column>
         <el-table-column prop="zzhxz" label="账户性质" show-overflow-tooltip></el-table-column>
         <el-table-column prop="zzhyt" label="账户用途" show-overflow-tooltip></el-table-column>
         <el-table-column prop="zkhjl" label="客户经理" show-overflow-tooltip></el-table-column>

@@ -64,6 +64,7 @@
             <el-button type="text" size="mini" @click="eventDel(row)">{{$t('message.deleteBtn')}}</el-button>
           </template>
         </el-table-column>
+        <el-table-column type="index" width="40" align="center" fixed="left"></el-table-column>
         <el-table-column type="selection" width="40" align="center" fixed="left" :selectable="checkSelectable"></el-table-column>
         <el-table-column prop="auditStatus" label="审批状态" show-overflow-tooltip>
           <template slot-scope="{row}">
@@ -76,7 +77,7 @@
         <el-table-column prop="deptName" label="部门名称" show-overflow-tooltip></el-table-column>
         <el-table-column prop="mainType" label="预算大类" show-overflow-tooltip>
           <template slot-scope="{row}">
-            <span v-if="row.mainType===1">费用类</span>
+            <span v-if="row.mainType==='1'">费用类</span>
           </template>
         </el-table-column>
         <el-table-column prop="budName" label="预算类型" show-overflow-tooltip></el-table-column>

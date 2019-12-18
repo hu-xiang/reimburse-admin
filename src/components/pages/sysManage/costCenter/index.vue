@@ -30,6 +30,7 @@
         :data="costCenterTableList"
         style="width: 100%"
       >
+        <el-table-column type="index" width="40" align="center"></el-table-column>
         <el-table-column prop="kokrs" label="控制范围" show-overflow-tooltip></el-table-column>
         <el-table-column prop="kostl" label="成本中心" show-overflow-tooltip></el-table-column>
         <el-table-column prop="datab" label="开始日期" show-overflow-tooltip></el-table-column>

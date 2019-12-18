@@ -1,44 +1,21 @@
 <template>
-  <div class="budgetEntry">
+  <div class="dataDic">
     <top-bar>
       <section>
-        <label>预算年度</label>
-        <el-date-picker
-          value-format="yyyy"
-          v-model="searchContent.budYear"
-          type="year"
-          placeholder="选择年"
-          class="dateInput"
-        ></el-date-picker>
+        <label>字典编码</label>
+        <el-input v-model="searchContent.code"></el-input>
       </section>
       <section>
-        <label>是否关闭</label>
+        <label>字典状态</label>
         <el-select v-model="searchContent.status" clearable>
-          <el-option label="开启" :value="1"></el-option>
-          <el-option label="关闭" :value="0"></el-option>
+          <el-option label="启用" value="1"></el-option>
+          <el-option label="未启用" value="0"></el-option>
         </el-select>
       </section>
       <section>
-        <label>开始日期</label>
-        <el-date-picker
-          value-format="yyyy-MM-dd HH:mm:ss"
-          v-model="searchContent.startDate"
-          type="date"
-          placeholder="选择日期"
-          class="dateInput"
-        ></el-date-picker>
+        <label>字典描述</label>
+        <el-input v-model="searchContent.remark"></el-input>
       </section>
-      <section>
-        <label>结束日期</label>
-        <el-date-picker
-          value-format="yyyy-MM-dd HH:mm:ss"
-          v-model="searchContent.endDate"
-          type="date"
-          placeholder="选择日期"
-          class="dateInput"
-        ></el-date-picker>
-      </section>
-
       <section>
         <el-button type="primary" @click="eventSearch" size="mini">{{$t('message.searchBtn')}}</el-button>
         <el-button @click="eventReset" size="mini">{{$t('message.resetBtn')}}</el-button>
@@ -56,26 +33,30 @@
         :data="tableList"
         style="width: 100%"
       >
-        <el-table-column align="center" fixed="left" :label="$t('message.operate')" width="120">
+        <el-table-column align="center" fixed="left" :label="$t('message.operate')" width="150">
           <template slot-scope="{row}">
             <el-button type="text" @click="eventEdit(row)" size="mini">{{$t('message.editBtn')}}</el-button>
+            <el-button
+              type="text"
+              @click="$router.push({path:'/dicConfig',query:{row:row}})"
+              size="mini"
+            >字典配置</el-button>
             <el-button type="text" size="mini" @click="eventDel(row)">{{$t('message.deleteBtn')}}</el-button>
           </template>
         </el-table-column>
-        <!-- <el-table-column prop="id" label="预算单位id" show-overflow-tooltip></el-table-column> -->
         <el-table-column type="index" width="40" align="center"></el-table-column>
-        <el-table-column prop="budYear" label="预算年度" show-overflow-tooltip></el-table-column>
-        <el-table-column prop="startDate" label="预算开始日期" show-overflow-tooltip></el-table-column>
-        <el-table-column prop="endDate" label="预算结束日期" show-overflow-tooltip></el-table-column>
-        <el-table-column prop="status" label="是否关闭" show-overflow-tooltip>
+        <el-table-column prop="code" label="字典编码" show-overflow-tooltip></el-table-column>
+        <el-table-column prop="status" label="字典状态" show-overflow-tooltip>
           <template slot-scope="{row}">
-            <span v-if="row.status==='1'">开启</span>
-            <span v-if="row.status==='0'">关闭</span>
+            <span v-if="row.status==='0'">未启用</span>
+            <span v-if="row.status==='1'">启用</span>
           </template>
         </el-table-column>
+        <el-table-column prop="remark" label="字典描述" show-overflow-tooltip></el-table-column>
         <el-table-column prop="createId" label="创建人" show-overflow-tooltip></el-table-column>
         <el-table-column prop="createDate" label="创建日期" show-overflow-tooltip></el-table-column>
-        <el-table-column prop="updateDate" label="操作时间" show-overflow-tooltip></el-table-column>
+        <el-table-column prop="updateId" label="修改人" show-overflow-tooltip></el-table-column>
+        <el-table-column prop="updateDate" label="修改日期" show-overflow-tooltip></el-table-column>
       </el-table>
       <el-pagination
         slot="page"
@@ -88,41 +69,20 @@
         :total="total"
       ></el-pagination>
     </table-bar>
-    <el-dialog :title="isAdd?'新增':'编辑'" :visible.sync="dialogVisible" width="500px">
+    <el-dialog :title="isAdd?'新增数据字典':'编辑数据字典'" :visible.sync="dialogVisible" width="500px">
       <el-form :model="form" ref="form" :rules="rules" label-width="120px">
-        <el-form-item label="预算年度" prop="budYear">
-          <el-date-picker
-            value-format="yyyy"
-            format="yyyy"
-            v-model="form.budYear"
-            type="year"
-            placeholder="选择年"
-            style="width:300px;"
-          ></el-date-picker>
+        <el-form-item label="字典编码" prop="code">
+          <el-input v-model="form.code" placeholder="请输入字典编码" style="width: 300px"></el-input>
         </el-form-item>
-        <el-form-item label="预算开始日期" prop="startDate">
-          <el-date-picker
-            value-format="yyyy-MM-dd HH:mm:ss"
-            v-model="form.startDate"
-            type="date"
-            placeholder="选择日期"
-            style="width:300px;"
-          ></el-date-picker>
-        </el-form-item>
-        <el-form-item label="预算结束日期" prop="endDate">
-          <el-date-picker
-            value-format="yyyy-MM-dd HH:mm:ss"
-            v-model="form.endDate"
-            type="date"
-            placeholder="选择日期"
-            style="width:300px;"
-          ></el-date-picker>
-        </el-form-item>
-        <el-form-item label="是否关闭" prop="status">
-          <el-select v-model="form.status" clearable style="width:300px;">
-            <el-option label="开启" value="1"></el-option>
-            <el-option label="关闭" value="0"></el-option>
+
+        <el-form-item label="字典状态" prop="status">
+          <el-select v-model="form.status" clearable style="width:300px;" placeholder="请选择字典状态">
+            <el-option label="启用" value="1"></el-option>
+            <el-option label="不启用" value="0"></el-option>
           </el-select>
+        </el-form-item>
+        <el-form-item label="字典描述" prop="remark">
+          <el-input type="textarea" v-model="form.remark" placeholder="请输入字典描述" style="width: 300px"></el-input>
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
@@ -135,16 +95,15 @@
 
 <script>
 export default {
-  name: "budgetEntry",
+  name: "dataDic",
   data() {
     return {
       loading: false,
       tableList: [],
       searchContent: {
-        budYear: "",
+        code: "",
         status: "",
-        startDate: "",
-        endDate: ""
+        remark: ""
       },
       curSearchContent: {
         pageNo: 1, // （当前页）
@@ -154,24 +113,16 @@ export default {
       dialogVisible: false,
       isAdd: true,
       form: {
-        budYear: "",
-        startDate: "",
-        endDate: "",
-        status: ""
+        code: "",
+        status: "",
+        remark: ""
       },
       rules: {
-        budYear: [
-          { required: true, message: "请输入预算年度", trigger: "blur" }
-        ],
-        startDate: [
-          { required: true, message: "请选择预算开始日期", trigger: "blur" }
-        ],
-        endDate: [
-          { required: true, message: "请选择预算结束日期", trigger: "blur" }
-        ],
+        code: [{ required: true, message: "请输入字典编码", trigger: "blur" }],
         status: [
-          { required: true, message: "请选择是否关闭", trigger: "change" }
-        ]
+          { required: true, message: "请选择字典状态", trigger: "change" }
+        ],
+        remark: [{ required: true, message: "请输入字典描述", trigger: "blur" }]
       }
     };
   },
@@ -186,20 +137,18 @@ export default {
     },
     eventReset() {
       this.searchContent = {
-        budYear: "",
+        code: "",
         status: "",
-        startDate: "",
-        endDate: ""
+        remark: ""
       };
       this.getList(1);
     },
     eventAdd() {
       (this.isAdd = true),
         (this.form = {
-          budYear: "",
-          startDate: "",
-          endDate: "",
-          status: ""
+          code: "",
+          status: "",
+          remark: ""
         });
       this.dialogVisible = true;
     },
@@ -207,10 +156,9 @@ export default {
       (this.isAdd = false),
         (this.form = {
           id: row.id,
-          budYear: new Date(`${row.budYear}-01-01 00:00:00`),
-          startDate: row.startDate,
-          endDate: row.endDate,
-          status: row.status
+          code: row.code,
+          status: row.status,
+          remark: row.remark
         });
       this.dialogVisible = true;
     },
@@ -219,7 +167,7 @@ export default {
         if (valid) {
           if (this.isAdd) {
             this.$axios
-              .post("/concur/budget/budgetDate/add", this.form)
+              .post("/concur/gloConfig/dictionary/add", this.form)
               .then(res => {
                 if (res && res.success) {
                   this.$message.success(res.message);
@@ -228,15 +176,8 @@ export default {
                 }
               });
           } else {
-            const submitForm = {
-              id: this.form.id,
-              budYear: new Date(this.form.budYear).getFullYear(),
-              startDate: this.form.startDate,
-              endDate: this.form.endDate,
-              status: this.form.status
-            };
             this.$axios
-              .put("/concur/budget/budgetDate/edit", submitForm)
+              .put("/concur/gloConfig/dictionary/edit", this.form)
               .then(res => {
                 if (res && res.success) {
                   this.$message.success(res.message);
@@ -249,7 +190,7 @@ export default {
       });
     },
     eventDel(row) {
-      this.$confirm("确定要删除该预算时间吗?", "提示", {
+      this.$confirm("确定要删除该数据字典吗?", "提示", {
         confirmButtonText: "确定",
         cancelButtonText: "取消",
         type: "warning"
@@ -257,7 +198,7 @@ export default {
         .then(() => {
           this.$axios
             .delete(
-              `/concur/budget/budgetDate/delete?${this.$qs.stringify({
+              `/concur/gloConfig/dictionary/delete?${this.$qs.stringify({
                 id: row.id
               })}`
             )
@@ -275,7 +216,7 @@ export default {
       this.loading = true;
       this.$axios
         .get(
-          `concur/budget/budgetDate/list?${this.$qs.stringify(
+          `/concur/gloConfig/dictionary/list?${this.$qs.stringify(
             this.curSearchContent
           )}`
         )
@@ -301,12 +242,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.budgetEntry {
-  .el-tree {
-    margin-top: 20px;
-  }
-  /deep/ .dateInput .el-input__inner {
-    padding-left: 30px;
-  }
+.dataDic {
 }
 </style>

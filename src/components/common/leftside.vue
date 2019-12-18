@@ -69,4 +69,8 @@
             overflow: hidden;
         }
     }
+    /deep/ .el-menu-item{
+        height: 40px;
+        line-height: 40px;
+    }
 </style>

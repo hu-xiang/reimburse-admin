@@ -50,6 +50,7 @@
             >{{$t('message.deleteBtn')}}</el-button>
           </template>
         </el-table-column>
+        <el-table-column type="index" width="40" align="center"></el-table-column>
         <el-table-column prop="rnumber" label="地区编号" show-overflow-tooltip></el-table-column>
         <el-table-column prop="rname" label="地区名称" show-overflow-tooltip></el-table-column>
         <el-table-column prop="rtype" label="地区类型" show-overflow-tooltip></el-table-column>

@@ -30,6 +30,7 @@
         :data="accountSubjectTableList"
         style="width: 100%"
       >
+        <el-table-column type="index" width="40" align="center"></el-table-column>
         <el-table-column prop="ktopl" label="帐目表" show-overflow-tooltip></el-table-column>
         <el-table-column prop="saknr" label="科目编码" show-overflow-tooltip></el-table-column>
         <el-table-column prop="txt50" label="总帐科目名称" show-overflow-tooltip></el-table-column>
@@ -63,7 +64,7 @@ export default {
       accountSubjectTableList: [{}],
       searchContent: {
         saknr: "",
-        txt50: "",
+        txt50: ""
       },
       curSearchContent: {
         pageNo: 1, // 当前页
@@ -85,7 +86,7 @@ export default {
     handleReset() {
       this.searchContent = {
         saknr: "",
-        txt50: "",
+        txt50: ""
       };
       this.getAccountSubjectList(1);
     },

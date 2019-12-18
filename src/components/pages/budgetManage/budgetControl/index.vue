@@ -32,6 +32,7 @@
         :data="tableList"
         style="width: 100%"
       >
+        <el-table-column type="index" width="40" align="center"></el-table-column>
         <el-table-column prop="version" label="预算版本" show-overflow-tooltip></el-table-column>
         <el-table-column prop="deptname" label="部门名称" show-overflow-tooltip></el-table-column>
         <el-table-column prop="mainType" label="预算大类" show-overflow-tooltip>
@@ -112,7 +113,12 @@
     </el-dialog>
     <!-- 预算类型树形弹框 -->
     <el-dialog title="预算类型" :visible.sync="dialogVisible1" width="500px">
-      <el-input v-model="budName" clearable placeholder="请输入关键字进行过滤" style="width:300px;margin-right:10px;"></el-input>
+      <el-input
+        v-model="budName"
+        clearable
+        placeholder="请输入关键字进行过滤"
+        style="width:300px;margin-right:10px;"
+      ></el-input>
       <el-button type="primary" @click="eventSearchType" size="mini">{{$t('message.searchBtn')}}</el-button>
       <el-button @click="eventResetType" size="mini">{{$t('message.resetBtn')}}</el-button>
       <el-tree
@@ -145,7 +151,7 @@ export default {
       searchContent: {
         contype: "",
         deptId: "",
-        budtypeId: "",
+        budtypeId: ""
       },
       deptName: "",
       budTypeName: "",
@@ -172,7 +178,7 @@ export default {
         pageNo: 1, // （当前页）
         pageSize: 10 // 每页显示数量
       },
-      total1: 0, // 总条数
+      total1: 0 // 总条数
     };
   },
   mounted() {
@@ -217,14 +223,18 @@ export default {
     },
     eventFocus() {
       this.dialogVisible = true;
-      this.$axios.get(`/concur/hrinfo/department/treelist?${this.$qs.stringify(
+      this.$axios
+        .get(
+          `/concur/hrinfo/department/treelist?${this.$qs.stringify(
             this.curSearchContent1
-          )}`).then(res => {
-        if (res && res.success) {
-          this.list = res.result;
-          this.total1 = res.total;
-        }
-      });
+          )}`
+        )
+        .then(res => {
+          if (res && res.success) {
+            this.list = res.result;
+            this.total1 = res.total;
+          }
+        });
     },
     selectSure() {
       const list = this.$refs.depTree.getCheckedNodes();
@@ -259,7 +269,7 @@ export default {
       this.searchContent = {
         contype: "",
         deptId: "",
-        budtypeId: "",
+        budtypeId: ""
       };
       this.getList(1);
     },

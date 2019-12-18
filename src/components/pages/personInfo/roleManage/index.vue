@@ -46,6 +46,7 @@
             </el-button>
           </template>
         </el-table-column>
+        <el-table-column type="index" width="40" align="center"></el-table-column>
         <el-table-column prop="roleName"
           :label="$t('message.roleName')" show-overflow-tooltip>
         </el-table-column>

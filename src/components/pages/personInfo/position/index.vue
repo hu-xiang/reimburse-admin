@@ -28,6 +28,7 @@
             <el-button type="text" size="mini" @click="eventDel(row)">{{$t('message.deleteBtn')}}</el-button>
           </template>
         </el-table-column>
+        <el-table-column type="index" width="40" align="center"></el-table-column>
         <el-table-column prop="id" label="岗位id" show-overflow-tooltip></el-table-column>
         <el-table-column prop="postdesc" label="岗位描述" show-overflow-tooltip></el-table-column>
       </el-table>

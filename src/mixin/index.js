@@ -186,7 +186,11 @@ Vue.mixin({
             {
               "path": "/exchangeRate",
               "name": "汇率信息维护"
-            }
+            },
+            {
+              "path": "/dataDic",
+              "name": "数据字典"
+            },
           ]
         }
       ]
