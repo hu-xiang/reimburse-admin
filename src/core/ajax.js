@@ -11,10 +11,10 @@ axios.defaults.baseURL = axiosBaseUrl;
 axios.defaults.headers.post['Content-Type'] = 'application/json';
 axios.defaults.timeout = 30 * 1000;
 
-let loadingInstance = null;
+//let loadingInstance = null;
 
 axios.interceptors.request.use((config) => {
-	loadingInstance = ElementUI.Loading.service({});
+	//loadingInstance = ElementUI.Loading.service({});
 	if (sessionStorage.getItem('token')) {
 		config.headers.common['X-Access-Token'] = sessionStorage.getItem('token');
 	}
@@ -24,7 +24,7 @@ axios.interceptors.request.use((config) => {
 });
 axios.interceptors.response.use(response => {
 	setTimeout(() => {
-		loadingInstance.close();
+		//loadingInstance.close();
 		if (response.data && !response.data.success) {
 			ElementUI.Message.error({
 				message: response.data.message || '请求数据异常，请稍后再试！！',
@@ -50,7 +50,7 @@ axios.interceptors.response.use(response => {
 			showClose: true
 		});
 	}
-	loadingInstance.close();
+	//loadingInstance.close();
 });
 
 Vue.prototype.$axios = axios;

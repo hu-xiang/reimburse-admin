@@ -75,6 +75,9 @@
         <el-table-column prop="applyId" label="预算申请单号" show-overflow-tooltip min-width="100px"></el-table-column>
         <el-table-column prop="deptName" label="部门名称" show-overflow-tooltip></el-table-column>
         <el-table-column prop="mainType" label="预算大类" show-overflow-tooltip>
+          <template slot-scope="{row}">
+            <span v-if="row.mainType===1">费用类</span>
+          </template>
         </el-table-column>
         <el-table-column prop="budName" label="预算类型" show-overflow-tooltip></el-table-column>
         <el-table-column prop="contype" label="管控方式" show-overflow-tooltip>
@@ -86,7 +89,7 @@
         </el-table-column>
         <el-table-column prop="startDate" label="预算开始时间" show-overflow-tooltip min-width="100px"></el-table-column>
         <el-table-column prop="endDate" label="预算结束时间" show-overflow-tooltip min-width="100px"></el-table-column>
-        <el-table-column prop="curId" label="货币码" show-overflow-tooltip></el-table-column>
+        <el-table-column prop="waers" label="货币码" show-overflow-tooltip></el-table-column>
         <el-table-column prop="ktext" label="货币名称" show-overflow-tooltip></el-table-column>
         <el-table-column prop="exrate" label="汇率" show-overflow-tooltip></el-table-column>
         <el-table-column prop="amount" label="预算总金额" show-overflow-tooltip></el-table-column>
