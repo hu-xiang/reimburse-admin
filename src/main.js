@@ -8,6 +8,7 @@ import './mixin'
 import api from './assets/js/common.js' // 公共js
 import './assets/css/common.scss' // 公共css
 import './core';
+import 'babel-polyfill'
 import { log } from 'util';
 
 Vue.prototype.$api = api;

@@ -32,7 +32,7 @@
         <el-row>
           <el-col :span="8">
             <el-form-item label="货币码" prop="curId">
-              <el-input v-model="form.curId" @focus="eventFocus2"></el-input>
+              <el-input v-model="waers" @focus="eventFocus2"></el-input>
             </el-form-item>
           </el-col>
           <el-col :span="8">
@@ -351,6 +351,7 @@ export default {
     this.$nextTick(function() {
       this.deptName = this.$route.query.row.deptName;
       this.budTypeName = this.$route.query.row.budName;
+      this.waers = this.$route.query.row.waers;
       this.form = {
         applyId: this.$route.query.row.applyId,
         deptId: this.$route.query.row.deptId,
@@ -378,7 +379,8 @@ export default {
       
     },
     selectSure2() {
-      this.form.curId = this.selectedCode[0].waers;
+      this.form.curId = this.selectedCode[0].id;
+      this.waers = this.selectedCode[0].waers;
       this.dialogVisible2 = false;
     },
     eventSearchCode() {

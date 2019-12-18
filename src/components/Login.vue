@@ -228,8 +228,6 @@ export default {
           { 
             required: true,
             validator: (rule, value, callback) => {
-              console.log(this.verifiedCode)
-              console.log(value.toLowerCase())
               if (value && this.verifiedCode == value.toLowerCase()) {
                 callback();
               } else {

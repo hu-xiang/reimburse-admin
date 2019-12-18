@@ -32,7 +32,7 @@
         <el-row>
           <el-col :span="8">
             <el-form-item label="货币码" prop="curId">
-              <el-input v-model="form.curId" @focus="eventFocus2"></el-input>
+              <el-input v-model="waers" @focus="eventFocus2"></el-input>
             </el-form-item>
           </el-col>
           <el-col :span="8">
@@ -318,6 +318,7 @@ export default {
         pageSize: 10 // 每页显示数量
       },
       total1: 0, // 总条数
+      waers: '',
     };
   },
   mounted() {
@@ -332,7 +333,8 @@ export default {
       
     },
     selectSure2() {
-      this.form.curId = this.selectedCode[0].waers;
+      this.form.curId = this.selectedCode[0].id;
+      this.waers = this.selectedCode[0].waers;
       this.dialogVisible2 = false;
     },
     eventSearchCode() {
