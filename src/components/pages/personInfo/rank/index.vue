@@ -29,7 +29,7 @@
           </template>
         </el-table-column>
         <el-table-column type="index" width="40" align="center"></el-table-column>
-        <el-table-column prop="id" label="职级id" show-overflow-tooltip></el-table-column>
+        <!-- <el-table-column prop="id" label="职级id" show-overflow-tooltip></el-table-column> -->
         <el-table-column prop="rankname" label="职级名称" show-overflow-tooltip></el-table-column>
       </el-table>
       <el-pagination

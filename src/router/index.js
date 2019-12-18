@@ -18,10 +18,10 @@ import rightSetting from '@/components/pages/reimbursement/rightSetting/index.vu
 import budgetEntry from '@/components/pages/budgetManage/budgetEntry/index.vue';
 import budAppAdd from '@/components/pages/budgetManage/budgetEntry/add.vue';
 import budAppEdit from '@/components/pages/budgetManage/budgetEntry/edit.vue';
+import myBudgetApp from '@/components/pages/budgetManage/myBudgetApp/index.vue';
+import myBudgetAppAdd from '@/components/pages/budgetManage/myBudgetApp/add.vue';
+import myBudgetAppEdit from '@/components/pages/budgetManage/myBudgetApp/edit.vue';
 import classMaintenance from '@/components/pages/budgetManage/classMaintenance/index.vue';
-import liveSetting from '@/components/pages/budgetManage/liveSetting/index.vue';
-import subsidySetting from '@/components/pages/budgetManage/subsidySetting/index.vue';
-import transSetting from '@/components/pages/budgetManage/transSetting/index.vue';
 import budgetTime from '@/components/pages/budgetManage/budgetTime/index.vue';
 import budgetControl from '@/components/pages/budgetManage/budgetControl/index.vue';
 // 报表分析页面
@@ -140,7 +140,7 @@ export default new Router({
         // 预算管理页面路由
         {
           path: '/budgetEntry',
-          name: '预算申请',
+          name: '预算申请管理',
           component: budgetEntry,
         },
         {
@@ -154,19 +154,19 @@ export default new Router({
           component: budAppEdit,
         },
         {
-          path: '/transSetting',
-          name: '出差交通费',
-          component: transSetting,
+          path: '/myBudgetApp',
+          name: '我的预算申请',
+          component: myBudgetApp,
         },
         {
-          path: '/subsidySetting',
-          name: '出差补助',
-          component: subsidySetting,
+          path: '/myBudgetAppAdd',
+          name: '我的预算申请新增',
+          component: myBudgetAppAdd,
         },
         {
-          path: '/liveSetting',
-          name: '出差住宿费',
-          component: liveSetting,
+          path: '/myBudgetAppEdit',
+          name: '我的预算申请编辑',
+          component: myBudgetAppEdit,
         },
         {
           path: '/classMaintenance',

@@ -75,7 +75,7 @@
         </el-table-column>
         <el-table-column prop="createId" label="创建人" show-overflow-tooltip></el-table-column>
         <el-table-column prop="createDate" label="创建日期" show-overflow-tooltip></el-table-column>
-        <el-table-column prop="updateDate" label="操作时间" show-overflow-tooltip></el-table-column>
+        <!-- <el-table-column prop="updateDate" label="操作时间" show-overflow-tooltip></el-table-column> -->
       </el-table>
       <el-pagination
         slot="page"

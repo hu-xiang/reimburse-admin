@@ -31,7 +31,7 @@
         style="width: 100%"
       >
         <el-table-column type="index" width="40" align="center"></el-table-column>
-        <el-table-column prop="pspnr" label="WBS_ID" show-overflow-tooltip></el-table-column>
+        <!-- <el-table-column prop="pspnr" label="WBS_ID" show-overflow-tooltip></el-table-column> -->
         <el-table-column prop="posid" label="WBS" show-overflow-tooltip></el-table-column>
         <el-table-column prop="post1" label="WBS描述" show-overflow-tooltip></el-table-column>
         <el-table-column prop="objnr" label="对象号" show-overflow-tooltip></el-table-column>

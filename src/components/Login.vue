@@ -135,9 +135,11 @@ export default {
         "/budgetEntry",
         "/budAppAdd",
         "/budAppEdit",
-        "/transSetting",
-        "/subsidySetting",
-        "/liveSetting",
+        
+        "/myBudgetApp",
+        "/myBudgetAppAdd",
+        "/myBudgetAppEdit",
+
         "/classMaintenance",
         "/budgetTime",
         "/budgetControl",

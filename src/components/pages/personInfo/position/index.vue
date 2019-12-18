@@ -29,7 +29,7 @@
           </template>
         </el-table-column>
         <el-table-column type="index" width="40" align="center"></el-table-column>
-        <el-table-column prop="id" label="岗位id" show-overflow-tooltip></el-table-column>
+        <!-- <el-table-column prop="id" label="岗位id" show-overflow-tooltip></el-table-column> -->
         <el-table-column prop="postdesc" label="岗位描述" show-overflow-tooltip></el-table-column>
       </el-table>
       <el-pagination

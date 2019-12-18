@@ -23,16 +23,8 @@ Vue.mixin({
               name: this.$t('message.budgetApplication')
             },
             {
-              path: "/transSetting",
-              name: this.$t('message.travelExpenses')
-            },
-            {
-              path: "/subsidySetting",
-              name: this.$t('message.travelAllowance')
-            },
-            {
-              path: "/liveSetting",
-              name: this.$t('message.travelAccommodation')
+              path: "/myBudgetApp",
+              name: this.$t('message.myBudgetApplication')
             },
             {
               path: "/classMaintenance",
