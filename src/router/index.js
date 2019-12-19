@@ -91,6 +91,7 @@ import dicConfig from '@/components/pages/sysManage/dataDic/dicConfig.vue';
 Vue.use(Router)
 
 export default new Router({
+  mode: 'history',
   routes: [
     { // 错误页面
       path: "*",
