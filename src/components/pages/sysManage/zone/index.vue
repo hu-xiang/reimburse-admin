@@ -55,9 +55,9 @@
         <el-table-column prop="rname" label="地区名称" show-overflow-tooltip></el-table-column>
         <el-table-column prop="rtype" label="地区类型" show-overflow-tooltip></el-table-column>
         <el-table-column prop="parentId" label="上层编号" show-overflow-tooltip></el-table-column>
-        <el-table-column prop="createId" label="创建人" show-overflow-tooltip></el-table-column>
+        <el-table-column prop="createName" label="创建人" show-overflow-tooltip></el-table-column>
         <el-table-column prop="createDate" label="创建时间" show-overflow-tooltip></el-table-column>
-        <el-table-column prop="updateId" label="操作人" show-overflow-tooltip></el-table-column>
+        <el-table-column prop="updateName" label="操作人" show-overflow-tooltip></el-table-column>
         <el-table-column prop="updateDate" label="操作时间" show-overflow-tooltip></el-table-column>
         <el-table-column prop="isOut" label="是否海外" show-overflow-tooltip>
           <template slot-scope="{row}">

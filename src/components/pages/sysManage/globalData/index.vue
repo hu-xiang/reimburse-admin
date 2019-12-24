@@ -61,9 +61,9 @@
             </el-select>
           </template>
         </el-table-column>
-        <el-table-column prop="createId" label="创建人" show-overflow-tooltip></el-table-column>
+        <el-table-column prop="createName" label="创建人" show-overflow-tooltip></el-table-column>
         <el-table-column prop="createDate" label="创建时间" show-overflow-tooltip></el-table-column>
-        <el-table-column prop="updateId" label="操作人" show-overflow-tooltip></el-table-column>
+        <el-table-column prop="updateName" label="操作人" show-overflow-tooltip></el-table-column>
         <el-table-column prop="updateDate" label="操作时间" show-overflow-tooltip></el-table-column>
         <el-table-column prop="curId" label="集团币别" show-overflow-tooltip></el-table-column>
         <el-table-column prop="ktext" label="货币名称" show-overflow-tooltip></el-table-column>

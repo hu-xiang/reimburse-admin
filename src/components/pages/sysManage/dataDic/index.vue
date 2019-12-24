@@ -53,9 +53,9 @@
           </template>
         </el-table-column>
         <el-table-column prop="remark" label="字典描述" show-overflow-tooltip></el-table-column>
-        <el-table-column prop="createId" label="创建人" show-overflow-tooltip></el-table-column>
+        <el-table-column prop="createName" label="创建人" show-overflow-tooltip></el-table-column>
         <el-table-column prop="createDate" label="创建日期" show-overflow-tooltip></el-table-column>
-        <el-table-column prop="updateId" label="修改人" show-overflow-tooltip></el-table-column>
+        <el-table-column prop="updateName" label="修改人" show-overflow-tooltip></el-table-column>
         <el-table-column prop="updateDate" label="修改日期" show-overflow-tooltip></el-table-column>
       </el-table>
       <el-pagination

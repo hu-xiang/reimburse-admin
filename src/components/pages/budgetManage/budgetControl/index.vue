@@ -41,7 +41,7 @@
         <el-table-column prop="deptname" label="部门名称" show-overflow-tooltip></el-table-column>
         <el-table-column prop="mainType" label="预算大类" show-overflow-tooltip>
           <template slot-scope="{row}">
-            <span v-if="row.mainType===1">费用类</span>
+            <span v-if="row.mainType==='1' ">费用类</span>
           </template>
         </el-table-column>
         <el-table-column prop="budName" label="预算类型" show-overflow-tooltip></el-table-column>
@@ -312,7 +312,7 @@ export default {
       this.eventFocus();
     },
     eventExport(){
-      
+      window.location.href = `${this.$axios.defaults.baseURL}/concur/budget/budgetControl/exportXls`;
     }
   }
 };

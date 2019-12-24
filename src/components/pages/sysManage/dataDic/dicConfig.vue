@@ -89,7 +89,7 @@ export default {
         status: ""
       },
       curSearchContent: {
-        id: this.$route.query.row.id,
+        dicId: this.$route.query.row.id,
         pageNo: 1, // （当前页）
         pageSize: 20 // 每页显示数量
       },

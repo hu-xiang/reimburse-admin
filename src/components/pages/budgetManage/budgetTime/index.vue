@@ -47,6 +47,7 @@
     <table-bar>
       <div slot="top">
         <el-button type="primary" @click="eventAdd" size="mini">{{$t('message.addBtn')}}</el-button>
+        <el-button type="success" plain size="mini" @click="eventDel">批量删除</el-button>
       </div>
       <el-table
         slot="table"
@@ -55,6 +56,7 @@
         stripe
         :data="tableList"
         style="width: 100%"
+        @selection-change="handleSelectionChange"
       >
         <el-table-column align="center" fixed="left" :label="$t('message.operate')" width="120">
           <template slot-scope="{row}">
@@ -63,7 +65,8 @@
           </template>
         </el-table-column>
         <!-- <el-table-column prop="id" label="预算单位id" show-overflow-tooltip></el-table-column> -->
-        <el-table-column type="index" width="40" align="center"></el-table-column>
+        <el-table-column type="index" width="40" align="center" fixed="left"></el-table-column>
+        <el-table-column type="selection" width="40" align="center" fixed="left"></el-table-column>
         <el-table-column prop="budYear" label="预算年度" show-overflow-tooltip></el-table-column>
         <el-table-column prop="startDate" label="预算开始日期" show-overflow-tooltip></el-table-column>
         <el-table-column prop="endDate" label="预算结束日期" show-overflow-tooltip></el-table-column>
@@ -73,7 +76,7 @@
             <span v-if="row.status==='0'">关闭</span>
           </template>
         </el-table-column>
-        <el-table-column prop="createId" label="创建人" show-overflow-tooltip></el-table-column>
+        <el-table-column prop="createName" label="创建人" show-overflow-tooltip></el-table-column>
         <el-table-column prop="createDate" label="创建日期" show-overflow-tooltip></el-table-column>
         <!-- <el-table-column prop="updateDate" label="操作时间" show-overflow-tooltip></el-table-column> -->
       </el-table>
@@ -172,7 +175,8 @@ export default {
         status: [
           { required: true, message: "请选择是否关闭", trigger: "change" }
         ]
-      }
+      },
+      multipleSelection: [],
     };
   },
   mounted() {
@@ -248,7 +252,24 @@ export default {
         }
       });
     },
+    handleSelectionChange(val) {
+      this.multipleSelection = val;
+    },
     eventDel(row) {
+      let id = '';
+      if (row.id) {
+        id = row.id;
+      } else {
+        if (this.multipleSelection.length>0) {
+          this.multipleSelection.forEach((item) =>{
+            id += `${item.id},`
+          })
+        } else {
+          this.$message.warning('您还没有选择需要批量删除的对象')
+          return
+        }
+      }
+      console.log(id)
       this.$confirm("确定要删除该预算时间吗?", "提示", {
         confirmButtonText: "确定",
         cancelButtonText: "取消",
@@ -258,7 +279,7 @@ export default {
           this.$axios
             .delete(
               `/concur/budget/budgetDate/delete?${this.$qs.stringify({
-                id: row.id
+                id: id
               })}`
             )
             .then(res => {
