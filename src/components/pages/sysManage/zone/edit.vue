@@ -94,7 +94,7 @@ export default {
             this.loading = false;
             if (res && res.success) {
               this.$router.replace("/zone");
-              this.$message.success(res.message);
+              this.$messageAlert.success(res.message);
             }
           });
         }

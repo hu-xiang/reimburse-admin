@@ -121,7 +121,7 @@ export default {
           if (this.title === "新增职级") {
             this.$axios.post("/concur/hrinfo/rank/add", this.form).then(res => {
               if (res && res.success) {
-                this.$message.success(res.message);
+                this.$messageAlert.success(res.message);
                 this.dialogFormVisible = false;
                 this.getList(1);
               }
@@ -129,7 +129,7 @@ export default {
           } else {
             this.$axios.put("/concur/hrinfo/rank/edit", this.form).then(res => {
               if (res && res.success) {
-                this.$message.success(res.message);
+                this.$messageAlert.success(res.message);
                 this.dialogFormVisible = false;
                 this.getList(1);
               }
@@ -153,7 +153,7 @@ export default {
             )
             .then(res => {
               if (res && res.success) {
-                this.$message.success(res.message);
+                this.$messageAlert.success(res.message);
                 this.getList(1);
               }
             });

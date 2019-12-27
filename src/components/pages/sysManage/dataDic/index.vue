@@ -170,7 +170,7 @@ export default {
               .post("/concur/gloConfig/dictionary/add", this.form)
               .then(res => {
                 if (res && res.success) {
-                  this.$message.success(res.message);
+                  this.$messageAlert.success(res.message);
                   this.dialogVisible = false;
                   this.getList(1);
                 }
@@ -180,7 +180,7 @@ export default {
               .put("/concur/gloConfig/dictionary/edit", this.form)
               .then(res => {
                 if (res && res.success) {
-                  this.$message.success(res.message);
+                  this.$messageAlert.success(res.message);
                   this.dialogVisible = false;
                   this.getList(1);
                 }
@@ -204,7 +204,7 @@ export default {
             )
             .then(res => {
               if (res && res.success) {
-                this.$message.success(res.message);
+                this.$messageAlert.success(res.message);
                 this.getList(1);
               }
             });

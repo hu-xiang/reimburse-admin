@@ -193,13 +193,13 @@ export default {
   methods: {
     checkDept(value, data) {
       if (data.checkedNodes.length > 1) {
-        this.$message.warning("一次只能选择一个部门查询");
+        this.$messageAlert.warning("一次只能选择一个部门查询");
         this.$refs.depTree.setChecked(value, false);
       }
     },
     checkType(value, data) {
       if (data.checkedNodes.length > 1) {
-        this.$message.warning("一次只能选择一个预算类型查询");
+        this.$messageAlert.warning("一次只能选择一个预算类型查询");
         this.$refs.budTypeTree.setChecked(value, false);
       }
     },

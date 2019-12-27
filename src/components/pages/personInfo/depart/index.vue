@@ -148,7 +148,7 @@ export default {
           )
           .then(res => {
             if (res && res.success) {
-              this.$message.success(res.message);
+              this.$messageAlert.success(res.message);
               this.getList();
             }
           });
@@ -162,7 +162,7 @@ export default {
               .post("/concur/hrinfo/department/add", this.form)
               .then(res => {
                 if (res && res.success) {
-                  this.$message.success(res.message);
+                  this.$messageAlert.success(res.message);
                   this.isShow = false;
                   this.getList();
                 }
@@ -172,7 +172,7 @@ export default {
               .put("/concur/hrinfo/department/edit", this.form)
               .then(res => {
                 if (res && res.success) {
-                  this.$message.success(res.message);
+                  this.$messageAlert.success(res.message);
                   this.isShow = false;
                   this.getList();
                 }

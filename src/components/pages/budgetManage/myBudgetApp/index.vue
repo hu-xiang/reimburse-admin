@@ -264,13 +264,13 @@ export default {
   methods: {
     checkDept(value, data) {
       if (data.checkedNodes.length > 1) {
-        this.$message.warning("一次只能选择一个部门查询");
+        this.$messageAlert.warning("一次只能选择一个部门查询");
         this.$refs.depTree.setChecked(value, false);
       }
     },
     checkType(value, data) {
       if (data.checkedNodes.length > 1) {
-        this.$message.warning("一次只能选择一个预算类型查询");
+        this.$messageAlert.warning("一次只能选择一个预算类型查询");
         this.$refs.budTypeTree.setChecked(value, false);
       }
     },
@@ -365,7 +365,7 @@ export default {
             )
             .then(res => {
               if (res && res.success) {
-                this.$message.success(res.message);
+                this.$messageAlert.success(res.message);
                 this.getList(1);
               }
             });
@@ -414,7 +414,7 @@ export default {
     },
     eventApproval() {
       if (!this.multipleSelection.length > 0) {
-        this.$message.warning("请选择您需要审批的预算申请");
+        this.$messageAlert.warning("请选择您需要审批的预算申请");
         return;
       }
       this.dialogVisible3 = true;
@@ -434,7 +434,7 @@ export default {
             .put("/concur/budget/budgetApply/auditList", this.$qs.stringify(submitForm,{arrayFormat: 'repeat'}))
             .then(res => {
               if (res && res.success) {
-                this.$message.success(res.message);
+                this.$messageAlert.success(res.message);
                 this.dialogVisible3 = false;
                 this.getList(1);
               }

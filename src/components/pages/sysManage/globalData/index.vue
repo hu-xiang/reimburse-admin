@@ -133,7 +133,7 @@ export default {
       };
       this.$axios.put("/concur/gloConfig/gloConfig/edit", obj).then(res => {
         if (res && res.success) {
-          this.$message.success(res.message);
+          this.$messageAlert.success(res.message);
           this.$set(row, "disabled", !row.disabled);
         }
         this.getGlobalDataList(1);

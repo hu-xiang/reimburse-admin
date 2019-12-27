@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import './ajax.js'
 import './authority.js'
+import './loading.js'
 import depart from '../components/common/select/depart.vue';
 import rank from '../components/common/select/rank.vue';
 import position from '../components/common/select/position.vue';

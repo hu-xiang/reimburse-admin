@@ -141,7 +141,7 @@ export default {
             )
             .then(res => {
               if (res && res.success) {
-                this.$message.success(res.message);
+                this.$messageAlert.success(res.message);
                 this.getList(1);
               }
             });

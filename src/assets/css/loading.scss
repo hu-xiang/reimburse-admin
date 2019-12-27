@@ -1,0 +1,251 @@
+/*全局加载样式*/
+.init-loading {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: #fff;
+    z-index: 9998;
+    .init-loading-warp{
+
+        width: 100%;
+        height: 100%;
+        position: relative;
+    }
+}
+.init-loading-main {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    height: 200px;
+    width: 200px;
+    margin-top: -100px;
+    margin-left: -100px;
+    transform: rotate(-135deg);
+}
+.init-loading-com {
+    border-radius: 50% 50% 50% 50%;
+    position: absolute;
+    border-top: 2px solid #59c993;
+    border-left: 2px solid #59c993;
+    border-bottom: 2px solid transparent;
+    border-right: 2px solid transparent;
+    animation: bootstrap-animate 2s infinite;
+
+}
+#init-loading-three {
+    left: 55px;
+    top: 55px;
+    width: 90px;
+    height: 90px;
+    animation-delay: 0.4s;
+    border-top: 2px solid #2d8cf0;
+    border-left: 2px solid #2d8cf0;
+}
+
+#init-loading-two {
+    left: 65px;
+    top: 65px;
+    width: 70px;
+    height: 70px;
+    animation-delay: 0.2s;
+    border-top: 2px solid #0bb27a;
+    border-left: 2px solid #0bb27a;
+}
+
+#init-loading-one {
+    left: 75px;
+    top: 75px;
+    width: 50px;
+    height: 50px;
+    border-top: 2px solid #ff9900;
+    border-left: 2px solid #ff9900;
+}
+@keyframes bootstrap-animate {
+    50% {
+        transform: rotate(1turn) scale(.8);
+    }
+}
+
+/*loading*/
+
+#loading {
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    width: 100px;
+    height: 100px;
+    // background-color: rgba(255, 255, 255, 0.7);
+    z-index: 10000;
+    animation: fin .25s;
+    animation-fill-mode: both;
+    transform: translate(-50%, -50%);
+    &.fade-out {
+        animation: fout .25s;
+    }
+}
+
+#loading .ripple {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    position: absolute;
+    top: calc(50% - 30px);
+    left: calc(50% - 30px);
+    animation-name: ripple;
+    animation-duration: 1s;
+    animation-timing-function: ease-in-out;
+    animation-direction: alternate-reverse;
+    animation-iteration-count: infinite;
+    transform: scale(0);
+    opacity: 0.6;
+}
+
+#loading .ripple1 {
+    background-color: #00A2E8;
+}
+
+#loading .ripple2 {
+    animation-delay: -250ms;
+    background-color: #0093E8;
+}
+
+#loading .ripple3 {
+    animation-delay: -500ms;
+    background-color: #3F60CC;
+}
+
+#loading .ripple4 {
+    animation-delay: -750ms;
+    background-color: #3F5DCC;
+}
+
+
+@keyframes ripple {
+    to {
+        transform: scale(1);
+    }
+}
+
+@keyframes fin {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fout {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}
+
+/*loading*/
+
+.load-block {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 9999;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: fin .25s;
+    animation-fill-mode: both;
+    background-color: rgba(0, 0, 0, 0.6);
+    &.fade-out {
+        animation: fout .25s;
+    }
+    .successLoad {
+        display: flex;
+        align-items: center;
+        max-width: 300px;
+        font-size: 14px;
+        padding: 14px 18px;
+        border-radius: 10px;
+        background-color: #fff;
+        color: #59c993;
+    }
+    .warningLoad {
+        display: flex;
+        align-items: center;
+        max-width: 300px;
+        font-size: 14px;
+        padding: 14px 18px;
+        border-radius: 10px;
+        background-color: #fff;
+        color: #f1a80a;
+    }
+    .errorLoad {
+        display: flex;
+        align-items: center;
+        max-width: 300px;
+        font-size: 14px;
+        padding: 14px 18px;
+        border-radius: 10px;
+        background-color: #fff;
+        color: red;
+    }
+    .load {
+        display: flex;
+        align-items: center;
+        max-width: 300px;
+        font-size: 14px;
+        padding: 14px 18px;
+        border-radius: 10px;
+        // background-color: rgba(85, 85, 85, .9);
+        background-color: #fff;
+        i {
+            position: relative;
+            display: inline-block;
+            width: 36px;
+            height: 36px;
+            vertical-align: middle;
+            background: url('../img/loading.png') no-repeat center;
+            background-size: contain;
+            backface-visibility: hidden;
+            animation: gif 1.2s infinite linear;
+            flex: none;
+        }
+        span {
+            display: inline-block;
+            vertical-align: middle;
+            margin-left: 14px;
+            // color: #f2f2f2;
+        }
+        @keyframes gif {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(359deg);
+            }
+        }
+    }
+}
+
+@keyframes fin {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fout {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}

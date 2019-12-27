@@ -81,7 +81,7 @@
                 }
                 if (action === 'remove') {
                     if(path == '/workBench') {
-                        this.$message.error(this.$t('message.noClose'));
+                        this.$messageAlert.error(this.$t('message.noClose'));
                         return;
                     }
                     if (this.editableTabsValue === path) {

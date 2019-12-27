@@ -226,7 +226,7 @@ export default {
               .post("/concur/budget/budgetDate/add", this.form)
               .then(res => {
                 if (res && res.success) {
-                  this.$message.success(res.message);
+                  this.$messageAlert.success(res.message);
                   this.dialogVisible = false;
                   this.getList(1);
                 }
@@ -243,7 +243,7 @@ export default {
               .put("/concur/budget/budgetDate/edit", submitForm)
               .then(res => {
                 if (res && res.success) {
-                  this.$message.success(res.message);
+                  this.$messageAlert.success(res.message);
                   this.dialogVisible = false;
                   this.getList(1);
                 }
@@ -265,7 +265,7 @@ export default {
             id += `${item.id},`
           })
         } else {
-          this.$message.warning('您还没有选择需要批量删除的对象')
+          this.$messageAlert.warning('您还没有选择需要批量删除的对象')
           return
         }
       }
@@ -284,7 +284,7 @@ export default {
             )
             .then(res => {
               if (res && res.success) {
-                this.$message.success(res.message);
+                this.$messageAlert.success(res.message);
                 this.getList(1);
               }
             });

@@ -275,7 +275,7 @@ export default {
   methods: {
     checkDept(value, data) {
       if (data.checkedNodes.length > 1) {
-        this.$message.warning("只能选择一个部门");
+        this.$messageAlert.warning("只能选择一个部门");
         this.$refs.depTree.setChecked(value, false);
       }
     },
@@ -325,7 +325,7 @@ export default {
             this.loading = false;
             if (res && res.success) {
               this.$router.replace("/userInfo");
-              this.$message.success(res.message);
+              this.$messageAlert.success(res.message);
             }
           });
         }
