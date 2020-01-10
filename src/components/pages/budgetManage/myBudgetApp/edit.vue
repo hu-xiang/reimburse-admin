@@ -103,7 +103,7 @@
                 <el-option label="审批未通过" value="0"></el-option>
               </el-select>
             </el-form-item>
-          </el-col>
+          </el-col> 
           <el-col :span="8">
             <el-form-item label="是否下达" prop="status">
               <el-select v-model="form.status" clearable>
@@ -504,7 +504,7 @@ export default {
             .then(res => {
               this.loading = false;
               if (res && res.success) {
-                this.$router.replace("/budgetEntry");
+                this.$router.replace("/myBudgetApp");
                 this.$messageAlert.success(res.message);
               }
             });

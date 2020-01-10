@@ -9,8 +9,17 @@
       </section>
       <section>
         <label>地区类型</label>
-        <el-input v-model="searchContent.rtype"></el-input>
+        <el-select v-model="searchContent.rtype" clearable>
+          <el-option label="海外一类区域" value="1"></el-option>
+          <el-option label="海外二类区域" value="2"></el-option>
+          <el-option label="海外三类区域" value="3"></el-option>
+          <el-option label="一线城市" value="4"></el-option>
+          <el-option label="二线城市" value="5"></el-option>
+          <el-option label="省会城市" value="6"></el-option>
+          <el-option label="其他城市" value="7"></el-option>
+        </el-select>
       </section>
+      <section>
         <el-button type="primary" @click="handleSearch" size="mini">{{$t('message.searchBtn')}}</el-button>
         <el-button @click="handleReset" size="mini">{{$t('message.resetBtn')}}</el-button>
       </section>
@@ -53,7 +62,17 @@
         <el-table-column type="index" width="40" align="center"></el-table-column>
         <el-table-column prop="rnumber" label="地区编号" show-overflow-tooltip></el-table-column>
         <el-table-column prop="rname" label="地区名称" show-overflow-tooltip></el-table-column>
-        <el-table-column prop="rtype" label="地区类型" show-overflow-tooltip></el-table-column>
+        <el-table-column prop="rtype" label="地区类型" show-overflow-tooltip>
+          <template slot-scope="{row}">
+            <span v-if="row.rtype==='1'">海外一类区域</span>
+            <span v-if="row.rtype==='2'">海外二类区域</span>
+            <span v-if="row.rtype==='3'">海外三类区域</span>
+            <span v-if="row.rtype==='4'">一线城市</span>
+            <span v-if="row.rtype==='5'">二线城市</span>
+            <span v-if="row.rtype==='6'">省会城市</span>
+            <span v-if="row.rtype==='7'">其他城市</span>
+          </template>
+        </el-table-column>
         <el-table-column prop="parentId" label="上层编号" show-overflow-tooltip></el-table-column>
         <el-table-column prop="createName" label="创建人" show-overflow-tooltip></el-table-column>
         <el-table-column prop="createDate" label="创建时间" show-overflow-tooltip></el-table-column>
@@ -89,7 +108,7 @@ export default {
       zoneTableList: [{}],
       searchContent: {
         rname: "",
-        rtype: "",
+        rtype: ""
       },
       curSearchContent: {
         pageNo: 1, // 当前页
@@ -111,7 +130,7 @@ export default {
     handleReset() {
       this.searchContent = {
         rname: "",
-        rtype: "",
+        rtype: ""
       };
       this.getZoneList(1);
     },
@@ -124,9 +143,9 @@ export default {
         .then(() => {
           this.$axios
             .delete(
-              `/concur/gloConfig/region/delete?${this.$qs.stringify(
-                {id: row.id}
-              )}`
+              `/concur/gloConfig/region/delete?${this.$qs.stringify({
+                id: row.id
+              })}`
             )
             .then(res => {
               if (res && res.success) {
@@ -142,7 +161,7 @@ export default {
       this.loading = true;
       this.$axios
         .get(
-          `concur/gloConfig/region/list?${this.$qs.stringify(
+          `/concur/gloConfig/region/treelist?${this.$qs.stringify(
             this.curSearchContent
           )}`
         )

@@ -23,8 +23,8 @@
           <el-col :span="8">
             <el-form-item label="性别" prop="memSex">
               <el-select v-model="form.memSex" clearable>
-                <el-option label="男" :value="1"></el-option>
-                <el-option label="女" :value="0"></el-option>
+                <el-option label="男" value="0"></el-option>
+                <el-option label="女" value="1"></el-option>
               </el-select>
             </el-form-item>
           </el-col>

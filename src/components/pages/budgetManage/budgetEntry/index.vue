@@ -19,7 +19,8 @@
       </section>
       <section>
         <label>部门</label>
-        <el-input v-model="deptName" @focus="eventFocus"></el-input>
+        <el-select v-model="deptName" placeholder="请选择部门" @focus="eventFocus"></el-select>
+        <!-- <el-input v-model="deptName" @focus="eventFocus"></el-input> -->
         <!-- <depart v-model="searchContent.deptId"></depart> -->
       </section>
       <section>
@@ -37,12 +38,14 @@
     </top-bar>
     <table-bar>
       <div slot="top">
-        <el-button
+        <!-- <el-button
           type="primary"
           @click="$router.push('/budAppAdd')"
           size="mini"
-        >{{$t('message.addBtn')}}</el-button>
-        <el-button type="success" size="mini" @click="eventApproval">审批</el-button>
+        >{{$t('message.addBtn')}}</el-button> -->
+        <el-button type="primary" size="mini" @click="eventApproval">审批</el-button>
+        <!-- <el-button size="mini" @click="eventImport">导入</el-button> -->
+        <el-button type="success" size="mini" @click="eventExport">导出</el-button>
       </div>
       <el-table
         ref="table"
@@ -54,7 +57,7 @@
         style="width: 100%"
         @selection-change="handleSelectionChange"
       >
-        <el-table-column align="center" fixed="left" :label="$t('message.operate')" width="120">
+        <!-- <el-table-column align="center" fixed="left" :label="$t('message.operate')" width="120">
           <template slot-scope="{row}">
             <el-button
               type="text"
@@ -63,7 +66,7 @@
             >{{$t('message.editBtn')}}</el-button>
             <el-button type="text" size="mini" @click="eventDel(row)">{{$t('message.deleteBtn')}}</el-button>
           </template>
-        </el-table-column>
+        </el-table-column> -->
         <el-table-column type="index" width="40" align="center" fixed="left"></el-table-column>
         <el-table-column type="selection" width="40" align="center" fixed="left" :selectable="checkSelectable"></el-table-column>
         <el-table-column prop="auditStatus" label="审批状态" show-overflow-tooltip>
@@ -75,10 +78,7 @@
         </el-table-column>
         <el-table-column prop="applyId" label="预算申请单号" show-overflow-tooltip min-width="100px"></el-table-column>
         <el-table-column prop="deptName" label="部门名称" show-overflow-tooltip></el-table-column>
-        <el-table-column prop="mainType" label="预算大类" show-overflow-tooltip>
-          <template slot-scope="{row}">
-            <span v-if="row.mainType==='1'">费用类</span>
-          </template>
+        <el-table-column prop="mainName" label="预算大类" show-overflow-tooltip>
         </el-table-column>
         <el-table-column prop="budName" label="预算类型" show-overflow-tooltip></el-table-column>
         <el-table-column prop="contype" label="管控方式" show-overflow-tooltip>
@@ -107,7 +107,7 @@
             <span v-if="row.status==='0'">否</span>
           </template>
         </el-table-column>
-        <el-table-column prop="budVersion" label="预算版本" show-overflow-tooltip></el-table-column>
+        <!-- <el-table-column prop="budVersion" label="预算版本" show-overflow-tooltip></el-table-column> -->
         <el-table-column prop="createName" label="创建人" show-overflow-tooltip></el-table-column>
         <el-table-column prop="createDate" label="创建日期" show-overflow-tooltip></el-table-column>
       </el-table>
@@ -441,7 +441,13 @@ export default {
             });
         }
       });
-    }
+    },
+    eventExport() {
+      window.location.href = `${this.$axios.defaults.baseURL}/concur/budget/budgetApply/exportXls`;
+    },
+    // eventImport() {
+
+    // }
   }
 };
 </script>

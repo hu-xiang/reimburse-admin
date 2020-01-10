@@ -10,6 +10,10 @@
         <el-input v-model="searchContent.memName"></el-input>
       </section>
       <section>
+        <label>部门</label>
+        <el-select v-model="deptName" placeholder="请选择部门" @focus="eventFocus"></el-select>
+      </section>
+      <section>
         <el-button type="primary" @click="eventSearch" size="mini">{{$t('message.searchBtn')}}</el-button>
         <el-button @click="eventReset" size="mini">{{$t('message.resetBtn')}}</el-button>
       </section>
@@ -58,8 +62,8 @@
         <el-table-column prop="memJobno" label="工号" show-overflow-tooltip></el-table-column>
         <el-table-column prop="memSex" label="性别" show-overflow-tooltip>
           <template slot-scope="{row}">
-            <span v-if="row.memSex===0">女</span>
-            <span v-if="row.memSex===1">男</span>
+            <span v-if="row.memSex===0">男</span>
+            <span v-if="row.memSex===1">女</span>
           </template>
         </el-table-column>
         <el-table-column prop="islead" label="是否有上级" show-overflow-tooltip>
@@ -89,6 +93,43 @@
         :total="total"
       ></el-pagination>
     </table-bar>
+    <!-- 部门树形弹框 -->
+    <el-dialog title="部门组织结构" :visible.sync="dialogVisible" width="500px">
+      <el-input
+        v-model="deptname"
+        clearable
+        placeholder="请输入关键字进行过滤"
+        style="width:300px;margin-right:10px;"
+      ></el-input>
+      <el-button type="primary" @click="eventSearchDep" size="mini">{{$t('message.searchBtn')}}</el-button>
+      <el-button @click="eventResetDep" size="mini">{{$t('message.resetBtn')}}</el-button>
+      <el-tree
+        class="filter-tree"
+        :data="list"
+        show-checkbox
+        :props="listProps"
+        :filter-node-method="filterNode"
+        :check-strictly="true"
+        ref="depTree"
+        node-key="id"
+        @check="checkDept"
+      ></el-tree>
+      <el-pagination
+        style="margin-top:10px;"
+        small
+        @size-change="handleSizeChange1"
+        @current-change="handleCurrentChange1"
+        :current-page="curSearchContent1.pageNo"
+        :page-sizes="[10, 20, 50]"
+        :page-size="curSearchContent1.pageSize"
+        layout="total, sizes, prev, pager, next"
+        :total="total1"
+      ></el-pagination>
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="dialogVisible = false" size="mini">取 消</el-button>
+        <el-button type="primary" @click="selectSure" size="mini">确 定</el-button>
+      </span>
+    </el-dialog>
   </div>
 </template>
 
@@ -101,13 +142,27 @@ export default {
       tableList: [],
       searchContent: {
         memJobno: "",
-        memName: ""
+        memName: "",
+        depId: "",
       },
       curSearchContent: {
         pageNo: 1, // （当前页）
         pageSize: 20 // 每页显示数量
       },
-      total: 0 // 总条数
+      total: 0, // 总条数
+      deptName: '',
+      dialogVisible: false,
+      deptname: '',
+      list: [],
+      listProps: {
+        children: "children",
+        label: "deptname"
+      },
+      curSearchContent1: {
+        pageNo: 1, // （当前页）
+        pageSize: 10 // 每页显示数量
+      },
+      total1: 0, // 总条数
     };
   },
   mounted() {
@@ -120,9 +175,11 @@ export default {
       this.getList(1);
     },
     eventReset() {
+      this.deptName = "";
       this.searchContent = {
         memJobno: "",
-        memName: ""
+        memName: "",
+        depId: "",
       };
       this.getList(1);
     },
@@ -173,12 +230,63 @@ export default {
     handleCurrentChange(val) {
       this.curSearchContent.pageNo = val;
       this.getList();
-    }
+    },
+    eventFocus() {
+      this.dialogVisible = true;
+      this.$axios
+        .get(
+          `/concur/hrinfo/department/treelist?${this.$qs.stringify(
+            this.curSearchContent1
+          )}`
+        )
+        .then(res => {
+          if (res && res.success) {
+            this.list = res.result;
+            this.total1 = res.total;
+          }
+        });
+    },
+    eventSearchDep() {
+      this.$refs.depTree.filter(this.deptname);
+    },
+    eventResetDep() {
+      this.deptname = "";
+      this.$refs.depTree.filter(this.deptname);
+    },
+    filterNode(value, data) {
+      if (!value) return true;
+      return data.deptname.indexOf(value) > -1;
+    },
+    checkDept(value, data) {
+      if (data.checkedNodes.length > 1) {
+        this.$messageAlert.warning("一次只能选择一个部门查询");
+        this.$refs.depTree.setChecked(value, false);
+      }
+    },
+    selectSure() {
+      const list = this.$refs.depTree.getCheckedNodes();
+      if (list.length > 0) {
+        this.searchContent.depId = list[0].id;
+        this.deptName = list[0].deptname;
+      }
+      this.dialogVisible = false;
+    },
+    handleSizeChange1(val) {
+      this.curSearchContent1.pageSize = val;
+      this.eventFocus();
+    },
+    handleCurrentChange1(val) {
+      this.curSearchContent1.pageNo = val;
+      this.eventFocus();
+    },
   }
 };
 </script>
 
 <style lang="scss" scoped>
 .userInfo {
+  .el-tree {
+    margin-top: 20px;
+  }
 }
 </style>

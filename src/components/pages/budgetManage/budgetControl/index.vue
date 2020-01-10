@@ -11,7 +11,8 @@
       </section>
       <section>
         <label>部门</label>
-        <el-input v-model="deptName" @focus="eventFocus"></el-input>
+        <el-select v-model="deptName" placeholder="请选择部门" @focus="eventFocus"></el-select>
+        <!-- <el-input v-model="deptName" @focus="eventFocus"></el-input> -->
         <!-- <depart v-model="searchContent.deptId"></depart> -->
       </section>
       <section>
@@ -37,7 +38,7 @@
         style="width: 100%"
       >
         <el-table-column type="index" width="40" align="center"></el-table-column>
-        <el-table-column prop="version" label="预算版本" show-overflow-tooltip></el-table-column>
+        <!-- <el-table-column prop="version" label="预算版本" show-overflow-tooltip></el-table-column> -->
         <el-table-column prop="deptname" label="部门名称" show-overflow-tooltip></el-table-column>
         <el-table-column prop="mainType" label="预算大类" show-overflow-tooltip>
           <template slot-scope="{row}">
@@ -61,11 +62,16 @@
         <el-table-column prop="ktext" label="货币名称" show-overflow-tooltip></el-table-column>
         <el-table-column prop="exrate" label="汇率" show-overflow-tooltip></el-table-column>
         <el-table-column prop="amount" label="预算总金额" show-overflow-tooltip></el-table-column>
-        <el-table-column prop="available" label="预算可用金额" show-overflow-tooltip min-width="100px"></el-table-column>
-        <el-table-column prop="reserve" label="预算预留金额" show-overflow-tooltip min-width="100px"></el-table-column>
         <el-table-column prop="lamount" label="预算本币总金额" show-overflow-tooltip min-width="100px"></el-table-column>
-        <el-table-column prop="lavailable" label="预算本币可用金额" show-overflow-tooltip min-width="110px"></el-table-column>
-        <el-table-column prop="lreserve" label="预算本币预留金额" show-overflow-tooltip min-width="110px"></el-table-column>
+        <el-table-column prop="eveAvailable" label="出差预算可用金额" show-overflow-tooltip min-width="110px"></el-table-column>
+        <el-table-column prop="eveReserve" label="出差预算预留金额" show-overflow-tooltip min-width="110px"></el-table-column>
+        <el-table-column prop="eveLavailable" label="出差预算本币可用金额" show-overflow-tooltip min-width="140px"></el-table-column>
+        <el-table-column prop="eveLreserve" label="出差预算本币预留金额" show-overflow-tooltip min-width="140px"></el-table-column>
+        <el-table-column prop="appAvailable" label="报销预算可用金额" show-overflow-tooltip min-width="110px"></el-table-column>
+        <el-table-column prop="appReserve" label="报销预算预留金额" show-overflow-tooltip min-width="110px"></el-table-column>
+        <el-table-column prop="appLavailable" label="报销预算本币可用金额" show-overflow-tooltip min-width="140px"></el-table-column>
+        <el-table-column prop="appLreserve" label="报销预算本币预留金额" show-overflow-tooltip min-width="140px"></el-table-column>
+        
       </el-table>
       <el-pagination
         slot="page"

@@ -4,12 +4,12 @@
 
     <top-bar>
       <section>
-        <label>源货币</label>
-        <el-input v-model="searchContent.curId"></el-input>
+        <label>源货币名称</label>
+        <el-input v-model="searchContent.fktext"></el-input>
       </section>
       <section>
-        <label>目标货币</label>
-        <el-input v-model="searchContent.targetCurId"></el-input>
+        <label>目标货币名称</label>
+        <el-input v-model="searchContent.tktext"></el-input>
       </section>
       <section>
         <label>汇率</label>
@@ -76,8 +76,8 @@ export default {
       loading: false,
       exchangeRateTableList: [{}],
       searchContent: {
-        curId: "",
-        targetCurId: "",
+        fktext: "",
+        tktext: "",
         ukurs: "",
         gdatu: ""
       },
@@ -100,8 +100,8 @@ export default {
     },
     handleReset() {
       this.searchContent = {
-        curId: "",
-        targetCurId: "",
+        fktext: "",
+        tktext: "",
         ukurs: "",
         gdatu: ""
       };

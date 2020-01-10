@@ -40,6 +40,7 @@
         <el-table-column prop="comId" label="公司代码" show-overflow-tooltip></el-table-column>
         <el-table-column prop="kosar" label="成本中心类型" show-overflow-tooltip min-width="100px"></el-table-column>
         <el-table-column prop="gsber" label="业务范围" show-overflow-tooltip></el-table-column>
+        <el-table-column prop="funcArea" label="功能范围" show-overflow-tooltip></el-table-column>
         <el-table-column prop="khinr" label="层次结构范围" show-overflow-tooltip min-width="100px"></el-table-column>
         <el-table-column prop="waers" label="货币码" show-overflow-tooltip></el-table-column>
         <el-table-column prop="prctr" label="利润中心" show-overflow-tooltip></el-table-column>

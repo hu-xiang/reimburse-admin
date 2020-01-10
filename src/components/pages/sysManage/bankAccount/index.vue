@@ -21,6 +21,10 @@
         <el-input v-model="searchContent.txt50"></el-input>
       </section>
       <section>
+        <label>公司名称</label>
+        <el-input v-model="searchContent.butxt"></el-input>
+      </section>
+      <section>
         <el-button type="primary" @click="handleSearch" size="mini">{{$t('message.searchBtn')}}</el-button>
         <el-button @click="handleReset" size="mini">{{$t('message.resetBtn')}}</el-button>
       </section>
@@ -97,7 +101,8 @@ export default {
       searchContent: {
         zdimuscod: "",
         zbtyp: "",
-        txt50: ""
+        txt50: "",
+        butxt: ""
       },
       curSearchContent: {
         pageNo: 1, // 当前页
@@ -120,7 +125,8 @@ export default {
       this.searchContent = {
         zdimuscod: "",
         zbtyp: "",
-        txt50: ""
+        txt50: "",
+        butxt: ""
       };
       this.getBankAccountList(1);
     },

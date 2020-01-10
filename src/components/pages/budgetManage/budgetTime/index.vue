@@ -21,7 +21,7 @@
       <section>
         <label>开始日期</label>
         <el-date-picker
-          value-format="yyyy-MM-dd HH:mm:ss"
+          value-format="yyyy-MM-dd"
           v-model="searchContent.startDate"
           type="date"
           placeholder="选择日期"
@@ -31,7 +31,7 @@
       <section>
         <label>结束日期</label>
         <el-date-picker
-          value-format="yyyy-MM-dd HH:mm:ss"
+          value-format="yyyy-MM-dd"
           v-model="searchContent.endDate"
           type="date"
           placeholder="选择日期"
@@ -269,8 +269,7 @@ export default {
           return
         }
       }
-      console.log(id)
-      this.$confirm("确定要删除该预算时间吗?", "提示", {
+      this.$confirm("确定要删除吗?", "提示", {
         confirmButtonText: "确定",
         cancelButtonText: "取消",
         type: "warning"
@@ -278,8 +277,8 @@ export default {
         .then(() => {
           this.$axios
             .delete(
-              `/concur/budget/budgetDate/delete?${this.$qs.stringify({
-                id: id
+              `/concur/budget/budgetDate/deleteBatch?${this.$qs.stringify({
+                ids: id
               })}`
             )
             .then(res => {

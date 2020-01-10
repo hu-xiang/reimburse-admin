@@ -22,6 +22,8 @@ import myBudgetApp from '@/components/pages/budgetManage/myBudgetApp/index.vue';
 import myBudgetAppAdd from '@/components/pages/budgetManage/myBudgetApp/add.vue';
 import myBudgetAppEdit from '@/components/pages/budgetManage/myBudgetApp/edit.vue';
 import classMaintenance from '@/components/pages/budgetManage/classMaintenance/index.vue';
+import classMaintenanceAdd from '@/components/pages/budgetManage/classMaintenance/add.vue';
+import classMaintenanceEdit from '@/components/pages/budgetManage/classMaintenance/edit.vue';
 import budgetTime from '@/components/pages/budgetManage/budgetTime/index.vue';
 import budgetControl from '@/components/pages/budgetManage/budgetControl/index.vue';
 // 报表分析页面
@@ -33,6 +35,7 @@ import userInfo from '@/components/pages/personInfo/userInfo/index.vue';
 import userAdd from '@/components/pages/personInfo/userInfo/add.vue';
 import userEdit from '@/components/pages/personInfo/userInfo/edit.vue';
 import depart from '@/components/pages/personInfo/depart/index.vue';
+import departEdit from '@/components/pages/personInfo/depart/edit.vue';
 import rank from '@/components/pages/personInfo/rank/index.vue';
 import position from '@/components/pages/personInfo/position/index.vue';
 import role from '@/components/pages/personInfo/roleManage/index.vue';
@@ -174,6 +177,16 @@ export default new Router({
           component: classMaintenance,
         },
         {
+          path: '/classMaintenanceAdd',
+          name: '预算类型新增',
+          component: classMaintenanceAdd,
+        },
+        {
+          path: '/classMaintenanceEdit',
+          name: '预算类型编辑',
+          component: classMaintenanceEdit,
+        },
+        {
           path: '/budgetTime',
           name: '预算时间',
           component: budgetTime,
@@ -219,6 +232,11 @@ export default new Router({
           path: '/depart',
           name: '部门组织结构',
           component: depart,
+        },
+        {
+          path: '/departEdit',
+          name: '编辑部门组织结构',
+          component: departEdit,
         },
         {
           path: '/rank',

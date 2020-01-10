@@ -141,6 +141,8 @@ export default {
         "/myBudgetAppEdit",
 
         "/classMaintenance",
+        "/classMaintenanceAdd",
+        "/classMaintenanceEdit",
         "/budgetTime",
         "/budgetControl",
         "/reportAnalysis",
@@ -153,6 +155,7 @@ export default {
         "/userEdit",
         "/userDelete",
         "/depart",
+        "/departEdit",
         "/rank",
         "/position",
         "/role",

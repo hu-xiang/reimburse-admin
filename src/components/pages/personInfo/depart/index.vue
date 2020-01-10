@@ -3,7 +3,11 @@
     <top-bar>
       <section>
         <label>部门名称</label>
-        <el-input v-model="searchContent.deptname" clearable placeholder="请输入关键字进行过滤"></el-input>
+        <el-input v-model="searchContent.deptname" clearable placeholder="请输入部门名称"></el-input>
+      </section>
+      <section>
+        <label>部门负责人</label>
+        <el-input v-model="searchContent.memName" clearable placeholder="请输入部门负责人"></el-input>
       </section>
       <section>
         <el-button type="primary" @click="eventSearch" size="mini">{{$t('message.searchBtn')}}</el-button>
@@ -13,53 +17,53 @@
     <el-card class="box-card">
       <div slot="header" class="clearfix">
         <span>部门组织架构</span>
-        <!-- <el-button style="float: right; padding: 3px 0" type="text" @click="add">新增一级部门</el-button> -->
       </div>
       <div class="text item">
-        <el-tree
+        <el-table
           class="filter-tree"
-          :default-expand-all="true"
           :data="list"
-          :props="listProps"
-          :filter-node-method="filterNode"
-          ref="menuTree"
-          node-key="id"
+          row-key="id"
+          border
+          stripe
+          :tree-props="{children: 'children'}"
         >
-          <el-tooltip slot-scope="{ node, data }" placement="right" trigger="hover" effect="light">
-            <span>
-              <span class="node-name" @click.stop="curRow(data, node)">{{ data.deptname}}</span>
-            </span>
-            <div class="api" slot="content">
-              <!-- <el-button type="primary" size="mini" @click="add(data, node)">新增</el-button> -->
-              <el-button type="success" size="mini" @click="edit(data, node)">编辑</el-button>
-              <!-- <el-button type="error" size="mini" @click="del(data)">删除</el-button> -->
-            </div>
-          </el-tooltip>
-        </el-tree>
+          <el-table-column prop="deptname" label="部门名称" min-width="200px" show-overflow-tooltip></el-table-column>
+          <el-table-column prop="deptLv" label="部门层级" show-overflow-tooltip></el-table-column>
+          <el-table-column prop="isend" label="是否末级部门" show-overflow-tooltip min-width="100px">
+            <template slot-scope="{row}">
+              <span v-if="row.isend==='1'">是</span>
+              <span v-if="row.isend==='0'">否</span>
+            </template>
+          </el-table-column>
+          <el-table-column prop="butxt" label="公司名称" show-overflow-tooltip></el-table-column>
+          <el-table-column prop="bukrs" label="公司代码" show-overflow-tooltip></el-table-column>
+          <el-table-column prop="kostl" label="成本中心" show-overflow-tooltip></el-table-column>
+          <el-table-column prop="memName" label="部门负责人" show-overflow-tooltip></el-table-column>
+          <el-table-column prop="updateName" label="操作人" show-overflow-tooltip></el-table-column>
+          <el-table-column prop="updateDate" label="操作时间" show-overflow-tooltip></el-table-column>
+          <el-table-column align="center" :label="$t('message.operate')" width="80">
+            <template slot-scope="{row}">
+              <el-button
+                type="text"
+                @click="$router.push({path:'/departEdit',query:{row:row}})"
+                size="mini"
+                :disabled="row.isend==='1'"
+              >{{$t('message.editBtn')}}</el-button>
+            </template>
+          </el-table-column>
+        </el-table>
         <el-pagination
-        slot="page"
-        @size-change="handleSizeChange"
-        @current-change="handleCurrentChange"
-        :current-page="curSearchContent.pageNo"
-        :page-sizes="[10, 20, 50]"
-        :page-size="curSearchContent.pageSize"
-        layout="total, sizes, prev, pager, next, jumper"
-        :total="total"
-      ></el-pagination>
+          slot="page"
+          @size-change="handleSizeChange"
+          @current-change="handleCurrentChange"
+          :current-page="curSearchContent.pageNo"
+          :page-sizes="[10, 20, 50]"
+          :page-size="curSearchContent.pageSize"
+          layout="total, sizes, prev, pager, next, jumper"
+          :total="total"
+        ></el-pagination>
       </div>
     </el-card>
-
-    <el-dialog :title="type==='add'?'部门新增':'部门编辑'" :visible.sync="isShow" width="500px">
-      <el-form :model="form" :rules="rules" ref="form" label-width="80px">
-        <el-form-item label="部门名称" prop="deptname">
-          <el-input v-model="form.deptname" placeholder="请输入部门名称" style="width: 300px"></el-input>
-        </el-form-item>
-      </el-form>
-      <div slot="footer" class="dialog-footer">
-        <el-button @click="isShow = false" size="mini">取 消</el-button>
-        <el-button type="primary" @click="eventSure" size="mini">确 定</el-button>
-      </div>
-    </el-dialog>
   </div>
 </template>
 
@@ -69,27 +73,15 @@ export default {
   data() {
     return {
       list: [],
-      filterText: "",
-      listProps: {
-        children: "children",
-        label: "deptname"
-      },
-      type: "",
-      isShow: false,
-      form: {
-        deptname: ""
-      },
       searchContent: {
-        deptname: ""
-      },
-      rules: {
-        deptname: [{ required: true, message: "请输入部门名称", trigger: "blur" }],
+        deptname: "",
+        memName: ""
       },
       curSearchContent: {
         pageNo: 1, // （当前页）
         pageSize: 10 // 每页显示数量
       },
-      total: 0, // 总条数
+      total: 0 // 总条数
     };
   },
   mounted() {
@@ -98,101 +90,32 @@ export default {
     });
   },
   methods: {
-    filterNode(value, data) {
-      if (!value) return true;
-      return data.deptname.indexOf(value) > -1;
-    },
     eventSearch() {
-      this.$refs.menuTree.filter(this.searchContent.deptname);
+      this.getList(1);
     },
     eventReset() {
       this.searchContent = {
-        deptname: ""
+        deptname: "",
+        memName: ""
       };
-      this.$refs.menuTree.filter(this.searchContent.deptname);
-    },
-    add(data) {
-      this.type = "add";
-      this.isShow = true;
-      if (data) {
-        this.form = {
-          parentId: data.id,
-          deptname: ""
-        };
-      } else {
-        this.form = {
-          deptname: "",
-          parentId: "0"
-        };
-      }
-    },
-    edit(data) {
-      this.type = "edit";
-      this.isShow = true;
-      this.form = {
-        id: data.id,
-        deptname: data.deptname
-      };
-    },
-    del(data) {
-      this.$confirm(`你确定要删除[ ${data.deptname} ]部门吗？`, "提示", {
-        confirmButtonText: "确定",
-        cancelButtonText: "取消",
-        type: "warning"
-      }).then(() => {
-        this.$axios
-          .delete(
-            `/concur/hrinfo/department/delete?${this.$qs.stringify({
-              id: data.id
-            })}`
-          )
-          .then(res => {
-            if (res && res.success) {
-              this.$messageAlert.success(res.message);
-              this.getList();
-            }
-          });
-      });
-    },
-    eventSure() {
-      this.$refs.form.validate(valid => {
-        if (valid) {
-          if (this.type === "add") {
-            this.$axios
-              .post("/concur/hrinfo/department/add", this.form)
-              .then(res => {
-                if (res && res.success) {
-                  this.$messageAlert.success(res.message);
-                  this.isShow = false;
-                  this.getList();
-                }
-              });
-          } else if (this.type === "edit") {
-            this.$axios
-              .put("/concur/hrinfo/department/edit", this.form)
-              .then(res => {
-                if (res && res.success) {
-                  this.$messageAlert.success(res.message);
-                  this.isShow = false;
-                  this.getList();
-                }
-              });
-          }
-        }
-      });
+      this.getList(1);
     },
     getList() {
       this.loading = true;
-      this.$axios.get(
-        `/concur/hrinfo/department/treelist?${this.$qs.stringify(
+      Object.assign(this.curSearchContent, this.searchContent)
+      this.$axios
+        .get(
+          `/concur/hrinfo/department/treelist?${this.$qs.stringify(
             this.curSearchContent
-          )}`).then(res => {
-        this.loading = false;
-        if (res && res.success) {
-          this.list = res.result;
-          this.total = res.total;
-        }
-      });
+          )}`
+        )
+        .then(res => {
+          this.loading = false;
+          if (res && res.success) {
+            this.list = res.result;
+            this.total = res.total;
+          }
+        });
     },
     handleSizeChange(val) {
       this.curSearchContent.pageSize = val;
@@ -212,5 +135,8 @@ export default {
   border-radius: 10px;
   padding: 12px;
   margin-top: 7px;
+}
+.filter-tree {
+  margin-bottom: 20px;
 }
 </style>

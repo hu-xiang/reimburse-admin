@@ -32,37 +32,68 @@
     <div class="workbench-content">
       <div class="workbench-content-item first">
         <!-- {{$t('message.myApplication')}} -->
-        <el-tabs v-model="activeName" @tab-click="handleClick">
+        <el-tabs v-model="activeName1">
           <el-tab-pane label="出差申请" name="first">出差申请</el-tab-pane>
-          <el-tab-pane label="预算申请" name="second">预算申请</el-tab-pane>
+          <el-tab-pane label="预算申请" name="second">
+            <budget-apply></budget-apply>
+          </el-tab-pane>
           <el-tab-pane label="报销申请" name="third">报销申请</el-tab-pane>
         </el-tabs>
       </div>
       <div class="workbench-content-item">
         <!-- {{$t('message.myApproval')}} -->
-        <el-tabs v-model="activeName" @tab-click="handleClick">
+        <el-tabs v-model="activeName2">
           <el-tab-pane label="出差审批" name="first">出差审批</el-tab-pane>
-          <el-tab-pane label="预算审批" name="second">预算审批</el-tab-pane>
+          <el-tab-pane label="预算审批" name="second">
+            <budget-approval></budget-approval>
+          </el-tab-pane>
           <el-tab-pane label="报销审批" name="third">报销审批</el-tab-pane>
         </el-tabs>
       </div>
     </div>
     <div class="workbench-content">
-      <div class="workbench-content-item first">{{$t('message.approvalQuery')}}</div>
-      <div class="workbench-content-item">{{$t('message.newsAnnouncement')}}</div>
+      <div class="workbench-content-item first">
+        <el-tabs v-model="activeName3">
+          <el-tab-pane :label="$t('message.approvalQuery')" name="first">
+            <query></query>
+          </el-tab-pane>
+        </el-tabs>
+      </div>
+      <div class="workbench-content-item">
+        <el-tabs v-model="activeName4">
+          <el-tab-pane :label="$t('message.newsAnnouncement')" name="first">
+            <news></news>
+          </el-tab-pane>
+        </el-tabs>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
+import budgetApply from "./budgetApply.vue";
+import budgetApproval from "./budgetApproval.vue";
+import news from "./news.vue";
+import query from "./query.vue"
+
 export default {
   name: "workbench",
+  components: {
+    budgetApply,
+    budgetApproval,
+    news,
+    query
+  },
   data() {
     return {
       time: "",
       blessing: "",
       isSex: "",
-      userName: ""
+      userName: "",
+      activeName1: "second",
+      activeName2: "second",
+      activeName3: "first",
+      activeName4: "first"
     };
   },
   mounted() {
@@ -118,17 +149,17 @@ export default {
 
   .workbench-content {
     display: flex;
-    //background-color: #ffffff;
-    //border-radius: 10px;
-    //padding: 12px 12px 5px;
     margin-top: 5px;
     justify-content: space-between;
     .workbench-content-item {
       background-color: #ffffff;
       padding: 12px 12px 5px;
       border-radius: 10px;
-      min-height: 350px;
-      flex: 0.5;
+      min-height: 500px;
+      flex: 1;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
     .first {
       margin-right: 5px;

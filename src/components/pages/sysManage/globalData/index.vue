@@ -37,7 +37,7 @@
         <el-table-column type="index" width="40" align="center"></el-table-column>
         <el-table-column prop="sysName" label="系统名称" show-overflow-tooltip></el-table-column>
         <el-table-column prop="logo" label="logo" show-overflow-tooltip></el-table-column>
-        <el-table-column prop="isShow" label="申请单显示预算费用" show-overflow-tooltip min-width="120px">
+        <el-table-column prop="isShow" label="出差申请单是否显示预算剩余" show-overflow-tooltip min-width="170px">
           <template slot-scope="{row}">
             <el-select v-model="row.isShow" :disabled="row.disabled">
               <el-option label="显示" value="1"></el-option>
@@ -45,7 +45,7 @@
             </el-select>
           </template>
         </el-table-column>
-        <el-table-column prop="isUse" label="是否启用预算审批" show-overflow-tooltip min-width="120px">
+        <el-table-column prop="isUse" label="是否启用预算审批流程" show-overflow-tooltip min-width="140px">
           <template slot-scope="{row}">
             <el-select v-model="row.isUse" :disabled="row.disabled">
               <el-option label="启用" value="1"></el-option>

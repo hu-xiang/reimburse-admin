@@ -19,7 +19,8 @@
       </section>
       <section>
         <label>部门</label>
-        <el-input v-model="deptName" @focus="eventFocus"></el-input>
+        <!-- <el-input v-model="deptName" @focus="eventFocus"></el-input> -->
+        <el-select v-model="deptName" placeholder="请选择部门" @focus="eventFocus"></el-select>
         <!-- <depart v-model="searchContent.deptId"></depart> -->
       </section>
       <section>
@@ -39,10 +40,12 @@
       <div slot="top">
         <el-button
           type="primary"
-          @click="$router.push('/budAppAdd')"
+          @click="$router.push('/myBudgetAppAdd')"
           size="mini"
         >{{$t('message.addBtn')}}</el-button>
-        <el-button type="success" size="mini" @click="eventApproval">审批</el-button>
+        <el-button size="mini" @click="eventIssued">下达</el-button>
+        <!-- <el-button size="mini" @click="eventImport">导入</el-button> -->
+        <!-- <el-button type="success" size="mini" @click="eventExport">导出</el-button> -->
       </div>
       <el-table
         ref="table"
@@ -58,14 +61,20 @@
           <template slot-scope="{row}">
             <el-button
               type="text"
-              @click="$router.push({path:'/budAppEdit',query:{row:row}})"
+              @click="$router.push({path:'/myBudgetAppEdit',query:{row:row}})"
               size="mini"
             >{{$t('message.editBtn')}}</el-button>
             <el-button type="text" size="mini" @click="eventDel(row)">{{$t('message.deleteBtn')}}</el-button>
           </template>
         </el-table-column>
         <el-table-column type="index" width="40" align="center" fixed="left"></el-table-column>
-        <el-table-column type="selection" width="40" align="center" fixed="left" :selectable="checkSelectable"></el-table-column>
+        <el-table-column type="selection" width="40" align="center" fixed="left"></el-table-column>
+        <el-table-column prop="status" label="是否下达" show-overflow-tooltip>
+          <template slot-scope="{row}">
+            <span v-if="row.status==='1'">是</span>
+            <span v-if="row.status==='0'">否</span>
+          </template>
+        </el-table-column>
         <el-table-column prop="auditStatus" label="审批状态" show-overflow-tooltip>
           <template slot-scope="{row}">
             <span v-if="row.auditStatus==='1'" style="color:#67C23A">审批通过</span>
@@ -75,11 +84,7 @@
         </el-table-column>
         <el-table-column prop="applyId" label="预算申请单号" show-overflow-tooltip min-width="100px"></el-table-column>
         <el-table-column prop="deptName" label="部门名称" show-overflow-tooltip></el-table-column>
-        <el-table-column prop="mainType" label="预算大类" show-overflow-tooltip>
-          <template slot-scope="{row}">
-            <span v-if="row.mainType==='1'">费用类</span>
-          </template>
-        </el-table-column>
+        <el-table-column prop="mainName" label="预算大类" show-overflow-tooltip></el-table-column>
         <el-table-column prop="budName" label="预算类型" show-overflow-tooltip></el-table-column>
         <el-table-column prop="contype" label="管控方式" show-overflow-tooltip>
           <template slot-scope="{row}">
@@ -107,7 +112,7 @@
             <span v-if="row.status==='0'">否</span>
           </template>
         </el-table-column>
-        <el-table-column prop="budVersion" label="预算版本" show-overflow-tooltip></el-table-column>
+        <!-- <el-table-column prop="budVersion" label="预算版本" show-overflow-tooltip></el-table-column> -->
         <el-table-column prop="createName" label="创建人" show-overflow-tooltip></el-table-column>
         <el-table-column prop="createDate" label="创建日期" show-overflow-tooltip></el-table-column>
       </el-table>
@@ -186,25 +191,11 @@
         <el-button type="primary" @click="selectSure1" size="mini">确 定</el-button>
       </span>
     </el-dialog>
-    <el-dialog title="审批" :visible.sync="dialogVisible3" width="500px">
-      <el-form :model="form" ref="form" :rules="rules" label-width="120px">
-        <el-form-item label="审批状态" prop="auditStatus">
-          <el-select v-model="form.auditStatus" clearable style="width:300px;">
-            <el-option label="审批通过" value="1"></el-option>
-            <el-option label="审批未通过" value="2"></el-option>
-          </el-select>
-        </el-form-item>
-      </el-form>
-      <div slot="footer" class="dialog-footer">
-        <el-button @click="dialogVisible3 = false" size="mini">取 消</el-button>
-        <el-button type="primary" @click="eventSure" size="mini">确 定</el-button>
-      </div>
-    </el-dialog>
   </div>
 </template>
 
 <script>
-import { log } from 'util';
+import { log } from "util";
 export default {
   name: "budgetEntry",
   data() {
@@ -244,16 +235,7 @@ export default {
         pageSize: 10 // 每页显示数量
       },
       total1: 0, // 总条数
-      multipleSelection: [],
-      dialogVisible3: false,
-      form: {
-        auditStatus: ""
-      },
-      rules: {
-        auditStatus: [
-          { required: true, message: "请选择审批状态", trigger: "change" }
-        ]
-      }
+      multipleSelection: []
     };
   },
   mounted() {
@@ -377,7 +359,7 @@ export default {
       this.loading = true;
       this.$axios
         .get(
-          `/concur/budget/budgetApply/list?${this.$qs.stringify(
+          `/concur/budget/budgetApply/myList?${this.$qs.stringify(
             this.curSearchContent
           )}`
         )
@@ -409,39 +391,40 @@ export default {
     handleSelectionChange(val) {
       this.multipleSelection = val;
     },
-    checkSelectable(row) {
-      return (row.auditStatus!=='2'&&row.auditStatus!=='1')
-    },
-    eventApproval() {
-      if (!this.multipleSelection.length > 0) {
-        this.$messageAlert.warning("请选择您需要审批的预算申请");
-        return;
-      }
-      this.dialogVisible3 = true;
-    },
-    eventSure() {
-      const list = [];
-      this.$refs.form.validate(valid => {
-        if (valid) {
-          this.multipleSelection.forEach((item) =>{
-            list.push(item.applyId)
-          })
-          const submitForm = {
-            list: list,
-            auditStatus: this.form.auditStatus
-          }
-          this.$axios
-            .put("/concur/budget/budgetApply/auditList", this.$qs.stringify(submitForm,{arrayFormat: 'repeat'}))
-            .then(res => {
-              if (res && res.success) {
-                this.$messageAlert.success(res.message);
-                this.dialogVisible3 = false;
-                this.getList(1);
-              }
+    // 下达
+    eventIssued() {
+      if (this.multipleSelection.length > 0) {
+        this.$confirm("确定要将选中的预算申请下达吗?", "提示", {
+          confirmButtonText: "确定",
+          cancelButtonText: "取消",
+          type: "warning"
+        })
+          .then(() => {
+            let ids = "";
+            this.multipleSelection.forEach((item) => {
+              ids += `${item.applyId},`;
             });
-        }
-      });
+            this.loading = true;
+            this.$axios
+              .put("/concur/budget/budgetApply/editStatus", {ids:ids})
+              .then(res => {
+                this.loading = false;
+                if (res && res.success) {
+                  this.$messageAlert.success(res.message);
+                }
+              });
+          })
+          .catch(() => {});
+      } else {
+        this.$messageAlert.warning("您还没有选择需要下达的预算申请");
+      }
     }
+    // eventExport() {
+    //   window.location.href = `${this.$axios.defaults.baseURL}/concur/budget/budgetApply/exportXls`;
+    // },
+    // eventImport() {
+
+    // }
   }
 };
 </script>

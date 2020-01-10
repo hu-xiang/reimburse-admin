@@ -30,9 +30,13 @@
           <el-col :span="8">
             <el-form-item label="地区类型" prop="rtype">
               <el-select v-model="form.rtype" clearable>
-                <el-option label="A" value="A"></el-option>
-                <el-option label="B" value="B"></el-option>
-                <el-option label="C" value="C"></el-option>
+                <el-option label="海外一类区域" value="1"></el-option>
+                <el-option label="海外二类区域" value="2"></el-option>
+                <el-option label="海外三类区域" value="3"></el-option>
+                <el-option label="一线城市" value="4"></el-option>
+                <el-option label="二线城市" value="5"></el-option>
+                <el-option label="省会城市" value="6"></el-option>
+                <el-option label="其他城市" value="7"></el-option>
               </el-select>
             </el-form-item>
           </el-col>

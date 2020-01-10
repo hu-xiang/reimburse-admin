@@ -3,9 +3,17 @@
     <!--搜索栏位-->
 
     <top-bar>
-      <section>
+      <!-- <section>
         <label>公司代码</label>
         <el-input v-model="searchContent.bukrs"></el-input>
+      </section> -->
+      <section>
+        <label>公司名称</label>
+        <el-input v-model="searchContent.butxt"></el-input>
+      </section>
+      <section>
+        <label>城市</label>
+        <el-input v-model="searchContent.ort01"></el-input>
       </section>
       <section>
         <el-button type="primary" @click="handleSearch" size="mini">{{$t('message.searchBtn')}}</el-button>
@@ -57,7 +65,8 @@ export default {
       loading: false,
       comCodeTableList: [{}],
       searchContent: {
-        bukrs: ""
+        ort01: "",
+        butxt: ""
       },
       curSearchContent: {
         pageNo: 1, // 当前页
@@ -79,7 +88,8 @@ export default {
     },
     handleReset() {
       this.searchContent = {
-        bukrs: ""
+        ort01: "",
+        butxt: ""
       };
       this.getComCodeList(1);
     },

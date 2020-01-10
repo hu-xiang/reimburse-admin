@@ -58,7 +58,7 @@
     <el-dialog :title="isAdd?'新增数据字典':'编辑数据字典'" :visible.sync="dialogVisible" width="500px">
       <el-form :model="form" ref="form" :rules="rules" label-width="120px">
         <el-form-item label="字典值" prop="value">
-          <el-input v-model="form.code" placeholder="请输入字典值" style="width: 300px"></el-input>
+          <el-input v-model="form.value" placeholder="请输入字典值" style="width: 300px"></el-input>
         </el-form-item>
 
         <el-form-item label="字典状态" prop="status">
@@ -89,7 +89,7 @@ export default {
         status: ""
       },
       curSearchContent: {
-        dicId: this.$route.query.row.id,
+        code: this.$route.query.row.code,
         pageNo: 1, // （当前页）
         pageSize: 20 // 每页显示数量
       },
@@ -127,7 +127,7 @@ export default {
     eventAdd() {
       (this.isAdd = true),
         (this.form = {
-          id: this.$route.query.row.id,
+          codeId: this.$route.query.row.code,
           value: "",
           status: ""
         });
@@ -136,8 +136,8 @@ export default {
     eventEdit(row) {
       (this.isAdd = false),
         (this.form = {
-          id: this.$route.query.row.id,
-          dId: row.id,
+          codeId: row.codeId,
+          id: row.id,
           value: row.value,
           status: row.status
         });
@@ -180,8 +180,7 @@ export default {
           this.$axios
             .delete(
               `/concur/gloConfig/dicDate/delete?${this.$qs.stringify({
-                dId: row.id,
-                id: this.$route.query.row.id
+                id: row.id
               })}`
             )
             .then(res => {
