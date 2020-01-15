@@ -35,33 +35,22 @@
           type="primary"
           @click="$router.push('/zoneAdd')"
           size="mini"
-        >{{$t('message.addBtn')}}</el-button>
+        >{{$t('message.addBtn')}}国家</el-button>
       </div>
       <el-table
         slot="table"
         v-loading="loading"
+        class="filter-tree"
+        :data="zoneTableList"
+        row-key="id"
         border
         stripe
-        :data="zoneTableList"
-        style="width: 100%"
+        default-expand-all
+        :tree-props="{children: 'children'}"
       >
-        <el-table-column align="center" fixed="left" :label="$t('message.operate')" width="120">
-          <template slot-scope="{row}">
-            <el-button
-              type="text"
-              @click="$router.push({path:'/zoneEdit',query:{row:row}})"
-              size="mini"
-            >{{$t('message.editBtn')}}</el-button>
-            <el-button
-              type="text"
-              size="mini"
-              @click="handleDelete(row)"
-            >{{$t('message.deleteBtn')}}</el-button>
-          </template>
-        </el-table-column>
         <el-table-column type="index" width="40" align="center"></el-table-column>
-        <el-table-column prop="rnumber" label="地区编号" show-overflow-tooltip></el-table-column>
         <el-table-column prop="rname" label="地区名称" show-overflow-tooltip></el-table-column>
+        <el-table-column prop="rnumber" label="地区编号" show-overflow-tooltip></el-table-column>
         <el-table-column prop="rtype" label="地区类型" show-overflow-tooltip>
           <template slot-scope="{row}">
             <span v-if="row.rtype==='1'">海外一类区域</span>
@@ -73,7 +62,7 @@
             <span v-if="row.rtype==='7'">其他城市</span>
           </template>
         </el-table-column>
-        <el-table-column prop="parentId" label="上层编号" show-overflow-tooltip></el-table-column>
+        <!-- <el-table-column prop="parentId" label="上层编号" show-overflow-tooltip></el-table-column> -->
         <el-table-column prop="createName" label="创建人" show-overflow-tooltip></el-table-column>
         <el-table-column prop="createDate" label="创建时间" show-overflow-tooltip></el-table-column>
         <el-table-column prop="updateName" label="操作人" show-overflow-tooltip></el-table-column>
@@ -82,6 +71,25 @@
           <template slot-scope="{row}">
             <span v-if="row.isOut==='1'">海外</span>
             <span v-if="row.isOut==='0'">国内</span>
+          </template>
+        </el-table-column>
+        <el-table-column align="center" :label="$t('message.operate')" width="150">
+          <template slot-scope="{row}">
+            <el-button
+              type="text"
+              @click="$router.push({path:'/zoneAdd',query:{row:row}})"
+              size="mini"
+            >新增城市</el-button>
+            <el-button
+              type="text"
+              @click="$router.push({path:'/zoneEdit',query:{row:row}})"
+              size="mini"
+            >{{$t('message.editBtn')}}</el-button>
+            <el-button
+              type="text"
+              size="mini"
+              @click="handleDelete(row)"
+            >{{$t('message.deleteBtn')}}</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -168,8 +176,8 @@ export default {
         .then(res => {
           this.loading = false;
           if (res && res.success) {
-            this.zoneTableList = res.result.records;
-            this.total = res.result.total;
+            this.zoneTableList = res.result;
+            this.total = res.total;
           }
         });
       Object.assign(this.searchContent, this.curSearchContent);

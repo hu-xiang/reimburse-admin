@@ -71,6 +71,7 @@
               type="date"
               value-format="yyyy-MM-dd"
               style="width:142px"
+              @change="startChange(row)"
             ></el-date-picker>
           </template>
         </el-table-column>
@@ -81,6 +82,7 @@
               type="date"
               value-format="yyyy-MM-dd"
               style="width:142px"
+              @change="endChange(row)"
             ></el-date-picker>
           </template>
         </el-table-column>
@@ -371,9 +373,47 @@ export default {
   mounted() {
     this.$nextTick(function() {
       this.getMainType();
+      this.getList();
     });
   },
   methods: {
+    getList() {
+      this.loading = true;
+      this.$axios
+        .get('/concur/budget/budgetApply/findAddList')
+        .then(res => {
+          this.loading = false;
+          if (res && res.success) {
+            this.tableList = res.result;
+          }
+        });
+    },
+    startChange(row) {
+      if (row.startDate&&row.endDate) {
+        let obj = {startDate: row.startDate, endDate: row.endDate}
+        this.$axios
+          .get(
+            `/concur/budget/budgetApply/getBudgetDatge?${this.$qs.stringify(
+              obj
+            )}`
+          )
+          .then(res => {
+          });
+      }
+    },
+    endChange(row) {
+      if (row.startDate&&row.endDate) {
+        let obj = {startDate: row.startDate, endDate: row.endDate}
+        this.$axios
+          .get(
+            `/concur/budget/budgetApply/getBudgetDatge?${this.$qs.stringify(
+              obj
+            )}`
+          )
+          .then(res => {
+          });
+      }
+    },
     eventChange(index, row) {
       this.index = index;
       if (!row.exrate) {

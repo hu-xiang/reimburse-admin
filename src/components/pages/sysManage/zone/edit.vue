@@ -20,11 +20,11 @@
               <el-input v-model="form.rname"></el-input>
             </el-form-item>
           </el-col>
-          <el-col :span="8">
+          <!-- <el-col :span="8">
             <el-form-item label="上层编码" prop="parentId">
               <el-input v-model="form.parentId"></el-input>
             </el-form-item>
-          </el-col>
+          </el-col> -->
         </el-row>
         <el-row>
           <el-col :span="8">

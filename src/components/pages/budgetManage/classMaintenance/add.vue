@@ -239,6 +239,7 @@ export default {
             .then(res => {
               this.loading = false;
               if (res && res.success) {
+                //this.$router.push({path:'/classMaintenance',query:{ mainType: this.$route.query.mainType}})
                 this.$router.replace("/classMaintenance");
                 this.$messageAlert.success(res.message);
               }

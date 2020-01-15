@@ -127,7 +127,9 @@ export default {
     };
   },
   mounted() {
-    this.$nextTick(function() {});
+    this.$nextTick(function() {
+      this.getList();
+    });
   },
   methods: {
     handleSelectionChange1(val) {

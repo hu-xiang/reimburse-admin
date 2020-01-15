@@ -6,7 +6,7 @@
         <el-select v-model="searchContent.auditStatus" clearable>
           <el-option label="审批通过" value="1"></el-option>
           <el-option label="审批未通过" value="2"></el-option>
-          <el-option label="待审批" value="0"></el-option>
+          <!-- <el-option label="待审批" value="0"></el-option> -->
         </el-select>
       </section>
       <!-- <section>

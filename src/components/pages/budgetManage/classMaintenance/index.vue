@@ -35,7 +35,7 @@
         >
           <el-table-column prop="budName" label="预算类型名称" min-width="200px" show-overflow-tooltip></el-table-column>
           <el-table-column prop="mainName" label="预算大类" show-overflow-tooltip></el-table-column>
-          <el-table-column prop="istran" label="是否为交通费" show-overflow-tooltip>
+          <el-table-column prop="istran" label="是否为交通费" show-overflow-tooltip min-width="100px">
             <template slot-scope="{row}">
               <span v-if="row.istran==='1'">是</span>
               <span v-if="row.istran==='0'">否</span>
@@ -54,7 +54,8 @@
             </template>
           </el-table-column>
           <el-table-column prop="taxrate" label="默认税率" show-overflow-tooltip></el-table-column>
-          <el-table-column prop="txt50" label="总帐科目名称" show-overflow-tooltip></el-table-column>
+          <el-table-column prop="txt50" label="会计科目" show-overflow-tooltip></el-table-column>
+          <el-table-column prop="cridetTxt50" label="贷方科目" show-overflow-tooltip></el-table-column>
           <el-table-column prop="remark" label="备注" show-overflow-tooltip></el-table-column>
           <el-table-column align="center" :label="$t('message.operate')" width="120">
             <template slot-scope="{row}">
@@ -158,6 +159,11 @@ export default {
           this.listMainType = res.result;
           if (res.result) {
             this.searchContent.mainType = res.result[0].id;
+            // if (this.$route.query.mainType||this.$route.query.mainType!=undefined) {
+            //   this.searchContent.mainType = this.$route.query.mainType;
+            // } else {
+            //   this.searchContent.mainType = res.result[0].id;
+            // }
             this.getList();
           }
         }

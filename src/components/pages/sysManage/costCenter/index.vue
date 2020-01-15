@@ -12,6 +12,16 @@
         <el-input v-model="searchContent.ktext"></el-input>
       </section>
       <section>
+        <label>截止日期</label>
+        <el-date-picker
+          class="dateInput"
+          v-model="searchContent.datbi"
+          type="date"
+          value-format="yyyy-MM-dd"
+          placeholder="截止日期"
+        ></el-date-picker>
+      </section>
+      <section>
         <el-button type="primary" @click="handleSearch" size="mini">{{$t('message.searchBtn')}}</el-button>
         <el-button @click="handleReset" size="mini">{{$t('message.resetBtn')}}</el-button>
       </section>
@@ -69,7 +79,8 @@ export default {
       costCenterTableList: [{}],
       searchContent: {
         kostl: "",
-        ktext: ""
+        ktext: "",
+        datbi: "",
       },
       curSearchContent: {
         pageNo: 1, // 当前页
@@ -91,7 +102,8 @@ export default {
     handleReset() {
       this.searchContent = {
         kostl: "",
-        ktext: ""
+        ktext: "",
+        datbi: "",
       };
       this.getCostCenterList(1);
     },
@@ -126,6 +138,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.comCode {
+.contCenter {
+  /deep/ .dateInput .el-input__inner {
+    padding-left: 30px;
+  }
 }
 </style>

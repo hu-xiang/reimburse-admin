@@ -401,16 +401,21 @@ export default {
         })
           .then(() => {
             let ids = "";
-            this.multipleSelection.forEach((item) => {
+            this.multipleSelection.forEach(item => {
               ids += `${item.applyId},`;
             });
             this.loading = true;
             this.$axios
-              .put("/concur/budget/budgetApply/editStatus", {ids:ids})
+              .get(
+                `/concur/budget/budgetApply/editStatus?${this.$qs.stringify(
+                  {ids:ids}
+                )}`
+              )
               .then(res => {
                 this.loading = false;
                 if (res && res.success) {
                   this.$messageAlert.success(res.message);
+                  this.getList();
                 }
               });
           })
