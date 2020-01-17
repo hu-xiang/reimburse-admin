@@ -8,7 +8,7 @@
       </section>
       <section>
         <label>申请人</label>
-        <el-input v-model="searchContent.mem_name"></el-input>
+        <el-input v-model="searchContent.memName"></el-input>
       </section>
       <section>
         <el-button type="primary" @click="eventSearch" size="mini">{{$t('message.searchBtn')}}</el-button>
@@ -19,13 +19,13 @@
       <el-table slot="table" v-loading="loading" border stripe :data="list" style="width: 100%">
         <el-table-column type="index" width="40" align="center"></el-table-column>
         <el-table-column prop="applyId" label="出差申请单号" show-overflow-tooltip min-width="100px;"></el-table-column>
-        <el-table-column prop="mem_name" label="申请人" show-overflow-tooltip></el-table-column>
-        <el-table-column prop="mem_deptname" label="部门" show-overflow-tooltip></el-table-column>
-        <el-table-column prop="b_deptname" label="受益部门" show-overflow-tooltip></el-table-column>
+        <el-table-column prop="memName" label="申请人" show-overflow-tooltip></el-table-column>
+        <el-table-column prop="memDeptname" label="部门" show-overflow-tooltip></el-table-column>
+        <el-table-column prop="bdeptname" label="受益部门" show-overflow-tooltip></el-table-column>
         <el-table-column prop="account" label="原币金额" show-overflow-tooltip></el-table-column>
         <el-table-column prop="laccount" label="本币金额" show-overflow-tooltip></el-table-column>
-        <el-table-column prop="s_rname" label="出发地点" show-overflow-tooltip></el-table-column>
-        <el-table-column prop="e_rname" label="目的地点" show-overflow-tooltip></el-table-column>
+        <el-table-column prop="ername" label="出发地点" show-overflow-tooltip></el-table-column>
+        <el-table-column prop="srname" label="目的地点" show-overflow-tooltip></el-table-column>
         <el-table-column prop="butxt" label="费用中心" show-overflow-tooltip></el-table-column>
         <el-table-column prop="txt50" label="费用科目" show-overflow-tooltip></el-table-column>
         <el-table-column prop="busreason" label="出差事由" show-overflow-tooltip></el-table-column>
@@ -116,8 +116,8 @@ export default {
       loading: false,
       list: [],
       searchContent: {
-        mem_deptname: "",
-        mem_name: ""
+        depId: "",
+        memName: ""
       },
       curSearchContent: {
         pageNo: 1, // 当前页
@@ -154,7 +154,7 @@ export default {
     selectSure1() {
       this.dialogVisible1 = false;
       this.deptname = this.selected1[0].deptname;
-      this.searchContent.mem_deptname = this.selected1[0].id;
+      this.searchContent.depId = this.selected1[0].id;
     },
     eventSearch1() {
       this.curSearchContent1.pageNo = 1;
@@ -198,8 +198,8 @@ export default {
     eventReset() {
       this.deptname = "";
       this.searchContent = {
-        mem_deptname: "",
-        mem_name: ""
+        depId: "",
+        memName: ""
       };
       this.getList(1);
     },

@@ -48,7 +48,7 @@
         <el-table-column prop="banks" label="银行国家代码" show-overflow-tooltip min-width="90px"></el-table-column>
         <el-table-column prop="bankl" label="银行编号" show-overflow-tooltip></el-table-column>
         <el-table-column prop="zdimuscod" label="银行账号" show-overflow-tooltip></el-table-column>
-        <el-table-column prop="curId" label="货币码/币别表" show-overflow-tooltip min-width="90px"></el-table-column>
+        <el-table-column prop="curId" label="货币码" show-overflow-tooltip min-width="90px"></el-table-column>
         <el-table-column prop="zbtyp" label="账号类型" show-overflow-tooltip>
           <template slot-scope="{row}">
             <span v-if="row.zbtyp==='1'">储蓄</span>
@@ -72,10 +72,10 @@
         <el-table-column prop="telfx" label="传真号" show-overflow-tooltip></el-table-column>
         <el-table-column prop="zkkrq" label="开户日期" show-overflow-tooltip></el-table-column>
         <el-table-column prop="zzxrq" label="注销日期" show-overflow-tooltip></el-table-column>
-        <el-table-column prop="accId" label="会计科目" show-overflow-tooltip></el-table-column>
+        <el-table-column prop="atxt50" label="会计科目" show-overflow-tooltip></el-table-column>
         <el-table-column prop="butxt" label="公司名称" show-overflow-tooltip></el-table-column>
         <el-table-column prop="ktext" label="货币名称" show-overflow-tooltip></el-table-column>
-        <el-table-column prop="atxt50" label="总帐科目名称" show-overflow-tooltip min-width="90px"></el-table-column>
+        <!-- <el-table-column prop="atxt50" label="总帐科目名称" show-overflow-tooltip min-width="90px"></el-table-column> -->
       </el-table>
       <el-pagination
         slot="page"
